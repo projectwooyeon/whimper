@@ -1,0 +1,1425 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>세.느.낌 | 이박터 40주년 기념공연</title>
+<meta name="description" content="KAIST 연극동아리 이박터 40주년 기념공연 · 프로젝트 우연 · 2026.11.21–22 창작플랫폼 경험과상상">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+  /* 포스터의 세계 하나로만 갑니다 (라이트/다크 전환 없음, 모든 색을 명시). */
+  :root {
+    --paper: #FBFAF6;
+    --ink: #1F1A17;
+    --ink-soft: #5B524C;
+    --rust: #C1592B;
+    --rust-bright: #DD7443;
+    --sea: #34479A;
+    --sea-light: #9DAEEB;
+    --earth: #2B1F1A;
+    --earth-2: #372821;
+    --earth-3: #43291E;
+    --earth-line: #574035;
+    --sand: #F2EBE1;
+    --sand-muted: #BCAC9C;
+    --warn: #F0B27A;
+    --hand: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    --body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    --ui: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body.busy #pledgeForm button, body.busy #panelDonor button, body.busy #panelDonor input, body.busy #bookForm button, body.busy #lkPanelDonor button, body.busy #lkPanelDonor input { pointer-events: none; }
+  body.busy { cursor: progress; }
+  /* 모든 탭이 화면보다 1px 길게 → 어느 탭이든 스크롤바가 똑같이 생겨 헤더 위치가 흔들리지 않음 (--head-h는 스크립트가 잼) */
+  html { --head-h: 72px; background: var(--earth); scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1120px; margin-inline: auto; padding-inline: 20px; }
+  .narrow { max-width: 680px; margin-inline: auto; }
+
+  /* ---------- 상단 ---------- */
+  .top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding-block: 20px 0; font-family: var(--ui); font-size: 13px; }
+  .top nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 20px; }
+  .top nav a { text-decoration: none; color: var(--ink-soft); }
+  .top nav a:hover { color: var(--rust); }
+  .top nav a[aria-current="page"] { color: var(--ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--rust); }
+  .top .actions { justify-self: end; }
+  .top .mark { justify-self: start; display: block; line-height: 0; border-radius: 4px; transition: opacity .15s; }
+  .top .mark:hover { opacity: .65; }
+  .top .mark img { height: 58px; width: auto; }
+  .top .actions { align-items: center; }
+  .top .ig { display: block; line-height: 0; margin-left: 4px; border-radius: 6px; transition: opacity .15s; }
+  .top .ig:hover { opacity: .65; }
+  .top .ig img { width: 30px; height: 30px; }
+  .top { padding-bottom: 14px; }
+  .view.ground { margin-top: 0; min-height: calc(100vh - var(--head-h) + 1px); }
+  .section.first { padding-top: 48px; }
+  .view.ground { padding-top: 0; }
+  .page-hero { background: var(--paper); color: var(--ink); text-align: center; }
+  .page-hero .wrap { padding-block: 34px 6px; }
+  .page-hero .kicker-line { margin: 0; }
+  .page-title { font-family: var(--hand); font-weight: 700; color: var(--rust); font-size: clamp(36px, 5.4vw, 60px); line-height: 1.15; letter-spacing: -.03em; margin: 10px 0 8px; }
+  .page-sub { margin: 0 auto; max-width: 560px; color: var(--ink-soft); font-size: 15px; text-wrap: balance; }
+  /* 하늘(종이색)은 그대로 두고, 수평선 아래 바다만 아래쪽에서 흙색으로 이어지게 */
+  .page-hero .band { position: relative; height: clamp(120px, 16vw, 300px); background: url(images/bg-band.webp) 72% 29% / cover no-repeat var(--paper); }
+  .page-hero .band::after { content: ""; position: absolute; inset: 58% 0 0; background: linear-gradient(to bottom, rgba(43,31,26,0), rgba(43,31,26,.18) 20%, rgba(43,31,26,.5) 50%, rgba(43,31,26,.82) 75%, var(--earth)); }
+  .top .actions { display: flex; gap: 6px; }
+  .top .act { text-decoration: none; border: 1.5px solid var(--ink); padding: 7px 12px; font-weight: 600; font-size: 13px; text-align: center; white-space: nowrap; }
+  .top .act:hover { background: var(--ink); color: var(--paper); }
+  .top .act.primary { background: var(--rust); border-color: var(--rust); color: #FFF8F0; }
+  .top .act.primary:hover { background: var(--rust-bright); border-color: var(--rust-bright); }
+  /* 지금 보고 있는 화면: 버튼 아래 4px 띄워 짙은 선 (주황 버튼과 겹치지 않게) */
+  .top .act { position: relative; }
+  .top .act[aria-current="page"]::after { content: ""; position: absolute; left: -1.5px; right: -1.5px; bottom: -7px; height: 2px; background: var(--ink); }
+  .kicker-line { text-align: center; font-family: var(--ui); font-size: 13px; color: var(--ink-soft); margin: 26px 0 0; letter-spacing: .02em; }
+
+  .title { margin: 0; padding-block: 18px 0; display: flex; justify-content: center; }
+  .title img { display: block; width: min(100%, 900px); height: auto; animation: write 1.8s cubic-bezier(.55,.1,.35,1) both .1s; }
+  @keyframes write { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+
+  /* 홈 첫 화면: 포스터 배경 그림(글자 뺀 것) + 손글씨 제목 */
+  .hero { background: var(--paper); }
+  .hero .kicker-line { margin: 0; padding-top: 24px; font-family: var(--hand); font-weight: 700; color: var(--ink); font-size: clamp(15px, 1.7vw, 20px); letter-spacing: .01em; }
+  .hero .title { padding: 14px 20px 0; position: relative; z-index: 1; margin-bottom: clamp(-60px, -4vw, -16px); }
+  .scene { position: relative; height: clamp(300px, 50vw, 680px); background: url(images/bg-scene.webp) 68% 0 / cover no-repeat; }
+  .scene::after { content: ""; position: absolute; inset: 62% 0 0; background: linear-gradient(to bottom, rgba(43,31,26,0), rgba(43,31,26,.6) 45%, var(--earth)); }
+  /* 일시: 포스터 아래쪽 흙 위에 포스터 글씨처럼 */
+  .scene-date { position: absolute; z-index: 1; left: 0; right: 0; bottom: clamp(12px, 1.4vw, 20px); margin: 0; text-align: center; color: var(--sand); font-family: var(--hand); line-height: 1.35; text-shadow: 0 1px 12px rgba(31,22,18,.6); }
+  .scene-date b { display: block; font-size: clamp(22px, 3.4vw, 40px); letter-spacing: .02em; }
+  .scene-date span { display: block; margin-top: 4px; font-size: clamp(14px, 1.6vw, 19px); letter-spacing: .08em; opacity: .9; }
+  .section.home-info { padding-top: 28px; }
+
+  /* ---------- 어두운 흙 영역 ---------- */
+  .ground { background: var(--earth); color: var(--sand); padding-block: 8px 72px; }
+  .credits { display: grid; gap: 10px; padding-block: 8px 44px; border-bottom: 1px solid var(--earth-line); }
+  .cast-line { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 26px; font-size: clamp(20px, 2.6vw, 28px); letter-spacing: -.01em; }
+  .staff { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 28px; font-size: 15px; color: var(--sand-muted); }
+  .staff b { font-weight: 400; color: var(--sand); }
+
+  .section { padding-top: 72px; scroll-margin-top: 12px; }
+  .section-h { font-family: var(--hand); font-weight: 700; color: var(--rust-bright); font-size: clamp(28px, 3.4vw, 38px); line-height: 1.2; margin: 0 0 8px; letter-spacing: -.02em; text-align: center; text-wrap: balance; }
+  .section-sub { text-align: center; color: var(--sand-muted); margin: 0 0 32px; font-size: 15px; }
+  .section-h + .prose { margin-top: 26px; }
+  .prose p, .rules li, .section-sub, .donate-steps li { word-break: keep-all; overflow-wrap: break-word; } /* 한글이 단어 중간에서 끊기지 않게 */
+  .prose p { margin: 0 0 14px; font-size: 16.5px; white-space: pre-line; } /* 글 안의 \n은 줄바꿈 */
+  .prose p:last-child { margin-bottom: 0; }
+  .todo { border: 1px dashed var(--earth-line); color: var(--sand-muted); padding: 14px 16px; font-family: var(--ui); font-size: 13.5px; }
+  .todo b { color: var(--warn); font-weight: 500; }
+
+  /* 제작진 */
+  /* 역할은 역할끼리, 이름은 이름끼리 각 열 가운데 정렬. 같은 줄은 글자 밑선(baseline)에 맞춤 */
+  .staff-roll { display: grid; grid-template-columns: 1fr 1fr; align-items: baseline; gap: 12px 20px; margin: 26px auto 0; max-width: 560px; }
+  .staff-roll dt { text-align: center; font-family: var(--ui); font-size: 13px; line-height: 1.4; letter-spacing: .06em; color: var(--sand-muted); word-break: keep-all; }
+  .staff-roll dd { margin: 0; text-align: center; font-size: 17px; line-height: 1.4; word-break: keep-all; }
+  .staff-roll .g { margin-top: 26px; }
+  @media (max-width: 480px) { .staff-roll { gap: 12px 16px; } .staff-roll dd { font-size: 16px; } }
+  .org-logo { height: .95em; width: auto; vertical-align: -.1em; margin-right: .35em; filter: invert(92%) sepia(8%) saturate(300%) hue-rotate(340deg); }
+
+  /* 홈: 포스터 + 공연 정보 목록 */
+  .info-rows { max-width: 760px; margin: 0 auto; border-top: 1px solid var(--earth-line); }
+  .info-rows > div { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 20px 4px; border-bottom: 1px solid var(--earth-line); }
+  .info-rows dt { font-family: var(--ui); font-size: 12.5px; letter-spacing: .12em; color: var(--rust-bright); padding-top: 3px; }
+  .info-rows dd { margin: 0; font-size: 16px; line-height: 1.75; }
+  .info-rows dd b { font-weight: 400; font-size: 19px; }
+  .info-rows dd a { color: var(--sea-light); font-size: 14.5px; }
+  .info-rows .muted { color: var(--sand-muted); font-size: 14px; }
+  .info-rows .prose p { font-size: 16px; }
+  @media (max-width: 560px) { .info-rows > div { grid-template-columns: 1fr; gap: 6px; } }
+
+  /* 공연 정보 */
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--earth-line); }
+  .facts > div { padding: 22px 18px; text-align: center; display: grid; gap: 6px; align-content: start; }
+  .facts > div + div { border-left: 1px solid var(--earth-line); }
+  .facts dt { font-family: var(--ui); font-size: 12px; letter-spacing: .14em; color: var(--sand-muted); }
+  .facts dd { margin: 0; font-size: 17px; }
+  .facts .big { font-family: var(--ui); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+  .facts a { color: var(--sea-light); font-size: 14px; }
+  @media (max-width: 760px) { .facts { grid-template-columns: 1fr; } .facts > div + div { border-left: 0; border-top: 1px solid var(--earth-line); } }
+  .tw { margin-top: 18px; text-align: center; font-size: 14.5px; color: var(--warn); }
+  .tw b { font-family: var(--ui); font-weight: 600; letter-spacing: .1em; font-size: 12px; margin-right: 8px; }
+
+  /* 만든 사람들 */
+  @media (max-width: 860px) { .team { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* 출연진 */
+  .cast-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 26px; }
+  @media (max-width: 760px) { .cast-grid { gap: 18px 10px; } }
+  .actor { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 8px; align-content: start; text-align: left; }
+  .actor:focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 4px; }
+  .actor .photo { aspect-ratio: 4 / 5; max-width: 100%; background: var(--earth-2); position: relative; overflow: hidden; }
+  .actor .photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.08); transition: filter .4s; }
+  .actor:hover .photo img { filter: none; }
+  /* 터치 기기(마우스 없음): 흑백 효과 없이 처음부터 컬러 */
+  @media (hover: none) { .actor .photo img { filter: none; } }
+  .actor .photo .ph { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--hand); font-size: 64px; color: var(--sea-light);
+    background-image: radial-gradient(circle, rgba(157,174,235,.22) 1.2px, transparent 1.6px); background-size: 7px 7px; }
+  .actor .role { font-family: var(--ui); font-size: 12.5px; letter-spacing: .06em; color: var(--rust-bright); }
+  .actor .nm { font-size: 22px; line-height: 1.2; }
+  @media (max-width: 760px) {
+    .actor { gap: 4px; }
+    .actor .role { font-size: 12px; letter-spacing: 0; line-height: 1.35; }
+    .actor .nm { font-size: 15px; }
+    .actor .photo .ph { font-size: 30px; }
+  }
+  /* 캐릭터 카드 (배우를 누르면 열림) */
+  .cast-modal { border: 0; padding: 0; background: var(--paper); color: var(--ink); width: min(92vw, 440px); max-height: 92vh; overflow: auto; }
+  .cast-modal::backdrop { background: rgba(20, 14, 10, .78); }
+  .cast-modal .cm-photo { aspect-ratio: 4 / 5; background: var(--earth-2); }
+  .cast-modal .cm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cast-modal .cm-body { padding: 18px 22px 22px; display: grid; gap: 6px; }
+  .cast-modal .cm-role { font-family: var(--ui); font-size: 12.5px; letter-spacing: .08em; color: var(--rust); }
+  .cast-modal .cm-name { font-family: var(--hand); font-weight: 700; font-size: 28px; line-height: 1.2; }
+  .cast-modal .cm-line { font-family: var(--hand); font-size: 17px; color: var(--ink-soft); margin: 6px 0 0; }
+  .cast-modal .cm-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; font-family: var(--ui); font-size: 14px; }
+  .cast-modal .cm-foot a { color: var(--sea); }
+  .cast-modal .cm-close { all: unset; cursor: pointer; font-family: var(--ui); font-weight: 600; font-size: 14px; border: 1.5px solid var(--ink); padding: 7px 14px; }
+  .cast-modal .cm-close:hover { background: var(--ink); color: var(--paper); }
+
+  /* ---------- 예매 ---------- */
+  .tabs { display: flex; justify-content: center; gap: 0; margin: 0 auto 30px; border: 1.5px solid var(--earth-line); width: fit-content; max-width: 100%; }
+  .tabs button { all: unset; cursor: pointer; padding: 12px 22px; font-family: var(--ui); font-weight: 600; font-size: 15px; color: var(--sand-muted); }
+  .tabs button[aria-selected="true"] { background: var(--sand); color: var(--earth); }
+  .tabs button:hover:not([aria-selected="true"]) { color: var(--sand); }
+  .demo-note { font-family: var(--ui); font-size: 13px; color: var(--warn); border: 1px dashed rgba(240,178,122,.5); padding: 10px 14px; margin-bottom: 22px; }
+
+  .book { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+  @media (max-width: 860px) { .book { grid-template-columns: 1fr; gap: 28px; } }
+  .step-label { font-family: var(--ui); font-size: 12px; letter-spacing: .12em; color: var(--sand-muted); margin: 0 0 10px; }
+  .step + .step { margin-top: 30px; }
+
+  /* 회차 고르기: 달력 + 시간 */
+  .picker { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+  .cal { flex: 0 0 auto; width: 264px; max-width: 100%; border: 1.5px solid var(--earth-line); background: var(--earth-2); padding: 12px 12px 10px; }
+  .cal-head { text-align: center; font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; font-variant-numeric: tabular-nums; }
+  .cal-w { font-size: 12px; color: var(--sand-muted); padding-bottom: 4px; }
+  .cal-w.sun { color: #E59A86; } .cal-w.sat { color: var(--sea-light); }
+  .cal-d { display: grid; place-items: center; height: 32px; font-size: 13px; color: #8C7A6C; }
+  button.cal-d { all: unset; box-sizing: border-box; display: grid; place-items: center; height: 32px; font-size: 14px; font-weight: 700; color: var(--sand); cursor: pointer; border-radius: 50%; border: 1.5px solid var(--rust-bright); }
+  button.cal-d:hover { background: var(--earth-3); }
+  button.cal-d[aria-pressed="true"] { background: var(--rust-bright); color: #1F1410; }
+  button.cal-d.closed { border-style: dashed; opacity: .6; }
+  button.cal-d:focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 2px; }
+  @media (max-width: 600px) { .cal { width: 100%; } }
+  .times { flex: 1 1 220px; display: grid; gap: 10px; align-content: start; }
+  .sess { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 6px; padding: 14px 16px; border: 1.5px solid var(--earth-line); background: var(--earth-2); }
+  .sess:hover:not([aria-disabled="true"]) { border-color: var(--sand-muted); }
+  .sess[aria-checked="true"] { border-color: var(--rust-bright); background: var(--earth-3); }
+  .sess[aria-disabled="true"] { cursor: not-allowed; opacity: .5; }
+  .sess:focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 2px; }
+  .sess .d { display: flex; align-items: baseline; gap: 10px; }
+  .sess .day { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+  .sess .time { font-size: 16px; color: var(--sand-muted); font-variant-numeric: tabular-nums; }
+  .sess .left { font-size: 13px; color: var(--sand-muted); font-variant-numeric: tabular-nums; }
+  .sess .left strong { color: var(--sand); font-weight: 600; }
+  .sess .left .low { color: var(--warn); }
+
+  .qty { display: inline-flex; align-items: center; border: 1.5px solid var(--earth-line); }
+  .qty button { all: unset; cursor: pointer; width: 44px; height: 44px; display: grid; place-items: center; font-family: var(--ui); font-size: 22px; color: var(--sand); }
+  .qty button:disabled { opacity: .3; cursor: not-allowed; }
+  .qty button:hover:not(:disabled) { background: var(--earth-2); }
+  .qty output { min-width: 56px; text-align: center; font-family: var(--ui); font-size: 20px; font-variant-numeric: tabular-nums; }
+  .hint { font-family: var(--ui); font-size: 13px; color: var(--sand-muted); }
+
+  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 520px) { .fields { grid-template-columns: 1fr; } }
+  .field { display: grid; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label { font-family: var(--ui); font-size: 13px; color: var(--sand-muted); }
+  .field input, .field select, .field textarea { font-family: var(--ui); font-size: 15px; color: var(--sand); background: var(--earth-2); border: 1.5px solid var(--earth-line); border-radius: 0; padding: 11px 12px; width: 100%; }
+  .field textarea { min-height: 72px; resize: vertical; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--rust-bright); }
+  .field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--sand-muted) 50%), linear-gradient(135deg, var(--sand-muted) 50%, transparent 50%); background-position: calc(100% - 18px) 55%, calc(100% - 13px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
+  .err { font-family: var(--ui); font-size: 12.5px; color: var(--warn); }
+  .agree { display: flex; gap: 10px; align-items: flex-start; font-family: var(--ui); font-size: 13.5px; color: var(--sand-muted); margin-top: 18px; }
+  .agree input { margin-top: 3px; accent-color: var(--rust-bright); width: 16px; height: 16px; flex: none; }
+  .btn-main { all: unset; box-sizing: border-box; cursor: pointer; margin-top: 22px; width: 100%; text-align: center; padding: 16px; background: var(--rust); color: #FFF8F0; font-family: var(--ui); font-weight: 600; font-size: 16px; letter-spacing: .04em; }
+  .btn-main:hover { background: var(--rust-bright); }
+  .btn-main:disabled, .btn-main[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+  .btn-line { all: unset; box-sizing: border-box; cursor: pointer; padding: 11px 18px; border: 1.5px solid var(--sand-muted); font-family: var(--ui); font-weight: 600; font-size: 14px; text-align: center; color: var(--sand); }
+  .btn-line:hover { background: var(--sand); color: var(--earth); }
+  .btn-line.danger { border-color: var(--warn); color: var(--warn); }
+  .btn-line.danger:hover { background: var(--warn); color: var(--earth); }
+  .form-msg { font-family: var(--ui); font-size: 14px; color: var(--warn); margin-top: 12px; min-height: 1.2em; }
+  .ok-msg { color: #A9D8A6; }
+  .ghost { all: unset; cursor: pointer; font-family: var(--ui); font-size: 14px; color: var(--sand); border-bottom: 1px solid var(--sand-muted); width: fit-content; }
+
+  /* 티켓 */
+  .ticket { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); background: var(--paper); color: var(--ink);
+    -webkit-mask: radial-gradient(circle 11px at 0 var(--cut), transparent 98%, #000), radial-gradient(circle 11px at 100% var(--cut), transparent 98%, #000);
+    -webkit-mask-composite: source-in; mask-composite: intersect; --cut: 64%; }
+  .ticket .main { padding: 22px 22px 20px; display: grid; gap: 14px; }
+  .ticket .kicker { font-family: var(--ui); font-size: 12px; letter-spacing: .14em; color: var(--ink-soft); display: flex; justify-content: space-between; gap: 8px; }
+  .ticket .name { font-family: var(--hand); font-size: clamp(19px, 1.9vw, 22px); font-weight: 700; line-height: 1.4; letter-spacing: -.03em; color: var(--rust); text-wrap: balance; }
+  .ticket dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-family: var(--ui); font-size: 14px; }
+  .ticket dt { color: var(--ink-soft); }
+  .ticket dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; overflow-wrap: anywhere; }
+  .ticket .stub { border-top: 2px dashed #CFC6BA; padding: 16px 22px 20px; display: flex; justify-content: space-between; align-items: end; gap: 12px; font-family: var(--ui); }
+  .ticket .stub .total { font-size: 13px; color: var(--ink-soft); }
+  .ticket .stub .total b { display: block; font-size: 22px; color: var(--ink); font-weight: 600; }
+  .ticket .code { text-align: right; font-size: 12px; color: var(--ink-soft); letter-spacing: .08em; }
+  .ticket .code b { display: block; font-size: 22px; letter-spacing: .12em; color: var(--sea); font-weight: 600; }
+  .done-box { display: grid; gap: 14px; }
+  .done-box h3 { font-family: var(--hand); font-weight: 700; font-size: 28px; color: var(--sand); margin: 0; line-height: 1.2; }
+  .done-box p { margin: 0; color: var(--sand-muted); }
+
+  /* 후원자 */
+  .login-card { max-width: 460px; margin-inline: auto; display: grid; gap: 14px; }
+  .login-card p { margin: 0; color: var(--sand-muted); font-size: 14.5px; text-align: center; }
+  .donor-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--earth-line); margin-bottom: 26px; }
+  .donor-head .who { font-family: var(--hand); font-size: 24px; font-weight: 700; }
+  .donor-head .who small { font-family: var(--ui); font-size: 13px; font-weight: 400; color: var(--sand-muted); margin-left: 8px; }
+  .tokens { display: flex; gap: 22px; font-family: var(--ui); font-variant-numeric: tabular-nums; }
+  .tokens div { display: grid; }
+  .tokens span { font-size: 12px; color: var(--sand-muted); letter-spacing: .06em; }
+  .tokens b { font-size: 24px; font-weight: 500; line-height: 1.2; }
+  .tokens .accent b { color: var(--rust-bright); }
+
+  .seatmap-wrap { overflow-x: auto; padding: 18px 0 8px; margin-top: 18px; border: 1px solid var(--earth-line); background: #2F221C; }
+  .seatmap { width: max-content; margin-inline: auto; padding-inline: 16px; display: grid; gap: 6px; }
+  .stage { text-align: center; font-family: var(--ui); font-size: 12px; letter-spacing: .5em; color: var(--earth); background: var(--sand-muted); padding: 5px 0; margin-bottom: 14px; }
+  .srow { display: flex; align-items: center; gap: 4px; }
+  .srow .lab { width: 20px; text-align: center; font-family: var(--ui); font-size: 12px; color: var(--sand-muted); }
+  .seat, .gap { width: 30px; height: 30px; flex: none; }
+  .seat { all: unset; box-sizing: border-box; width: 30px; height: 30px; flex: none; display: grid; place-items: center; cursor: pointer; font-family: var(--ui); font-size: 12px; font-variant-numeric: tabular-nums;
+    border: 1.5px solid var(--sand-muted); color: var(--sand-muted); border-radius: 6px 6px 3px 3px; }
+  .seat:hover:not(:disabled) { border-color: var(--sand); color: var(--sand); }
+  .seat[aria-pressed="true"] { background: var(--sea-light); border-color: var(--sea-light); color: var(--earth); font-weight: 600; }
+  .seat.taken { border-color: transparent; background: #4A3830; color: transparent; cursor: not-allowed; }
+  .seat.mine { background: var(--rust); border-color: var(--rust); color: #FFF8F0; cursor: default; }
+  .legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 12px; font-family: var(--ui); font-size: 12.5px; color: var(--sand-muted); }
+  .legend i { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; margin-right: 6px; border-radius: 4px 4px 2px 2px; border: 1.5px solid var(--sand-muted); }
+  .legend .l-sel { background: var(--sea-light); border-color: var(--sea-light); }
+  .legend .l-mine { background: var(--rust); border-color: var(--rust); }
+  .legend .l-taken { background: #4A3830; border-color: #4A3830; }
+  .pickbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; font-family: var(--ui); font-size: 14px; }
+  .pickbar .btn-main { width: auto; margin: 0; padding: 13px 22px; }
+
+  .myseats { margin-top: 34px; }
+  .myseats h3 { font-family: var(--hand); font-size: 22px; margin: 0 0 10px; }
+  .mylist { display: grid; gap: 0; font-family: var(--ui); font-size: 14.5px; }
+  .mylist .grp { padding-block: 10px; border-bottom: 1px solid var(--earth-line); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+  .mylist .grp .sl { min-width: 130px; color: var(--sand-muted); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--earth-line); cursor: pointer; font-variant-numeric: tabular-nums; }
+  .chip input { accent-color: var(--warn); margin: 0; }
+  .chip:has(input:checked) { border-color: var(--warn); color: var(--warn); }
+  .confirm { margin-top: 14px; padding: 14px 16px; border: 1px solid var(--warn); display: grid; gap: 12px; font-family: var(--ui); font-size: 14px; }
+  .confirm .row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* 예매 확인 */
+  .lookup { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; max-width: 720px; margin-inline: auto; }
+  @media (max-width: 620px) { .lookup { grid-template-columns: 1fr; } }
+  .results { margin: 18px auto 0; display: grid; gap: 8px; max-width: 720px; font-family: var(--ui); font-size: 14px; }
+  .results .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; border-bottom: 1px solid var(--earth-line); padding-block: 10px; }
+  .results .row b { color: var(--sea-light); letter-spacing: .08em; font-weight: 600; }
+  .results .none { color: var(--sand-muted); text-align: center; }
+  /* 예매 확인 결과: 확정 / 취소를 색·글자·모양으로 함께 구분 */
+  .results .row { align-items: center; }
+  .results .row .what { flex: 1 1 auto; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; font-weight: 600; font-size: 13px; letter-spacing: .02em; white-space: nowrap; border: 1.5px solid; }
+  .badge.ok { color: #0F1A12; background: #9FD3A8; border-color: #9FD3A8; }
+  .badge.ok::before { content: "✓"; }
+  .badge.no { color: #F2A79A; background: transparent; border-color: #F2A79A; }
+  .badge.no::before { content: "✕"; }
+  .results .row.cancelled b, .results .row.cancelled .what { color: var(--sand-muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .results .sum { text-align: center; color: var(--sand); padding-bottom: 4px; }
+
+  .contact-line { color: var(--sand); font-weight: 600; text-decoration: none; font-variant-numeric: tabular-nums; }
+  .contact-line:hover { color: var(--rust-bright); }
+  .rules-link { display: inline-block; text-decoration: none; padding: 13px 22px; }
+  /* 예매 오픈 전: 탭 안에는 "N/N 오픈 예정입니다"만 */
+  .is-closed > :not(.closed-note) { display: none !important; }
+  .closed-note { text-align: center; padding: 56px 16px; font-size: clamp(20px, 2.6vw, 26px); color: var(--sand); border-block: 1px solid var(--earth-line); }
+  /* 이용 안내 */
+  .usage { max-width: 640px; margin: 22px auto 0; border-top: 1px solid var(--earth-line); }
+  .usage > div { display: flex; justify-content: center; gap: 14px; padding: 13px 4px; border-bottom: 1px solid var(--earth-line); font-size: 15px; }
+  .usage dt { color: var(--sand-muted); }
+  .usage dd { margin: 0; color: var(--sand); font-weight: 500; }
+  .usage-note { max-width: 640px; margin: 14px auto 0; text-align: center; color: var(--sand-muted); font-size: 14px; word-break: keep-all; }
+  /* 관람 유의사항 (예매 화면) */
+  .rules { max-width: 640px; margin: 22px auto 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1px solid var(--earth-line); }
+  .rules li { padding: 13px 4px; border-bottom: 1px solid var(--earth-line); font-size: 15px; color: var(--sand); text-align: center; text-wrap: balance; }
+
+  /* 후원하기 */
+  .donate-grid { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 8px; }
+  .bank-card { flex: 1 1 320px; max-width: 460px; background: var(--paper); color: var(--ink); padding: 22px 22px 20px; display: grid; gap: 8px; }
+  .bank-top { display: flex; justify-content: space-between; font-family: var(--ui); font-size: 13px; letter-spacing: .06em; }
+  .bank-top .muted { color: var(--ink-soft); }
+  .bank-no { font-family: var(--ui); font-size: clamp(22px, 3.4vw, 28px); font-weight: 600; letter-spacing: .02em; font-variant-numeric: tabular-nums; color: var(--rust); overflow-wrap: anywhere; }
+  .bank-holder { font-family: var(--ui); font-size: 14px; color: var(--ink-soft); }
+  .bank-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .bank-actions .btn-line { color: var(--ink); border-color: var(--ink); padding: 9px 14px; font-size: 13.5px; text-decoration: none; }
+  .bank-actions .btn-line:hover { background: var(--ink); color: var(--paper); }
+  .qr-card { flex: 0 0 auto; background: var(--paper); color: var(--ink-soft); padding: 18px; display: grid; justify-items: center; gap: 10px; text-align: center; font-family: var(--ui); font-size: 13px; }
+  .qr-card p { margin: 0; }
+  .donate-steps { max-width: 560px; margin: 34px auto 26px; padding-left: 22px; display: grid; gap: 8px; color: var(--sand); font-size: 15.5px; }
+  .donate-steps b { color: var(--rust-bright); font-weight: 400; }
+  .pledge-form { max-width: 640px; margin: 0 auto; }
+  .amount-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .amt { all: unset; box-sizing: border-box; cursor: pointer; padding: 10px 14px; border: 1.5px solid var(--earth-line); font-family: var(--ui); font-size: 14px; color: var(--sand); font-variant-numeric: tabular-nums; }
+  .amt[aria-pressed="true"] { border-color: var(--rust-bright); background: var(--earth-3); }
+  .amount-row input { flex: 1 1 140px; min-width: 0; }
+  #pDone { max-width: 640px; margin: 0 auto; }
+
+  /* 하단 이동 버튼 */
+  .to-donate { margin-top: -4px; font-family: var(--ui); font-size: 13.5px; color: var(--sand); }
+  .to-donate a { color: var(--rust-bright); font-weight: 600; text-underline-offset: 3px; }
+  .to-donate a::after { content: " →"; }
+  .page-links { background: var(--earth); padding-block: 8px 56px; }
+  .page-links .wrap { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .page-links a { text-decoration: none; min-width: 120px; }
+  .page-links .btn-main { width: auto; margin: 0; padding: 14px 26px; }
+  .page-links .btn-line { padding: 13px 22px; }
+  @media (max-width: 480px) { .page-links a { flex: 1 1 40%; min-width: 0; } }
+
+  /* 공통 푸터 */
+  .site-foot { background: #211712; color: var(--sand); padding-block: 44px 36px; border-top: 1px solid var(--earth-line); }
+  .foot-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+  @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; gap: 24px; } }
+  .site-foot h3 { font-family: var(--ui); font-size: 12px; letter-spacing: .14em; color: var(--rust-bright); margin: 0 0 10px; font-weight: 600; }
+  .site-foot p { margin: 0; font-size: 14.5px; line-height: 1.7; }
+  .site-foot p + p { margin-top: 8px; }
+  .site-foot .muted { color: var(--sand-muted); font-size: 13px; }
+  .site-foot a { color: var(--sea-light); }
+  .foot-line { margin-top: 32px !important; padding-top: 18px; border-top: 1px solid var(--earth-line); font-family: var(--ui); font-size: 12px !important; color: var(--sand-muted); letter-spacing: .02em; }
+  .foot-line { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 20px; }
+  .foot-logos { display: inline-flex; align-items: center; gap: 12px; color: var(--sand-muted); font-size: 13px; }
+  .foot-logos a { display: block; line-height: 0; transition: opacity .15s; }
+  .foot-logos a:hover { opacity: .65; }
+  .foot-logos img { height: 30px; width: auto; filter: invert(92%) sepia(8%) saturate(300%) hue-rotate(340deg); }
+  .foot-ig { display: inline-flex; align-items: center; gap: 8px; }
+  .foot-ig img { width: 22px; height: 22px; }
+  .credit-list { display: grid; gap: 2px; }
+  .credit-list b { font-size: inherit !important; font-weight: 500; color: var(--sand-muted); }
+  .credit-list b::after { content: " |"; color: var(--earth-line); margin-right: .35em; }
+  .permit { display: block; margin-top: 6px; font-size: 13px; }
+  /* 제작진 페이지는 전문 가운데 정렬 */
+  [data-view="crew"] .prose { text-align: center; }
+  .copy { all: unset; cursor: pointer; font-family: var(--ui); font-size: 12px; color: var(--sand-muted); border: 1px solid var(--earth-line); padding: 2px 8px; margin-left: 8px; }
+
+  @media (max-width: 760px) {
+    .top { grid-template-columns: auto 1fr; }
+    .top nav { justify-content: flex-end; gap: 4px 16px; }
+    .top .actions { grid-column: 1 / -1; justify-self: stretch; }
+    .top .act { flex: 1; padding: 9px 6px; }
+    .top .mark img { height: 44px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .title img { animation: none; } * { transition: none !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a class="mark" href="#home" aria-label="공연 정보로 이동"><img src="images/logo-sub.png" alt="세.느.낌" width="480" height="194"></a>
+  <nav aria-label="페이지 이동">
+    <a href="#home" data-nav="home">공연 정보</a><a href="#crew" data-nav="crew">제작진</a><a href="#cast" data-nav="cast">출연진</a>
+  </nav>
+  <div class="actions">
+    <a class="act" href="#lookup" data-nav="lookup">예매 확인</a>
+    <a class="act" href="#donate" data-nav="donate">후원하기</a>
+    <a class="act primary" href="#tickets" data-nav="tickets">티켓 예매</a>
+    <a class="ig" id="igHeader" href="https://www.instagram.com/project_wooyeon/" target="_blank" rel="noopener" aria-label="프로젝트 우연 인스타그램"><img src="images/insta.png" alt="" width="96" height="96"></a>
+  </div>
+</header>
+
+<main>
+  <!-- ===== 홈 ===== -->
+  <div class="view" data-view="home">
+    <div class="hero">
+      <p class="kicker-line">KAIST 연극동아리 이박터 40주년 기념공연</p>
+      <h1 class="title"><img src="images/title.webp" width="1398" height="1134" alt="세상이 이렇게 끝나는구나 쾅 소리 한 번 없이 흐느낌으로"></h1>
+      <div class="scene" role="img" aria-label="수평선 위 잠수함과 절벽, 붉은 땅으로 이어지는 바다 (포스터 그림)">
+        <p class="scene-date"><b>2026. 11. 21 토 – 22 일</b><span>매일 14시 · 17시</span></p>
+      </div>
+    </div>
+    <div class="ground">
+      <div class="wrap">
+        <section class="section home-info">
+          <dl class="info-rows">
+            <div><dt>장소</dt><dd><b>창작플랫폼 경험과상상</b><br>서울 영등포구, 2·9호선 당산역 인근<br><a href="https://map.naver.com/p/search/%EA%B2%BD%ED%97%98%EA%B3%BC%EC%83%81%EC%83%81" target="_blank" rel="noopener">네이버 지도에서 보기</a></dd></div>
+            <div><dt>시놉시스</dt><dd class="prose" id="synopsisText"></dd></div>
+            <div><dt>러닝타임</dt><dd><b id="runtime"></b> <span id="runtimeNote" class="muted"></span></dd></div>
+            <div><dt>가격</dt><dd><b>무료</b></dd></div>
+            <div><dt>트리거 워닝</dt><dd id="twText"></dd></div>
+            <div><dt>공연 정보</dt><dd><span class="credit-list"><span><b>원작</b> 네빌 슈트 〈해변에서〉</span><span><b>각색</b> 박주영</span><span><b>초연</b> 극단 배다</span><span><b>제작</b> 프로젝트 우연</span><span><b>기획・윤색・연출</b> 유현민</span></span><span class="muted permit">본 작품은 극단 배다의 정식 허가를 받았습니다.</span></dd></div>
+          </dl>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 제작진 ===== -->
+  <div class="view ground" data-view="crew" hidden>
+    <header class="page-hero">
+      <div class="band" aria-hidden="true"></div>
+    </header>
+    <div class="wrap narrow">
+      <section class="section first">
+        <h2 class="section-h">기획의도</h2>
+        <div class="prose" id="intentText"></div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-h">제작진</h2>
+        <dl class="staff-roll" id="staffRoll"></dl>
+      </section>
+
+      <section class="section">
+        <h2 class="section-h"><img class="org-logo" src="images/logo-wooyeon.png" alt="" width="139" height="120">프로젝트 우연</h2>
+        <div class="prose" id="wooyeonText"></div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-h"><img class="org-logo" src="images/logo-ibaktor.png" alt="" width="144" height="120">이박터</h2>
+        <div class="prose" id="ibaktorText"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===== 출연진 ===== -->
+  <div class="view ground" data-view="cast" hidden>
+    <header class="page-hero">
+      <div class="band" aria-hidden="true"></div>
+    </header>
+    <div class="wrap">
+      <!-- 출연진 -->
+      <section class="section first">
+        <h2 class="section-h">출연진</h2>
+        <p class="section-sub" style="margin-bottom:24px">사진을 누르면 캐릭터 카드와 배우의 한마디를 볼 수 있어요.</p>
+        <div class="cast-grid" id="castGrid"></div>
+        <dialog class="cast-modal" id="castModal" aria-label="캐릭터 카드">
+          <div class="cm-photo"></div>
+          <div class="cm-body">
+            <div class="cm-role"></div>
+            <div class="cm-name"></div>
+            <p class="cm-line"></p>
+            <div class="cm-foot"><a class="cm-ig" href="#" target="_blank" rel="noopener" hidden></a><span></span><button type="button" class="cm-close">닫기</button></div>
+          </div>
+        </dialog>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===== 예매 ===== -->
+  <div class="view ground" data-view="tickets" hidden>
+    <header class="page-hero">
+      <div class="band" aria-hidden="true"></div>
+    </header>
+    <div class="wrap">
+      <!-- 예매 -->
+      <section class="section first">
+        <p class="section-sub">본 연극은 무료 공연입니다. 10/25까지 후원해주신 분들은 10/31 에 우선 공개되는 지정좌석 예매권을 제공해드립니다.</p>
+        <div class="demo-note" id="demoNote" hidden>미리보기 모드입니다. 서버 주소(API_URL)가 비어 있어 예시 데이터로 동작하고, 새로고침하면 처음 상태로 돌아갑니다. 후원자 예매는 이름 <b>홍길동</b>, 코드 <b>DEMO01</b>로 체험할 수 있습니다. <a href="admin.html" target="_blank" rel="noopener">어드민 미리보기</a></div>
+        <div class="tabs" role="tablist" aria-label="예매 방식">
+          <button role="tab" id="tabGeneral" aria-selected="true" aria-controls="panelGeneral">일반 예매</button>
+          <button role="tab" id="tabDonor" aria-selected="false" aria-controls="panelDonor">후원자 예매</button>
+        </div>
+
+        <!-- 일반 예매 -->
+        <div id="panelGeneral" role="tabpanel" aria-labelledby="tabGeneral">
+          <div class="book">
+            <div id="formSide">
+              <form id="bookForm" novalidate>
+                <div class="step">
+                  <p class="step-label">회차</p>
+                  <div class="picker" id="sessions"></div>
+                </div>
+                <div class="step">
+                  <p class="step-label">매수</p>
+                  <div style="display:flex;align-items:center;flex-wrap:wrap;gap:14px">
+                    <div class="qty">
+                      <button type="button" id="qtyMinus" aria-label="한 장 줄이기">−</button>
+                      <output id="qtyOut" aria-live="polite">1</output>
+                      <button type="button" id="qtyPlus" aria-label="한 장 늘리기">+</button>
+                    </div>
+                    <span class="hint" id="qtyHint"></span>
+                  </div>
+                </div>
+                <div class="step">
+                  <p class="step-label">예매자 정보</p>
+                  <div class="fields">
+                    <div class="field"><label for="fName">이름</label><input id="fName" autocomplete="name" maxlength="20"><span class="err" id="errName"></span></div>
+                    <div class="field"><label for="fPhone">연락처</label><input id="fPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" maxlength="13"><span class="err" id="errPhone"></span></div>
+                    <div class="field full"><label for="fGuest">누구를 보러 오셨나요? <span style="opacity:.7">(선택)</span></label><select id="fGuest"></select></div>
+                    <div class="field full"><label for="fMemo">요청사항 <span style="opacity:.7">(선택)</span></label><textarea id="fMemo" maxlength="200" placeholder="휠체어석, 동반 관람 등"></textarea></div>
+                  </div>
+                  <label class="agree" for="fAgree"><input type="checkbox" id="fAgree"><span>예매 확인과 현장 발권을 위해 이름과 연락처를 수집하며, 공연 종료 후 파기하는 데 동의합니다.</span></label>
+                </div>
+                <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="fWebsite">웹사이트</label><input id="fWebsite" tabindex="-1" autocomplete="off"></div>
+                <button class="btn-main" id="submitBtn" type="submit">예매 신청</button>
+                <div class="form-msg" id="formMsg" role="status"></div>
+              </form>
+            </div>
+            <aside class="ticket" aria-label="예매 요약">
+              <div class="main">
+                <div class="kicker"><span>선택 좌석</span></div>
+                <div class="name">세상이 이렇게 끝나는구나<br>쾅 소리 한 번 없이 흐느낌으로</div>
+                <dl>
+                  <dt>회차</dt><dd id="tSess">회차를 골라 주세요</dd>
+                  <dt>매수</dt><dd id="tQty">1매</dd>
+                  <dt>예매자</dt><dd id="tName">–</dd>
+                </dl>
+              </div>
+              <div class="stub">
+                <div class="total">관람료<b>무료</b></div>
+                <div class="code">예매번호<b id="tCode">······</b></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- 후원자 예매 -->
+        <div id="panelDonor" role="tabpanel" aria-labelledby="tabDonor" hidden>
+          <form class="login-card" id="donorLogin" novalidate>
+            <p>후원자 명단에 등록된 이름과 안내받은 후원자 코드를 입력하세요. 후원 15,000원마다 지정석 1석을 예매할 수 있습니다.</p>
+            <p class="to-donate">아직 후원 전이라면 <a href="#donate">후원하기</a>에서 먼저 후원해 주세요. 확인 후 후원자 코드를 보내 드립니다.</p>
+            <div class="field"><label for="dName">이름</label><input id="dName" autocomplete="name" maxlength="20"></div>
+            <div class="field"><label for="dCode">후원자 코드</label><input id="dCode" autocomplete="off" autocapitalize="characters" maxlength="12" style="text-transform:uppercase;letter-spacing:.12em"></div>
+            <button class="btn-main" type="submit" style="margin-top:6px">로그인</button>
+            <div class="form-msg" id="dLoginMsg" role="status" style="text-align:center"></div>
+          </form>
+
+          <div id="donorPanel" hidden>
+            <div class="donor-head">
+              <div class="who"><span id="dWho"></span><small>후원자님</small></div>
+              <div class="tokens">
+                <div><span>받은 토큰</span><b id="tkTotal">0</b></div>
+                <div><span>사용</span><b id="tkUsed">0</b></div>
+                <div class="accent"><span>남은 토큰</span><b id="tkLeft">0</b></div>
+              </div>
+              <button class="ghost" type="button" id="dLogout">로그아웃</button>
+            </div>
+
+            <p class="step-label">회차</p>
+            <div class="picker" id="dSessions"></div>
+
+            <div class="seatmap-wrap"><div class="seatmap" id="seatmap"></div></div>
+            <div class="legend"><span><i></i>선택 가능</span><span><i class="l-sel"></i>선택함</span><span><i class="l-mine"></i>내 좌석</span><span><i class="l-taken"></i>예매됨</span></div>
+            <div class="pickbar">
+              <span id="pickText" class="hint"></span>
+              <button class="btn-main" type="button" id="dBookBtn">예매하기</button>
+            </div>
+            <div class="form-msg" id="dMsg" role="status"></div>
+
+            <div class="myseats">
+              <h3>내 예매 좌석</h3>
+              <div class="mylist" id="myList"></div>
+              <div style="margin-top:14px"><button class="btn-line danger" type="button" id="dCancelBtn" hidden>선택한 좌석 취소</button></div>
+              <div class="confirm" id="cancelConfirm" hidden>
+                <span id="cancelText"></span>
+                <div class="row"><button class="btn-line danger" type="button" id="cancelYes">취소하기</button><button class="btn-line" type="button" id="cancelNo">그대로 두기</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 이용 안내 -->
+      <section class="section">
+        <h2 class="section-h">이용 안내</h2>
+        <dl class="usage">
+          <div><dt>예매 가능 시간</dt><dd>관람 1일 전까지</dd></div>
+          <div><dt>예매 취소 기간</dt><dd>관람 1일 전까지</dd></div>
+        </dl>
+        <p class="usage-note">공연 당일 불가피한 관람 취소는 페이지 하단 '문의'의 전화번호로 연락해 주세요.</p>
+      </section>
+
+      <!-- 관람 유의사항 (예매 화면 전용) -->
+      <section class="section">
+        <h2 class="section-h">관람 유의사항</h2>
+        <ul class="rules">
+          <li>티켓은 공연 시작 30분 전부터 현장에서 수령하실 수 있습니다.</li>
+          <li>공연 시작 10분 전부터 입장이 가능하며, 공연이 시작된 후에는 극장 출입이 제한됩니다.</li>
+          <li>허가되지 않은 사진 및 동영상 촬영, 음성 녹음, 음식물 반입 및 섭취는 불가능합니다.</li>
+          <li>배우 혹은 제작진을 위한 선물은 티켓 수령 시 안내원을 통해 맡겨두시고, 공연 종료 후 찾아가주시면 감사하겠습니다.</li>
+          <li>연출 상 큰 소리, 흡연, 음주, 죽음에 대한 직간접적 묘사가 포함되어 있습니다.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <!-- ===== 예매 확인 ===== -->
+  <div class="view ground" data-view="lookup" hidden>
+    <header class="page-hero">
+      <div class="band" aria-hidden="true"></div>
+    </header>
+    <div class="wrap">
+      <section class="section first">
+        <div class="tabs" role="tablist" aria-label="예매 확인 방식">
+          <button role="tab" id="lkTabGeneral" aria-selected="true" aria-controls="lkPanelGeneral">일반 예매 확인</button>
+          <button role="tab" id="lkTabDonor" aria-selected="false" aria-controls="lkPanelDonor">후원자 예매 확인</button>
+        </div>
+
+        <div id="lkPanelGeneral" role="tabpanel" aria-labelledby="lkTabGeneral">
+          <p class="section-sub">예매 내역을 입력해주신 이름과 연락처로 찾을 수 있습니다. 취소 혹은 매수 변경은 필요 시 아래 문의 번호로 연락해주세요.<br><a class="contact-line" href="tel:01038630463">010-3863-0463</a> 기획 유현민</p>
+          <form class="lookup" id="lookupForm" novalidate>
+            <div class="field"><label for="lName">이름</label><input id="lName" autocomplete="name" maxlength="20"></div>
+            <div class="field"><label for="lPhone">연락처</label><input id="lPhone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" placeholder="010-0000-0000"></div>
+            <button class="btn-line" type="submit">조회</button>
+          </form>
+          <div class="results" id="lookupResults" aria-live="polite"></div>
+        </div>
+
+        <div id="lkPanelDonor" role="tabpanel" aria-labelledby="lkTabDonor" hidden>
+          <form class="login-card" id="lkDonorLogin" novalidate>
+            <p>후원해주신 분의 이름과 SMS로 발송된 후원자 코드로 로그인해주세요. 지정하신 좌석 확인과 취소가 가능합니다. 로그인이 불가능하실 경우 아래 문의 번호로 연락해주세요.<br><a class="contact-line" href="tel:01038630463">010-3863-0463</a> 기획 유현민</p>
+            <div class="field"><label for="lkName">이름</label><input id="lkName" autocomplete="name" maxlength="20"></div>
+            <div class="field"><label for="lkCode">후원자 코드</label><input id="lkCode" autocomplete="off" autocapitalize="characters" maxlength="12" style="text-transform:uppercase;letter-spacing:.12em"></div>
+            <button class="btn-main" type="submit" style="margin-top:6px">로그인</button>
+            <div class="form-msg" id="lkLoginMsg" role="status" style="text-align:center"></div>
+          </form>
+          <div id="lkDonorPanel" hidden>
+            <div class="donor-head">
+              <div class="who"><span id="lkWho"></span><small>후원자님</small></div>
+              <div class="tokens">
+                <div><span>받은 토큰</span><b id="lkTotal">0</b></div>
+                <div><span>사용</span><b id="lkUsed">0</b></div>
+                <div class="accent"><span>남은 토큰</span><b id="lkLeft">0</b></div>
+              </div>
+              <button class="ghost" type="button" id="lkLogout">로그아웃</button>
+            </div>
+            <div class="myseats" style="margin-top:0">
+              <h3>내 예매 좌석</h3>
+              <div class="mylist" id="lkMyList"></div>
+              <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:10px">
+                <button class="btn-line danger" type="button" id="lkCancelBtn" hidden>선택한 좌석 취소</button>
+                <a class="btn-line" href="#tickets" id="lkGoBook">좌석 더 예매하기</a>
+              </div>
+              <div class="confirm" id="lkConfirm" hidden>
+                <span id="lkConfirmText"></span>
+                <div class="row"><button class="btn-line danger" type="button" id="lkYes">취소하기</button><button class="btn-line" type="button" id="lkNo">그대로 두기</button></div>
+              </div>
+              <div class="form-msg" id="lkMsg" role="status"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- ===== 후원하기 ===== -->
+  <div class="view ground" data-view="donate" hidden>
+    <header class="page-hero">
+      <div class="band" aria-hidden="true"></div>
+    </header>
+    <div class="wrap">
+      <section class="section first narrow">
+        <h2 class="section-h">후원하기</h2>
+        <p class="section-sub donate-lead">KAIST 이박터 40주년 기념 공연, 〈세.느.낌〉을 응원해주세요. 보내주신 후원금은 모두 본 공연의 제작 및 후배들의 미래 공연 제작에 쓰입니다.<br><br>후원해주신 모든 분들을 위해 작은 선물을 준비하고 있으며, 10/25까지 후원해주신 분들께는 15,000원 당 1석의 지정좌석 선예매권을 드립니다. <span class="nowrap">(10/31 후원자 선예매 오픈 예정, 11/7 일반 예매 오픈 예정)</span></p>
+
+        <div class="donate-grid">
+          <div class="bank-card">
+            <div class="bank-top"><span id="dnBank">카카오뱅크</span><span class="muted">후원 계좌</span></div>
+            <div class="bank-no" id="dnAccount">계좌 안내 준비 중</div>
+            <div class="bank-holder" id="dnHolderRow" hidden>예금주 <span id="dnHolder"></span></div>
+            <div class="bank-actions">
+              <button class="btn-line" type="button" id="dnCopy">계좌번호 복사</button>
+              <a class="btn-line" id="dnKakao" href="#" target="_blank" rel="noopener" hidden>카카오페이로 송금</a>
+              <a class="btn-line" id="dnToss" href="#" hidden>토스로 송금</a>
+            </div>
+          </div>
+          <div class="qr-card" id="dnQrCard" hidden>
+            <div id="dnQr" aria-label="카카오페이 송금 QR 코드"></div>
+            <p>휴대폰 카메라로 찍으면<br>카카오페이 송금 화면이 열려요</p>
+          </div>
+        </div>
+
+        <ol class="donate-steps">
+          <li>위 계좌로 후원금을 보내주세요.</li>
+          <li>아래 양식에 이름과 연락처, 후원 금액을 남겨 주세요.</li>
+          <li>10/25까지 후원해주신 분들께는 후원 금액 15,000원 당 1석의 지정좌석을 예매하실 수 있는 <b>후원자코드</b>를 보내드립니다. (10/27 발송 예정)</li>
+        </ol>
+
+        <form id="pledgeForm" novalidate class="pledge-form">
+          <div class="fields">
+            <div class="field"><label for="pName">이름</label><input id="pName" autocomplete="name" maxlength="20"></div>
+            <div class="field"><label for="pPhone">연락처</label><input id="pPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" maxlength="13"></div>
+            <div class="field full">
+              <label for="pAmount">후원 금액</label>
+              <div class="amount-row">
+                <button type="button" class="amt" data-amt="15000">15,000</button>
+                <button type="button" class="amt" data-amt="30000">30,000</button>
+                <button type="button" class="amt" data-amt="50000">50,000</button>
+                <input id="pAmount" inputmode="numeric" placeholder="직접 입력 (원)" maxlength="12">
+              </div>
+              <span class="hint" id="pTokens"></span>
+            </div>
+            <div class="field"><label for="pDepositor">입금자명 <span style="opacity:.7">(이름과 다르면)</span></label><input id="pDepositor" maxlength="20"></div>
+            <div class="field"><label for="pMemo">남길 말 <span style="opacity:.7">(선택)</span></label><input id="pMemo" maxlength="200"></div>
+          </div>
+          <label class="agree" for="pAgree"><input type="checkbox" id="pAgree"><span>후원 확인과 후원자 코드 안내를 위해 이름과 연락처를 수집하며, 공연 종료 후 파기하는 데 동의합니다.</span></label>
+          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="pWebsite">웹사이트</label><input id="pWebsite" tabindex="-1" autocomplete="off"></div>
+          <button class="btn-main" type="submit" id="pSubmit">후원 신청 남기기</button>
+          <div class="form-msg" id="pMsg" role="status"></div>
+        </form>
+        <div class="done-box" id="pDone" hidden>
+          <h3>고맙습니다</h3>
+          <p id="pDoneText"></p>
+          <button type="button" class="ghost" id="pAgain">한 번 더 남기기</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<!-- ===== 다른 화면으로 가는 버튼 (모든 화면, 현재 화면은 빠짐) ===== -->
+<nav class="page-links" aria-label="다른 화면으로 이동"><div class="wrap" id="pageLinks"></div></nav>
+
+<!-- ===== 공통 푸터 (모든 화면) ===== -->
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>작품</h3>
+        <p><span class="credit-list"><span><b>원작</b> 네빌 슈트 〈해변에서〉</span><span><b>각색</b> 박주영</span><span><b>초연</b> 극단 배다</span><span><b>제작</b> 프로젝트 우연</span><span><b>기획・윤색・연출</b> 유현민</span></span></p>
+        <p class="muted">본 작품은 극단 배다의 정식 허가를 받았습니다.</p>
+      </div>
+      <div>
+        <h3>장소</h3>
+        <p>창작플랫폼 경험과상상<br>서울 영등포구, 2·9호선 당산역 인근</p>
+        <p><a href="https://map.naver.com/p/search/%EA%B2%BD%ED%97%98%EA%B3%BC%EC%83%81%EC%83%81" target="_blank" rel="noopener">네이버 지도에서 보기</a></p>
+      </div>
+      <div>
+        <h3>문의</h3>
+        <p>유현민 <span id="phoneText">010.3863.0463</span><button class="copy" type="button" id="copyPhone">복사</button></p>
+        <p><a class="foot-ig" href="https://www.instagram.com/project_wooyeon/" target="_blank" rel="noopener"><img src="images/insta.png" alt="인스타그램" width="96" height="96">@project_wooyeon</a></p>
+      </div>
+    </div>
+    <div class="foot-line">
+      <span>KAIST 연극동아리 이박터 40주년 기념공연 · 2026.11.21 – 22</span>
+      <span class="foot-logos">
+        <a id="logoWooyeon" href="#home" target="_blank" rel="noopener" aria-label="프로젝트 우연 인스타그램"><img src="images/logo-wooyeon.png" alt="프로젝트 우연" width="139" height="120"></a>
+        <span aria-hidden="true">X</span>
+        <a id="logoIbaktor" href="#home" target="_blank" rel="noopener" aria-label="이박터 인스타그램"><img src="images/logo-ibaktor.png" alt="이박터" width="144" height="120"></a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script src="api.js"></script>
+<script>
+/* ================== 설정 ================== */
+const CONFIG = {
+  // 후원 계좌. kakaoPayLink: 카카오페이 앱 → 송금 → '송금코드/링크'로 만든 https 주소 (넣으면 버튼과 QR이 생김)
+  DONATE: {
+    bank: "카카오뱅크",
+    account: "7942-14-22605",
+    holder: "유현민",
+    kakaoPayLink: "",    // 예: "https://qr.kakaopay.com/xxxxxxxx"
+  },
+  // 좌상단 로고(왼쪽 우연, 오른쪽 이박터)를 누르면 열리는 인스타그램 주소. 비우면 로고를 눌러도 홈으로만 이동
+  INSTAGRAM: {
+    ibaktor: "https://www.instagram.com/ibagutor_kaist/",
+    wooyeon: "https://www.instagram.com/project_wooyeon/",
+  },
+  // Google Apps Script 웹 앱 주소(/exec 로 끝남). 비워 두면 미리보기 모드
+  API_URL: "https://script.google.com/macros/s/AKfycby1Z8a79rKosp-unS52MaNxjzyx7asbTnbPR33eDeBg7BWIwBhsDSNK7fVFVKse4wu0/exec",
+};
+
+/* ================== 페이지 내용: 여기 글만 고치면 됩니다 ==================
+ * 빈 칸("")이나 빈 목록([])은 점선 상자로 "작성 필요" 표시가 나옵니다.
+ * 문단은 목록에 한 줄씩 넣으세요.
+ */
+const CONTENT = {
+  runtime: "100분",            // 예: "약 100분"
+  runtimeNote: "",              // 러닝타임 옆 작은 글씨 (예: "인터미션 없음"). 필요 없으면 ""
+  triggerWarning: "연출 상 큰 소리, 흡연, 음주, 죽음에 대한 직간접적 묘사가 포함되어 있습니다.",
+  synopsis: ["전 지구적인 핵전쟁으로 북반구의 인류 문명이 멸망한다.\n남반구의 생존자들도 서서히 다가오는 방사성 낙진으로 인한 피할 수 없는 죽음을 기다릴 뿐.\n종말까지 6개월이 남은 어느 날, 사라진 줄로만 알았던 북반구로부터 무전 신호가 날아온다.\n호주 멜버른에서는 희망을 품고 신호의 근원지로 탐사대를 보내는데..."],   // 시놉시스 (문단마다 한 칸, 줄바꿈은 \n)
+  intent: ["KAIST 연극동아리 이박터 창립 40주년을 맞아, 연극을 사랑하는 사람들이 모였습니다.\n각기 다른 시간을 이박터와 보낸 이들이 같은 시간, 같은 공간에 모여 같은 마음과 가치를 나눕니다.", "서로가 서로에 기대어 함께 작업한다는 것이 얼마나 벅차고 멋진 일인지 다시 한 번 느낍니다.\n40년이 단순한 시간의 흐름이 아니라, 숫자로 환산하는 것이 불가능한 가치가 될 수 있음을 느낍니다.", "〈세상이 이렇게 끝나는구나..〉 (이하 세느낌) 은 같은 순간을 살아가는 사람들에 대한 이야기입니다.\n공연을 통해 우리는 앞으로 어떻게 살아가야 할 지 함께 마음을 나누었으면 합니다.", "함께 해주신 모든 분들, 도움주신 모든 분들, 찾아와주실 모든 분들께 감사드립니다.\n그럼, 즐거운 관람 되시길 바라겠습니다."],   // 기획의도
+  wooyeon: ["우리, 같이 연극해요!", "공연에 목마른 이들이 서로를 빌미로 삼아 다시 모였습니다.\n우발적으로, 충동적으로, 비정기적으로 연극 공연을 제작합니다."],   // 프로젝트 우연 소개
+  ibaktor: ["이박터는 이야기를 뜻하는 경상도 방언 이바구와 공간을 뜻하는 터를 결합하여 만들어진 이름입니다. 1986년 창설된 이박터는 40주년인 \'프로를 지향하는 아마추어\'라는 모토 아래 지금까지 훌륭하고 멋진 선배들과 열정적인 현역 부원들의 활동에 힘입어 연극을 올리고 있습니다.", "최근 올린 공연으로는 66회 정기연극 <프루프>, 67회 정기연극 <블랙코미디>가 있습니다."],     // 이박터 소개
+  // 만든 사람들 (스탭롤). 묶음(빈 줄로 띄워 보일 단위)마다 [역할, 이름]을 한 줄씩. 이름이 여럿이면 "오주원, 김상우"처럼
+  staff: [
+    [["원작", "네빌 슈트 〈해변에서〉"], ["각색", "박주영"], ["초연", "극단 배다"]],
+    [["기획 · 연출", "유현민"], ["기획보", "이수빈"], ["조연출", "오주원, 김상우"]],
+    [["조명 · 음향 디자인", "유현민"], ["조명 오퍼레이터", "홍승의"], ["음향 오퍼레이터", "노진혁"]],
+    [["무대", "김예나"], ["소품", "오주원"], ["분장", "김상우"]],
+    [["홍보 디자인", "오주원"], ["촬영", "박세준"], ["웹사이트", "김동언"]],
+    // [["하우스", "고대력, 박시현"], ["굿즈", "허수영"]],   // 확정되면 맨 앞 // 를 지우세요
+    [["제작", "프로젝트 우연"], ["공연 지원", "KAIST 연극동아리 이박터"]],
+  ],
+  // photo: images 폴더에 사진을 넣고 파일 이름을 적으세요 (예: "images/kimdongeon.jpg"). 세로 4:5 비율 권장
+  // poster: 배우를 눌렀을 때 크게 보일 캐릭터 포스터 (비우면 photo를 크게 보여 줌)
+  // instagram: 공개를 원하는 배우만 계정 아이디나 주소 (예: "@account"). 비우면 표시 안 함
+  // 지금 들어 있는 images/sample/animal-*.jpg 는 임시 동물 사진입니다. 실제 사진으로 바꾼 뒤 sample 폴더는 지워도 됩니다.
+  cast: [   // 등장 순서
+    { name: "이수빈", role: "피터", photo: "images/sample/animal-07.jpg", line: "운전면허 3번 떨어짐" },
+    { name: "김예나", role: "메리", photo: "images/sample/animal-04.jpg", line: "다음 세상에선 바다에 집을 짓자" },
+    { name: "유현민", role: "드와이트", photo: "images/sample/animal-06.jpg", line: "짱" },
+    { name: "김상우", role: "존", photo: "images/sample/animal-02.jpg", line: "페라리가 제일 좋았어요" },
+    { name: "김동언", role: "스웨인", photo: "images/sample/animal-01.jpg", line: "산타바바라가 제일 좋았어요" },
+    { name: "오주원", role: "모이라", photo: "images/sample/animal-05.jpg", line: "나는야 베스트 타이피스트" },
+    { name: "김수진", role: "중대장/바텐더/학생", photo: "images/sample/animal-03.jpg", line: "술 좀 그만 드세요" },
+    { name: "한은혜", role: "웬디/약사/학생", photo: "images/sample/animal-09.jpg", line: "과학이 망친 게 아니라구요?" },
+    { name: "한승범", role: "더글라스", photo: "images/sample/animal-08.jpg", line: "🐋🐳" },
+  ],
+};
+const TODO_HINTS = {
+  synopsis: "시놉시스 — 결말은 숨기고 인물과 상황 위주로 3~5문장",
+  intent: "기획의도 — 왜 지금 이 작품인지, 40주년에 선후배가 다시 모인 이유",
+  wooyeon: "프로젝트 우연 소개 — 언제, 누가, 어떤 연극을 하려고 모였는지",
+  ibaktor: "이박터 소개 — 창단 연도, 활동, 40년 동안의 공연",
+};
+/* ====================================================================== */
+
+const $ = (id) => document.getElementById(id);
+const api = makeApi(CONFIG.API_URL);
+const digits = (s) => String(s || "").replace(/\D/g, "");
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const store = {
+  get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
+  set(k, v) { try { v == null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch {} },
+};
+let STATUS = { sessions: [], layout: [], generalMax: 4 };
+const labelOf = (id) => { const s = STATUS.sessions.find((x) => x.id === id); return s ? s.label : id; };
+const splitLabel = (label) => { const i = String(label).lastIndexOf(" "); return i > 0 ? [label.slice(0, i), label.slice(i + 1)] : [label, ""]; };
+
+/* ---------- 내용 채우기 ---------- */
+function fillProse(el, paras, hintKey) {
+  el.textContent = "";
+  if (!paras || !paras.length) {
+    const d = document.createElement("div"); d.className = "todo";
+    d.innerHTML = "<b>작성 필요</b> · ";
+    d.append(TODO_HINTS[hintKey] || "");
+    el.appendChild(d); return;
+  }
+  paras.forEach((t) => { const p = document.createElement("p"); p.textContent = t; el.appendChild(p); });
+}
+function fillContent() {
+  $("runtime").textContent = CONTENT.runtime || "추후 공지";
+  $("runtimeNote").textContent = CONTENT.runtime ? CONTENT.runtimeNote : "";
+  $("twText").textContent = CONTENT.triggerWarning;
+  fillProse($("synopsisText"), CONTENT.synopsis, "synopsis");
+  fillProse($("intentText"), CONTENT.intent, "intent");
+  const roll = $("staffRoll");
+  (CONTENT.staff || []).forEach((group, gi) => group.forEach(([role, name], i) => {
+    const dt = document.createElement("dt"); dt.textContent = role;
+    const dd = document.createElement("dd"); dd.textContent = name;
+    if (gi && !i) { dt.className = dd.className = "g"; } // 묶음 사이 간격
+    roll.append(dt, dd);
+  }));
+  fillProse($("wooyeonText"), CONTENT.wooyeon, "wooyeon");
+  fillProse($("ibaktorText"), CONTENT.ibaktor, "ibaktor");
+  const line = $("castLine"), grid = $("castGrid");  // castLine은 없을 수 있음
+  CONTENT.cast.forEach((c) => {
+    if (line) { const s = document.createElement("span"); s.textContent = c.name; line.appendChild(s); }
+    const card = document.createElement("button"); card.type = "button"; card.className = "actor";
+    card.setAttribute("aria-label", `${c.name}${c.role ? ", " + c.role + " 역" : ""} — 캐릭터 카드 열기`);
+    card.onclick = () => openCastCard(c);
+    const ph = document.createElement("div"); ph.className = "photo";
+    const fallback = () => { ph.textContent = ""; const f = document.createElement("div"); f.className = "ph"; f.textContent = c.name.length > 2 ? c.name.slice(1) : c.name; ph.appendChild(f); };
+    if (c.photo) { const img = document.createElement("img"); img.src = c.photo; img.alt = c.name + " 배우 사진"; img.loading = "lazy"; img.onerror = fallback; ph.appendChild(img); } else fallback();
+    const role = document.createElement("div"); role.className = "role"; role.textContent = c.role ? c.role + " 역" : "배역 미정";
+    const nm = document.createElement("div"); nm.className = "nm"; nm.textContent = c.name;
+    card.append(ph, role, nm); grid.appendChild(card);
+  });
+  const g = $("fGuest");
+  [["", "선택 안 함"], ...CONTENT.cast.map((c) => [c.name, c.name]), ["스태프", "스태프 지인"]].forEach(([v, t]) => { const o = document.createElement("option"); o.value = v; o.textContent = t; g.appendChild(o); });
+}
+
+/* ---------- 캐릭터 카드 ---------- */
+function openCastCard(c) {
+  const dlg = $("castModal");
+  const box = dlg.querySelector(".cm-photo"); box.textContent = "";
+  const src = c.poster || c.photo;
+  if (src) { const img = document.createElement("img"); img.src = src; img.alt = `${c.name} ${c.role || ""} 캐릭터 포스터`; box.appendChild(img); }
+  dlg.querySelector(".cm-role").textContent = c.role ? c.role + " 역" : "배역 미정";
+  dlg.querySelector(".cm-name").textContent = c.name;
+  dlg.querySelector(".cm-line").textContent = c.line ? "“" + c.line + "”" : "";
+  const ig = dlg.querySelector(".cm-ig");
+  if (c.instagram) { ig.hidden = false; ig.href = /^https?:/.test(c.instagram) ? c.instagram : "https://www.instagram.com/" + c.instagram.replace(/^@/, "") + "/"; ig.textContent = "@" + c.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, "").replace(/^@/, "").replace(/\/$/, ""); }
+  else ig.hidden = true;
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+}
+$("castModal").addEventListener("click", (e) => { if (e.target === $("castModal")) $("castModal").close(); }); // 바깥 누르면 닫힘
+$("castModal").querySelector(".cm-close").onclick = () => $("castModal").close();
+
+/* ---------- 탭 ---------- */
+function showTab(which) {
+  const donor = which === "donor";
+  $("tabGeneral").setAttribute("aria-selected", String(!donor));
+  $("tabDonor").setAttribute("aria-selected", String(donor));
+  $("panelGeneral").hidden = donor; $("panelDonor").hidden = !donor;
+  store.set("tab", which);
+}
+$("tabGeneral").onclick = () => showTab("general");
+$("tabDonor").onclick = () => showTab("donor");
+
+/* ---------- 상태 불러오기 ---------- */
+async function loadStatus() {
+  try {
+    const res = await api.call("status");
+    if (res && res.ok) { STATUS = res; STATUS.skew = res.now ? res.now - Date.now() : 0; }
+  } catch { $("formMsg").textContent = "잔여 좌석을 불러오지 못했습니다. 잠시 후 새로고침해 주세요."; }
+  applyOpen(); renderGeneral(); if (D.token) renderDonor();
+}
+
+/* ---------- 예매 오픈 전: 해당 탭에는 "N/N 오픈 예정입니다"만 (서버도 따로 막음) ---------- */
+function openMsg(ms) {
+  const k = new Date(ms + 9 * 3600000), h = k.getUTCHours(), mi = k.getUTCMinutes(), p2 = (n) => String(n).padStart(2, "0");
+  return `${k.getUTCMonth() + 1}/${k.getUTCDate()}${h || mi ? ` ${p2(h)}:${p2(mi)}` : ""} 오픈 예정입니다.`;
+}
+let openTimer;
+function applyOpen() {
+  const o = STATUS.open || {}, now = Date.now() + (STATUS.skew || 0);
+  let next = 0;
+  [["panelGeneral", o.general], ["panelDonor", o.donor]].forEach(([id, t]) => {
+    const panel = $(id), closed = !!t && now < t;
+    let note = panel.querySelector(":scope > .closed-note");
+    if (closed && !note) { note = document.createElement("div"); note.className = "closed-note"; note.setAttribute("role", "status"); panel.prepend(note); }
+    if (note) note.textContent = closed ? openMsg(t) : "";
+    panel.classList.toggle("is-closed", closed);
+    if (closed && (!next || t < next)) next = t;
+  });
+  clearTimeout(openTimer);
+  if (next && next - now < 864e5) openTimer = setTimeout(loadStatus, next - now + 1500); // 페이지를 켜 둔 채 오픈 시각이 되면 자동으로 열림
+}
+
+/* ================== 일반 예매 ================== */
+const G = { selected: undefined, qty: 1 };
+function sessLeft(id) { const s = STATUS.sessions.find((x) => x.id === id); return s ? s.left : 0; }
+function maxQty() { return Math.max(1, Math.min(STATUS.generalMax || 4, G.selected ? sessLeft(G.selected) : 4)); }
+/* ---------- 회차 고르기: 달력에서 날짜 → 그 날의 시간 ---------- */
+const PICK = { general: null, donor: null }; // 고른 날짜 (회차ID 앞 4자리 MMDD)
+const dateKey = (s) => String(s.id).slice(0, 4);
+function renderPicker(box, kind, selectedId, onPick, opt) {
+  const list = STATUS.sessions; box.textContent = "";
+  if (!list.length) return;
+  const byDate = {}; list.forEach((s) => (byDate[dateKey(s)] = byDate[dateKey(s)] || []).push(s));
+  const dates = Object.keys(byDate).sort();
+  const sel = list.find((s) => s.id === selectedId);
+  let day = sel ? dateKey(sel) : PICK[kind];
+  if (!byDate[day]) day = dates[0];
+  PICK[kind] = day;
+  const year = STATUS.year || 2026, mm = Number(day.slice(0, 2));
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  const cal = el("div", "cal");
+  cal.append(el("div", "cal-head", `${year}년 ${mm}월`));
+  const grid = el("div", "cal-grid");
+  ["일", "월", "화", "수", "목", "금", "토"].forEach((w, i) => grid.append(el("span", "cal-w" + (i === 0 ? " sun" : i === 6 ? " sat" : ""), w)));
+  const first = new Date(Date.UTC(year, mm - 1, 1)).getUTCDay(), last = new Date(Date.UTC(year, mm, 0)).getUTCDate();
+  for (let i = 0; i < first; i++) grid.append(el("span", "cal-d"));
+  for (let d = 1; d <= last; d++) {
+    const key = String(mm).padStart(2, "0") + String(d).padStart(2, "0"), ss = byDate[key];
+    if (!ss) { grid.append(el("span", "cal-d", d)); continue; }
+    const b = el("button", "cal-d on" + (ss.every((x) => x.closed) ? " closed" : ""), d);
+    b.type = "button"; b.setAttribute("aria-pressed", String(key === day)); b.setAttribute("aria-label", `${mm}월 ${d}일 공연`);
+    b.onclick = () => { PICK[kind] = key; const f = ss.find(opt.selectable); onPick(f ? f.id : null); };
+    grid.append(b);
+  }
+  cal.append(grid);
+
+  const times = el("div", "times"); times.setAttribute("role", "radiogroup"); times.setAttribute("aria-label", "시간 선택");
+  byDate[day].forEach((s) => {
+    const [dlabel, time] = splitLabel(s.label), ok = opt.selectable(s), soldOut = s.left <= 0;
+    const b = el("button", "sess"); b.type = "button"; b.setAttribute("role", "radio"); b.setAttribute("aria-checked", String(s.id === selectedId));
+    if (!ok) b.setAttribute("aria-disabled", "true");
+    const d = el("div", "d"); d.append(el("span", "day", dlabel), el("span", "time", time));
+    const left = el("div", "left");
+    if (s.closed) left.textContent = "온라인 예매 마감";
+    else if (soldOut) left.textContent = "매진";
+    else { left.append("잔여 "); left.append(el("strong", s.left <= 10 ? "low" : "", String(s.left))); left.append(`/${s.capacity}석`); }
+    if (opt.extra) { const x = opt.extra(s); if (x) left.append(` · ${x}`); }
+    b.append(d, left);
+    b.onclick = () => { if (ok) onPick(s.id); };
+    times.append(b);
+  });
+  box.append(cal, times);
+}
+const generalOk = (s) => !s.closed && s.left > 0;
+function renderGeneral() {
+  const cur = STATUS.sessions.find((s) => s.id === G.selected);
+  if (G.selected === undefined || (cur && !generalOk(cur))) { const f = STATUS.sessions.find(generalOk); G.selected = f ? f.id : null; }
+  renderPicker($("sessions"), "general", G.selected, (id) => { G.selected = id; renderGeneral(); }, { selectable: generalOk });
+  G.qty = Math.min(Math.max(1, G.qty), maxQty());
+  $("qtyOut").textContent = G.qty;
+  $("qtyMinus").disabled = G.qty <= 1; $("qtyPlus").disabled = G.qty >= maxQty();
+  $("qtyHint").textContent = `한 연락처당 회차별 최대 ${STATUS.generalMax || 4}매`;
+  $("tSess").textContent = G.selected ? labelOf(G.selected) : "회차를 골라 주세요";
+  $("tQty").textContent = G.qty + "매";
+  $("tName").textContent = $("fName").value.trim() || "–";
+}
+$("qtyMinus").onclick = () => { G.qty--; renderGeneral(); };
+$("qtyPlus").onclick = () => { G.qty++; renderGeneral(); };
+$("fName").addEventListener("input", () => { $("tName").textContent = $("fName").value.trim() || "–"; });
+
+function formatPhone(el) {
+  el.addEventListener("input", () => {
+    const d = digits(el.value).slice(0, 11);
+    el.value = d.length < 4 ? d : d.length < 8 ? `${d.slice(0, 3)}-${d.slice(3)}` : `${d.slice(0, 3)}-${d.slice(3, d.length - 4)}-${d.slice(-4)}`;
+  });
+}
+formatPhone($("fPhone")); formatPhone($("lPhone"));
+
+$("bookForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = $("fName").value.trim(), phone = $("fPhone").value.trim();
+  $("errName").textContent = name ? "" : "이름을 적어 주세요.";
+  $("errPhone").textContent = /^01\d{8,9}$/.test(digits(phone)) ? "" : "휴대전화 번호를 010-0000-0000 형식으로 적어 주세요.";
+  if (!G.selected) { $("formMsg").textContent = "회차를 골라 주세요."; return; }
+  if (!name || $("errPhone").textContent) { $("formMsg").textContent = ""; return; }
+  if (!$("fAgree").checked) { $("formMsg").textContent = "개인정보 수집에 동의해야 예매할 수 있습니다."; return; }
+  const btn = $("submitBtn"); btn.disabled = true; btn.textContent = "신청하는 중…"; $("formMsg").textContent = "";
+  const payload = { session: G.selected, qty: G.qty, name, phone, guest: $("fGuest").value, memo: $("fMemo").value.trim(), website: $("fWebsite").value };
+  try {
+    const res = await api.call("book", payload);
+    if (!res || !res.ok) { $("formMsg").textContent = (res && res.error) || "예매에 실패했습니다. 다시 시도해 주세요."; await loadStatus(); return; }
+    showDone(res.code, payload); loadStatus();
+  } catch { $("formMsg").textContent = "서버에 연결하지 못했습니다. 네트워크를 확인하고 다시 시도해 주세요."; }
+  finally { btn.disabled = false; btn.textContent = "예매 신청"; }
+});
+function showDone(code, p) {
+  code = String(code).replace(/[^A-Z0-9]/g, "").slice(0, 8);
+  $("tCode").textContent = code;
+  $("bookForm").hidden = true;
+  const box = document.createElement("div"); box.className = "done-box";
+  box.innerHTML = `<h3>예매가 접수되었습니다</h3><p><span class="n"></span>님, <span class="s"></span> 회차 ${Number(p.qty) || 0}매가 신청되었습니다. 예매번호는 <b class="c" style="color:var(--sea-light);letter-spacing:.08em"></b>입니다. 공연 당일 현장에서 예매번호나 이름으로 티켓을 받을 수 있습니다.</p><button type="button" class="ghost">다른 회차 추가 예매</button>`;
+  box.querySelector(".n").textContent = p.name; box.querySelector(".s").textContent = labelOf(p.session); box.querySelector(".c").textContent = code;
+  box.querySelector("button").onclick = () => { box.remove(); $("bookForm").hidden = false; $("bookForm").reset(); G.qty = 1; $("tCode").textContent = "······"; renderGeneral(); };
+  $("formSide").appendChild(box);
+}
+
+/* ================== 후원자 예매 ================== */
+const D = { token: store.get("donorToken"), donor: null, session: null, picked: new Set(), cancelPick: new Set() };
+
+// 후원자 로그인은 예매 화면·예매 확인 화면 어디서 해도 같은 로그인 상태를 씀
+async function donorLogin(nameEl, codeEl, msg) {
+  msg.textContent = "확인하는 중…";
+  try {
+    const res = await api.call("donorLogin", { name: nameEl.value, code: codeEl.value });
+    if (!res.ok) { msg.textContent = res.error; return; }
+    msg.textContent = ""; D.token = res.token; D.donor = res.donor; store.set("donorToken", res.token);
+    codeEl.value = ""; renderDonor();
+  } catch { msg.textContent = "서버에 연결하지 못했습니다."; }
+}
+$("donorLogin").addEventListener("submit", (e) => { e.preventDefault(); donorLogin($("dName"), $("dCode"), $("dLoginMsg")); });
+$("lkDonorLogin").addEventListener("submit", (e) => { e.preventDefault(); donorLogin($("lkName"), $("lkCode"), $("lkLoginMsg")); });
+async function donorLogout() {
+  try { await api.call("donorLogout", { token: D.token }); } catch {}
+  D.token = null; D.donor = null; D.picked.clear(); D.cancelPick.clear(); LK.pick.clear(); store.set("donorToken", null); renderDonor();
+}
+$("dLogout").onclick = donorLogout; $("lkLogout").onclick = donorLogout;
+function expired(res) {
+  if (res && res.expired) { D.token = null; D.donor = null; store.set("donorToken", null); renderDonor(); $("dLoginMsg").textContent = res.error; $("lkLoginMsg").textContent = res.error; return true; }
+  return false;
+}
+
+/* ---------- 예매 확인 화면: 탭 + 후원자 좌석 목록 ---------- */
+const LK = { pick: new Set() };
+function showLookupTab(which) {
+  const donor = which === "donor";
+  $("lkTabGeneral").setAttribute("aria-selected", String(!donor)); $("lkTabDonor").setAttribute("aria-selected", String(donor));
+  $("lkPanelGeneral").hidden = donor; $("lkPanelDonor").hidden = !donor;
+}
+$("lkTabGeneral").onclick = () => showLookupTab("general");
+$("lkTabDonor").onclick = () => showLookupTab("donor");
+$("lkGoBook").onclick = () => showTab("donor");
+function renderLookupDonor() {
+  const on = !!(D.token && D.donor);
+  $("lkDonorLogin").hidden = on; $("lkDonorPanel").hidden = !on;
+  if (!on) return;
+  const d = D.donor;
+  $("lkWho").textContent = d.name; $("lkTotal").textContent = d.tokens; $("lkUsed").textContent = d.used; $("lkLeft").textContent = d.left;
+  const list = $("lkMyList"); list.textContent = "";
+  const groups = {}; d.seats.forEach((x) => { (groups[x.session] = groups[x.session] || []).push(x.seat); });
+  const ids = STATUS.sessions.map((x) => x.id).filter((id) => groups[id]);
+  for (const k of [...LK.pick]) if (!d.seats.some((x) => x.session + "|" + x.seat === k)) LK.pick.delete(k);
+  if (!ids.length) { const e = document.createElement("div"); e.className = "hint"; e.style.paddingBlock = "10px"; e.textContent = "아직 예매한 좌석이 없습니다."; list.appendChild(e); }
+  ids.forEach((sid) => {
+    const g = document.createElement("div"); g.className = "grp";
+    const sl = document.createElement("span"); sl.className = "sl"; sl.textContent = labelOf(sid); g.appendChild(sl);
+    groups[sid].sort((a, b) => a.localeCompare(b, "en", { numeric: true })).forEach((seat) => {
+      const key = sid + "|" + seat;
+      const c = document.createElement("label"); c.className = "chip";
+      const cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = LK.pick.has(key);
+      cb.onchange = () => { cb.checked ? LK.pick.add(key) : LK.pick.delete(key); $("lkConfirm").hidden = true; $("lkCancelBtn").hidden = !LK.pick.size; };
+      c.append(cb, document.createTextNode(seat)); g.appendChild(c);
+    });
+    list.appendChild(g);
+  });
+  $("lkCancelBtn").hidden = !LK.pick.size;
+}
+$("lkCancelBtn").onclick = () => {
+  const keys = [...LK.pick];
+  $("lkConfirmText").textContent = `${keys.map((k) => labelOf(k.split("|")[0]) + " " + k.split("|")[1]).join(", ")} 좌석을 취소합니다. 토큰 ${keys.length}개가 돌아옵니다.`;
+  $("lkConfirm").hidden = false;
+};
+$("lkNo").onclick = () => { $("lkConfirm").hidden = true; };
+$("lkYes").onclick = async () => {
+  if (DBUSY) return;
+  DBUSY = true; document.body.classList.add("busy"); $("lkYes").textContent = "취소하는 중…"; $("lkMsg").textContent = "";
+  const bySession = {}; [...LK.pick].forEach((k) => { const [s, seat] = k.split("|"); (bySession[s] = bySession[s] || []).push(seat); });
+  try {
+    for (const [session, seats] of Object.entries(bySession)) {
+      const res = await api.call("donorCancel", { token: D.token, session, seats });
+      if (expired(res)) return;
+      if (!res.ok) { $("lkMsg").textContent = res.error; break; }
+      D.donor = res.donor;
+    }
+    LK.pick.clear(); $("lkConfirm").hidden = true;
+    await loadStatus();
+    $("lkMsg").innerHTML = '<span class="ok-msg">취소했습니다. 토큰이 돌아왔습니다.</span>';
+  } catch { $("lkMsg").textContent = "서버에 연결하지 못했습니다."; }
+  finally { $("lkYes").textContent = "취소하기"; DBUSY = false; document.body.classList.remove("busy"); }
+};
+async function restoreDonor() {
+  if (!D.token) return renderDonor();
+  try { const res = await api.call("donorMe", { token: D.token }); if (expired(res)) return; if (res.ok) D.donor = res.donor; } catch {}
+  renderDonor();
+}
+
+function parseLayout(rows) {
+  let label = 0; const out = [];
+  rows.forEach((row) => {
+    const has = row.includes("o"); const L = has ? String.fromCharCode(65 + label++) : "";
+    let n = 0; out.push({ L, cells: [...row].map((ch) => (ch === "o" ? L + ++n : null)) });
+  });
+  return out;
+}
+function renderDonor() {
+  const on = !!(D.token && D.donor);
+  $("donorLogin").hidden = on; $("donorPanel").hidden = !on;
+  if (!on) return;
+  const d = D.donor;
+  $("dWho").textContent = d.name; $("tkTotal").textContent = d.tokens; $("tkUsed").textContent = d.used; $("tkLeft").textContent = d.left;
+  if (!D.session || !STATUS.sessions.find((s) => s.id === D.session)) D.session = STATUS.sessions[0] && STATUS.sessions[0].id;
+  // 매진·마감 회차도 내 좌석 확인을 위해 고를 수 있게 둠 (예매·취소는 서버가 따로 막음)
+  renderPicker($("dSessions"), "donor", D.session, (id) => { if (id) D.session = id; D.picked.clear(); renderDonor(); }, {
+    selectable: () => true,
+    extra: (s) => { const n = d.seats.filter((x) => x.session === s.id).length; return n ? `내 좌석 ${n}` : ""; },
+  });
+  // 좌석표
+  const s = STATUS.sessions.find((x) => x.id === D.session);
+  const taken = new Set(s ? s.taken : []);
+  const mine = new Set(d.seats.filter((x) => x.session === D.session).map((x) => x.seat));
+  const map = $("seatmap"); map.textContent = "";
+  const stage = document.createElement("div"); stage.className = "stage"; stage.textContent = "무대"; map.appendChild(stage);
+  parseLayout(STATUS.layout || []).forEach((row) => {
+    const r = document.createElement("div"); r.className = "srow";
+    const lab = () => { const l = document.createElement("span"); l.className = "lab"; l.textContent = row.L; return l; };
+    r.appendChild(lab());
+    row.cells.forEach((id) => {
+      if (!id) { const g = document.createElement("span"); g.className = "gap"; r.appendChild(g); return; }
+      const b = document.createElement("button"); b.type = "button"; b.className = "seat"; b.textContent = id.slice(row.L.length);
+      const num = id.slice(row.L.length);
+      if (mine.has(id)) { b.classList.add("mine"); b.disabled = true; b.setAttribute("aria-label", `${row.L}열 ${num}번, 내 좌석`); }
+      else if (taken.has(id)) { b.classList.add("taken"); b.disabled = true; b.setAttribute("aria-label", `${row.L}열 ${num}번, 예매됨`); }
+      else {
+        b.setAttribute("aria-pressed", String(D.picked.has(id))); b.setAttribute("aria-label", `${row.L}열 ${num}번`);
+        b.onclick = () => {
+          if (D.picked.has(id)) D.picked.delete(id);
+          else if (D.picked.size >= d.left) { $("dMsg").textContent = `남은 토큰이 ${d.left}개라 더 고를 수 없습니다.`; return; }
+          else if (s && D.picked.size >= s.left) { $("dMsg").textContent = `이 회차에 남은 좌석이 ${s.left}석뿐입니다.`; return; }
+          else D.picked.add(id);
+          $("dMsg").textContent = ""; renderDonor();
+        };
+      }
+      r.appendChild(b);
+    });
+    r.appendChild(lab()); map.appendChild(r);
+  });
+  const n = D.picked.size;
+  $("pickText").textContent = n ? `선택한 좌석 ${[...D.picked].join(", ")} · 토큰 ${n}개 사용` : d.left > 0 ? `좌석을 눌러 고르세요 (최대 ${d.left}석)` : "남은 토큰이 없습니다. 좌석을 취소하면 토큰이 돌아옵니다.";
+  $("dBookBtn").setAttribute("aria-disabled", String(!n));
+  $("dBookBtn").textContent = n ? `${n}석 예매하기` : "예매하기";
+  // 내 좌석 목록
+  const list = $("myList"); list.textContent = "";
+  const groups = {}; d.seats.forEach((x) => { (groups[x.session] = groups[x.session] || []).push(x.seat); });
+  const ids = STATUS.sessions.map((x) => x.id).filter((id) => groups[id]);
+  if (!ids.length) { list.innerHTML = `<div class="hint" style="padding-block:10px">아직 예매한 좌석이 없습니다.</div>`; }
+  ids.forEach((sid) => {
+    const g = document.createElement("div"); g.className = "grp";
+    const sl = document.createElement("span"); sl.className = "sl"; sl.textContent = labelOf(sid); g.appendChild(sl);
+    groups[sid].sort((a, b) => a.localeCompare(b, "en", { numeric: true })).forEach((seat) => {
+      const key = sid + "|" + seat;
+      const c = document.createElement("label"); c.className = "chip";
+      const cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = D.cancelPick.has(key);
+      cb.onchange = () => { cb.checked ? D.cancelPick.add(key) : D.cancelPick.delete(key); $("cancelConfirm").hidden = true; $("dCancelBtn").hidden = !D.cancelPick.size; };
+      c.append(cb, document.createTextNode(seat)); g.appendChild(c);
+    });
+    list.appendChild(g);
+  });
+  $("dCancelBtn").hidden = !D.cancelPick.size;
+}
+const _renderDonor = renderDonor;
+renderDonor = function () { _renderDonor(); renderLookupDonor(); };
+let DBUSY = false; // 후원자 예매·취소 요청이 처리되는 동안 추가 클릭 무시
+$("dBookBtn").onclick = async () => {
+  if (!D.picked.size || DBUSY) return;
+  DBUSY = true; document.body.classList.add("busy");
+  const btn = $("dBookBtn"); btn.setAttribute("aria-disabled", "true"); btn.textContent = "예매하는 중…";
+  try {
+    const res = await api.call("donorBook", { token: D.token, session: D.session, seats: [...D.picked] });
+    if (expired(res)) return;
+    if (!res.ok) { $("dMsg").textContent = res.error; D.picked.clear(); await loadStatus(); return; }
+    const n = D.picked.size; D.picked.clear(); D.donor = res.donor;
+    await loadStatus();
+    $("dMsg").innerHTML = `<span class="ok-msg">${esc(labelOf(D.session))} 회차 ${n}석을 예매했습니다.</span>`;
+  } catch { $("dMsg").textContent = "서버에 연결하지 못했습니다."; renderDonor(); }
+  finally { DBUSY = false; document.body.classList.remove("busy"); }
+};
+$("dCancelBtn").onclick = () => {
+  const keys = [...D.cancelPick];
+  $("cancelText").textContent = `${keys.map((k) => labelOf(k.split("|")[0]) + " " + k.split("|")[1]).join(", ")} 좌석을 취소합니다. 토큰 ${keys.length}개가 돌아옵니다.`;
+  $("cancelConfirm").hidden = false;
+};
+$("cancelNo").onclick = () => { $("cancelConfirm").hidden = true; };
+$("cancelYes").onclick = async () => {
+  if (DBUSY) return;
+  DBUSY = true; document.body.classList.add("busy");
+  const bySession = {}; [...D.cancelPick].forEach((k) => { const [s, seat] = k.split("|"); (bySession[s] = bySession[s] || []).push(seat); });
+  $("cancelYes").textContent = "취소하는 중…";
+  try {
+    for (const [session, seats] of Object.entries(bySession)) {
+      const res = await api.call("donorCancel", { token: D.token, session, seats });
+      if (expired(res)) return;
+      if (!res.ok) { $("dMsg").textContent = res.error; break; }
+      D.donor = res.donor;
+    }
+    D.cancelPick.clear(); $("cancelConfirm").hidden = true;
+    await loadStatus();
+  } catch { $("dMsg").textContent = "서버에 연결하지 못했습니다."; }
+  finally { $("cancelYes").textContent = "취소하기"; DBUSY = false; document.body.classList.remove("busy"); }
+};
+
+/* ================== 예매 확인 ================== */
+$("lookupForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const out = $("lookupResults"), name = $("lName").value.trim(), phone = $("lPhone").value.trim();
+  out.textContent = "";
+  const none = (t) => { const d = document.createElement("div"); d.className = "none"; d.textContent = t; out.appendChild(d); };
+  if (!name || digits(phone).length < 10) return none("이름과 연락처를 모두 적어 주세요.");
+  none("찾는 중…");
+  try {
+    const res = await api.call("lookup", { name, phone });
+    out.textContent = "";
+    if (!res.ok) return none(res.error);
+    if (!res.bookings.length) return none("일치하는 예매 내역이 없습니다. 이름과 번호를 다시 확인해 주세요.");
+    // 시트의 '취소'만 취소, 나머지('신청' 등)는 모두 유효한 예매
+    const list = res.bookings.map((b) => ({ ...b, cancelled: b.status === "취소" }))
+      .sort((x, y) => x.cancelled - y.cancelled);
+    const live = list.filter((b) => !b.cancelled);
+    const sum = document.createElement("div"); sum.className = "sum";
+    const nc = list.length - live.length;
+    sum.textContent = (live.length ? `예매 확정 ${live.length}건 · 총 ${live.reduce((n, b) => n + b.qty, 0)}매` : "확정된 예매가 없습니다") + (nc ? ` · 취소 ${nc}건` : "");
+    out.appendChild(sum);
+    list.forEach((b) => {
+      const row = document.createElement("div"); row.className = "row" + (b.cancelled ? " cancelled" : "");
+      const c = document.createElement("b"); c.textContent = b.code;
+      const s = document.createElement("span"); s.className = "what"; s.textContent = `${labelOf(b.session)} · ${b.qty}매`;
+      const st = document.createElement("span"); st.className = "badge " + (b.cancelled ? "no" : "ok");
+      st.textContent = b.cancelled ? "취소됨" : "예매 확정";
+      row.append(c, s, st); out.appendChild(row);
+    });
+  } catch { out.textContent = ""; none("서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요."); }
+});
+
+$("copyPhone").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText("010-3863-0463"); $("copyPhone").textContent = "복사됨"; }
+  catch { const r = document.createRange(); r.selectNodeContents($("phoneText")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+});
+
+
+
+/* ---------- 하단 이동 버튼: 현재 화면을 뺀 나머지 ---------- */
+const PAGE_LINKS = [
+  ["lookup", "#lookup", "예매 확인"], ["donate", "#donate", "후원하기"], ["tickets", "#tickets", "티켓 예매", true],
+];
+function renderPageLinks(current) {
+  const box = $("pageLinks"); box.textContent = "";
+  PAGE_LINKS.filter(([id]) => id !== current).forEach(([, href, label, primary]) => {
+    const a = document.createElement("a"); a.href = href; a.textContent = label;
+    a.className = primary ? "btn-main" : "btn-line"; box.appendChild(a);
+  });
+}
+
+/* ---------- 후원하기 ---------- */
+(function setupDonate() {
+  const C = CONFIG.DONATE || {};
+  $("dnBank").textContent = C.bank || "후원 계좌";
+  if (C.account) { $("dnAccount").textContent = C.account; if (C.holder) { $("dnHolder").textContent = C.holder; $("dnHolderRow").hidden = false; } }
+  else $("dnCopy").hidden = true;
+  $("dnCopy").onclick = async () => {
+    const t = `${C.bank || ""} ${C.account}`.trim(); // 예: "카카오뱅크 7942-14-22605" (송금 앱에 붙여 넣으면 은행까지 인식)
+    try { await navigator.clipboard.writeText(t); $("dnCopy").textContent = "복사됨"; setTimeout(() => ($("dnCopy").textContent = "계좌번호 복사"), 1800); }
+    catch { const r = document.createRange(); r.selectNodeContents($("dnAccount")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+  };
+  if (C.account && /Android|iPhone|iPad/i.test(navigator.userAgent)) {
+    $("dnToss").hidden = false;
+    $("dnToss").href = "supertoss://send?bank=" + encodeURIComponent(C.bank || "카카오뱅크") + "&accountNo=" + encodeURIComponent(C.account.replace(/\D/g, ""));
+  }
+  if (C.kakaoPayLink && /^https:\/\//.test(C.kakaoPayLink)) {
+    $("dnKakao").hidden = false; $("dnKakao").href = C.kakaoPayLink;
+    const sc = document.createElement("script");
+    sc.src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";
+    sc.onload = () => { try { new QRCode($("dnQr"), { text: C.kakaoPayLink, width: 168, height: 168, colorDark: "#1F1A17", colorLight: "#FBFAF6" }); $("dnQrCard").hidden = false; } catch {} };
+    document.head.appendChild(sc);
+  }
+})();
+function amountValue() { return Number(String($("pAmount").value).replace(/\D/g, "")) || 0; }
+function updatePledgeHint() {
+  const a = amountValue();
+  document.querySelectorAll(".amt").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.amt) === a)));
+  const n = Math.floor(a / 15000);
+  $("pTokens").textContent = a ? `${a.toLocaleString("ko-KR")}원 · 지정석 ${n}석 예매 가능` : "15,000원마다 지정석 1석";
+}
+document.querySelectorAll(".amt").forEach((b) => (b.onclick = () => { $("pAmount").value = Number(b.dataset.amt).toLocaleString("ko-KR"); updatePledgeHint(); }));
+$("pAmount").addEventListener("input", () => { const n = amountValue(); $("pAmount").value = n ? n.toLocaleString("ko-KR") : ""; updatePledgeHint(); });
+formatPhone($("pPhone")); updatePledgeHint();
+let PBUSY = false;
+$("pledgeForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (PBUSY) return;
+  const name = $("pName").value.trim(), phone = $("pPhone").value.trim(), amount = amountValue();
+  if (!name) return ($("pMsg").textContent = "이름을 적어 주세요.");
+  if (!/^01\d{8,9}$/.test(digits(phone))) return ($("pMsg").textContent = "휴대전화 번호를 010-0000-0000 형식으로 적어 주세요.");
+  if (amount < 1000) return ($("pMsg").textContent = "후원 금액을 골라 주세요.");
+  if (!$("pAgree").checked) return ($("pMsg").textContent = "개인정보 수집에 동의해야 신청할 수 있습니다.");
+  PBUSY = true; $("pSubmit").disabled = true; $("pSubmit").textContent = "보내는 중…"; $("pMsg").textContent = "";
+  try {
+    const res = await api.call("pledge", { name, phone, amount, depositor: $("pDepositor").value.trim(), memo: $("pMemo").value.trim(), website: $("pWebsite").value });
+    if (!res || !res.ok) { $("pMsg").textContent = (res && res.error) || "신청을 보내지 못했습니다. 다시 시도해 주세요."; return; }
+    $("pledgeForm").hidden = true; $("pDone").hidden = false;
+    $("pDoneText").textContent = `${name}님, ${amount.toLocaleString("ko-KR")}원 후원 신청을 받았습니다. 입금이 확인되면 ${phone} 번호로 후원자 코드를 보내 드릴게요.` + (res.tokens ? ` 지정석 ${res.tokens}석을 예매할 수 있어요.` : "");
+  } catch { $("pMsg").textContent = "서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요."; }
+  finally { PBUSY = false; $("pSubmit").disabled = false; $("pSubmit").textContent = "후원 신청 남기기"; }
+});
+$("pAgain").onclick = () => { $("pledgeForm").reset(); $("pledgeForm").hidden = false; $("pDone").hidden = true; updatePledgeHint(); };
+
+/* ---------- 화면 전환 (#home #crew #cast #tickets #lookup) ---------- */
+const VIEWS = ["home", "crew", "cast", "tickets", "lookup", "donate"];
+function route() {
+  const h = location.hash.replace("#", "");
+  const alias = { story: "crew", book: "tickets" }; // 예전 주소도 계속 동작
+  const view = VIEWS.includes(h) ? h : alias[h] || "home";
+  document.querySelectorAll("[data-view]").forEach((v) => (v.hidden = v.dataset.view !== view));
+  document.querySelectorAll("[data-nav]").forEach((a) => a.dataset.nav === view ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  renderPageLinks(view);
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+function measureHeader() { document.documentElement.style.setProperty("--head-h", document.querySelector("header.top").offsetHeight + "px"); }
+window.addEventListener("resize", measureHeader);
+measureHeader();
+
+/* ---------- 로고 → 인스타그램 ---------- */
+[["logoIbaktor", CONFIG.INSTAGRAM.ibaktor], ["logoWooyeon", CONFIG.INSTAGRAM.wooyeon], ["igHeader", CONFIG.INSTAGRAM.wooyeon]].forEach(([id, url]) => {
+  const a = $(id);
+  if (url) a.href = url; else { a.removeAttribute("target"); a.removeAttribute("rel"); a.href = "#home"; }
+});
+
+/* ---------- 시작 ---------- */
+if (api.demo) $("demoNote").hidden = false;
+fillContent();
+showTab(store.get("tab") === "donor" ? "donor" : "general");
+route();
+
+loadStatus().then(restoreDonor);
+</script>
+
+</body>
+</html>
