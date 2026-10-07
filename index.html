@@ -338,6 +338,28 @@
   /* 예매 오픈 전: 탭 안에는 "N/N 오픈 예정입니다"만 */
   .is-closed > :not(.closed-note) { display: none !important; }
   .closed-note { text-align: center; padding: 56px 16px; font-size: clamp(20px, 2.6vw, 26px); color: var(--sand); border-block: 1px solid var(--earth-line); }
+  /* 공지 상자 */
+  .notice { max-width: 720px; margin: 0 auto 26px; padding: 12px 16px; border: 1px solid var(--warn); color: var(--sand); background: rgba(240,178,122,.08); font-size: 14.5px; text-align: center; word-break: keep-all; }
+  .notice { text-wrap: balance; }
+  .notice::before { content: "※ "; color: var(--warn); }
+  .notice.small { margin: 0; font-size: 13px; padding: 10px 12px; }
+  .cast-note { font-size: 13px; color: var(--sand-muted); }
+  /* 연습 현장 */
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  @media (max-width: 520px) { .gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; } }
+  .gallery .ph { all: unset; box-sizing: border-box; cursor: pointer; aspect-ratio: 4 / 3; background: var(--earth-2); overflow: hidden; display: block; }
+  .gallery .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+  .gallery .ph:hover img { transform: scale(1.03); }
+  .gallery .ph:focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 2px; }
+  .gallery .ph.broken { display: none; }
+  .gallery-empty { grid-column: 1 / -1; text-align: center; color: var(--sand-muted); padding: 40px 0; }
+  .photo-box { border: 0; padding: 0; background: #120D0A; color: var(--sand); width: min(96vw, 1200px); max-height: 94vh; }
+  .photo-box::backdrop { background: rgba(10, 7, 5, .88); }
+  .photo-box img { display: block; width: 100%; max-height: calc(94vh - 52px); object-fit: contain; background: #120D0A; }
+  .pb-bar { display: flex; align-items: center; gap: 10px; padding: 8px 12px; font-size: 14px; }
+  .pb-bar span { flex: 1; text-align: center; font-variant-numeric: tabular-nums; color: var(--sand-muted); }
+  .pb-bar button { all: unset; cursor: pointer; padding: 6px 12px; border: 1px solid var(--earth-line); font-size: 15px; }
+  .pb-bar button:hover { border-color: var(--sand-muted); }
   /* 이용 안내 */
   .usage { max-width: 640px; margin: 22px auto 0; border-top: 1px solid var(--earth-line); }
   .usage > div { display: flex; justify-content: center; gap: 14px; padding: 13px 4px; border-bottom: 1px solid var(--earth-line); font-size: 15px; }
@@ -414,7 +436,12 @@
 
   @media (max-width: 760px) {
     .top { grid-template-columns: auto 1fr; }
-    .top nav { justify-content: flex-end; gap: 4px 16px; }
+    .top nav { justify-content: flex-end; gap: 4px 12px; }
+  }
+  @media (max-width: 520px) {
+    /* 좁은 휴대폰: 메뉴 4개를 로고 아래 한 줄로 */
+    .top nav { grid-column: 1 / -1; grid-row: 2; justify-content: space-around; padding-top: 2px; font-size: 14px; }
+    .top .actions { grid-row: 3; }
     .top .actions { grid-column: 1 / -1; justify-self: stretch; }
     .top .act { flex: 1; padding: 9px 6px; }
     .top .mark img { height: 44px; }
@@ -426,7 +453,7 @@
 <header class="wrap top">
   <a class="mark" href="#home" aria-label="공연 정보로 이동"><img src="images/logo-sub.png" alt="세.느.낌" width="480" height="194"></a>
   <nav aria-label="페이지 이동">
-    <a href="#home" data-nav="home">공연 정보</a><a href="#crew" data-nav="crew">제작진</a><a href="#cast" data-nav="cast">출연진</a>
+    <a href="#home" data-nav="home">공연 정보</a><a href="#crew" data-nav="crew">제작진</a><a href="#cast" data-nav="cast">출연진</a><a href="#practice" data-nav="practice">연습 현장</a>
   </nav>
   <div class="actions">
     <a class="act" href="#lookup" data-nav="lookup">예매 확인</a>
@@ -500,7 +527,7 @@
       <!-- 출연진 -->
       <section class="section first">
         <h2 class="section-h">출연진</h2>
-        <p class="section-sub" style="margin-bottom:24px">사진을 누르면 캐릭터 카드와 배우의 한마디를 볼 수 있어요.</p>
+        <p class="section-sub" style="margin-bottom:24px">사진을 누르면 캐릭터 카드와 배우의 한마디를 볼 수 있어요.<br><span class="cast-note">* 배역 사진은 추후 업데이트 예정입니다</span></p>
         <div class="cast-grid" id="castGrid"></div>
         <dialog class="cast-modal" id="castModal" aria-label="캐릭터 카드">
           <div class="cm-photo"></div>
@@ -509,6 +536,29 @@
             <div class="cm-name"></div>
             <p class="cm-line"></p>
             <div class="cm-foot"><a class="cm-ig" href="#" target="_blank" rel="noopener" hidden></a><span></span><button type="button" class="cm-close">닫기</button></div>
+          </div>
+        </dialog>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===== 연습 현장 ===== -->
+  <div class="view ground" data-view="practice" hidden>
+    <header class="page-hero">
+      <div class="band" aria-hidden="true"></div>
+    </header>
+    <div class="wrap">
+      <section class="section first">
+        <h2 class="section-h">연습 현장</h2>
+        <p class="section-sub" style="margin-bottom:24px">〈세.느.낌〉을 준비하는 연습실의 기록입니다. 사진을 누르면 크게 볼 수 있어요.</p>
+        <div class="gallery" id="gallery" aria-live="polite"></div>
+        <dialog class="photo-box" id="photoBox" aria-label="연습 사진 크게 보기">
+          <img id="pbImg" alt="">
+          <div class="pb-bar">
+            <button type="button" id="pbPrev" aria-label="이전 사진">‹</button>
+            <span id="pbCap"></span>
+            <button type="button" id="pbNext" aria-label="다음 사진">›</button>
+            <button type="button" id="pbClose">닫기</button>
           </div>
         </dialog>
       </section>
@@ -587,6 +637,7 @@
         <div id="panelDonor" role="tabpanel" aria-labelledby="tabDonor" hidden>
           <form class="login-card" id="donorLogin" novalidate>
             <p>후원자 명단에 등록된 이름과 안내받은 후원자 코드를 입력하세요. 후원 15,000원마다 지정석 1석을 예매할 수 있습니다.</p>
+            <p class="notice small">11/21 (토) 공연은 KAIST 연극동아리 이박터 홈커밍 행사와 연계되어 일부 좌석 지정이 제한될 수 있습니다.</p>
             <p class="to-donate">아직 후원 전이라면 <a href="#donate">후원하기</a>에서 먼저 후원해 주세요. 확인 후 후원자 코드를 보내 드립니다.</p>
             <div class="field"><label for="dName">이름</label><input id="dName" autocomplete="name" maxlength="20"></div>
             <div class="field"><label for="dCode">후원자 코드</label><input id="dCode" autocomplete="off" autocapitalize="characters" maxlength="12" style="text-transform:uppercase;letter-spacing:.12em"></div>
@@ -720,6 +771,7 @@
         <h2 class="section-h">후원하기</h2>
         <p class="section-sub donate-lead">KAIST 이박터 40주년 기념 공연, 〈세.느.낌〉을 응원해주세요. 보내주신 후원금은 모두 본 공연의 제작 및 후배들의 미래 공연 제작에 쓰입니다.<br><br>후원해주신 모든 분들을 위해 작은 선물을 준비하고 있으며, 10/25까지 후원해주신 분들께는 15,000원 당 1석의 지정좌석 선예매권을 드립니다. <span class="nowrap">(10/31 후원자 선예매 오픈 예정, 11/7 일반 예매 오픈 예정)</span></p>
 
+        <p class="notice">11/21 (토) 공연은 KAIST 연극동아리 이박터 홈커밍 행사와 연계되어 일부 좌석 지정이 제한될 수 있습니다.</p>
         <div class="donate-grid">
           <div class="bank-card">
             <div class="bank-top"><span id="dnBank">카카오뱅크</span><span class="muted">후원 계좌</span></div>
@@ -978,7 +1030,8 @@ function openMsg(ms) {
 }
 let openTimer;
 function applyOpen() {
-  const o = STATUS.open || {}, now = Date.now() + (STATUS.skew || 0);
+  // 서버가 오픈 시각을 안 주면(예전 서버) 공지된 날짜로 닫아 둠
+  const o = STATUS.open || { donor: Date.UTC(2026, 9, 30, 15), general: Date.UTC(2026, 10, 6, 15) }, now = Date.now() + (STATUS.skew || 0);
   let next = 0;
   [["panelGeneral", o.general], ["panelDonor", o.donor]].forEach(([id, t]) => {
     const panel = $(id), closed = !!t && now < t;
@@ -1405,7 +1458,47 @@ $("pledgeForm").addEventListener("submit", async (e) => {
 $("pAgain").onclick = () => { $("pledgeForm").reset(); $("pledgeForm").hidden = false; $("pDone").hidden = true; updatePledgeHint(); };
 
 /* ---------- 화면 전환 (#home #crew #cast #tickets #lookup) ---------- */
-const VIEWS = ["home", "crew", "cast", "tickets", "lookup", "donate"];
+/* ================== 연습 현장 (구글 드라이브 폴더 사진) ================== */
+const PH = { list: null, i: 0, loading: false };
+const okId = (id) => /^[-\w]{10,}$/.test(String(id || ""));
+function photoUrl(p, w) {
+  if (p.src && /^images\//.test(p.src)) return p.src;           // 미리보기용 예시 사진
+  return `https://drive.google.com/thumbnail?id=${encodeURIComponent(p.id)}&sz=w${w}`;
+}
+async function loadPhotos() {
+  if (PH.list || PH.loading) return;
+  const g = $("gallery"), msg = (t) => { g.textContent = ""; const d = document.createElement("p"); d.className = "gallery-empty"; d.textContent = t; g.appendChild(d); };
+  PH.loading = true; msg("사진을 불러오는 중…");
+  try {
+    const res = await api.call("photos");
+    PH.list = ((res && res.ok && res.photos) || []).filter((p) => okId(p.id) || (p.src && /^images\//.test(p.src)));
+  } catch { msg("사진을 불러오지 못했습니다. 잠시 후 다시 들어와 주세요."); PH.loading = false; return; }
+  PH.loading = false;
+  if (!PH.list.length) return msg("연습 사진이 곧 올라옵니다.");
+  g.textContent = "";
+  PH.list.forEach((p, i) => {
+    const b = document.createElement("button"); b.type = "button"; b.className = "ph";
+    b.setAttribute("aria-label", `${p.name || "연습 사진"} 크게 보기`);
+    const img = document.createElement("img"); img.loading = "lazy"; img.decoding = "async"; img.alt = p.name || "연습 사진";
+    img.referrerPolicy = "no-referrer"; img.src = photoUrl(p, 600);
+    img.onerror = () => b.classList.add("broken");
+    b.appendChild(img); b.onclick = () => openPhoto(i); g.appendChild(b);
+  });
+}
+function openPhoto(i) {
+  const n = PH.list.length; PH.i = (i + n) % n; const p = PH.list[PH.i];
+  $("pbImg").src = photoUrl(p, 1600); $("pbImg").alt = p.name || "연습 사진";
+  $("pbCap").textContent = `${PH.i + 1} / ${n}`;
+  const d = $("photoBox"); if (!d.open) { if (d.showModal) d.showModal(); else d.setAttribute("open", ""); }
+}
+$("pbPrev").onclick = () => openPhoto(PH.i - 1);
+$("pbNext").onclick = () => openPhoto(PH.i + 1);
+$("pbClose").onclick = () => $("photoBox").close();
+$("photoBox").addEventListener("click", (e) => { if (e.target === $("photoBox")) $("photoBox").close(); });
+$("photoBox").addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") openPhoto(PH.i - 1); if (e.key === "ArrowRight") openPhoto(PH.i + 1); });
+$("pbImg").referrerPolicy = "no-referrer";
+
+const VIEWS = ["home", "crew", "cast", "practice", "tickets", "lookup", "donate"];
 function route() {
   const h = location.hash.replace("#", "");
   const alias = { story: "crew", book: "tickets" }; // 예전 주소도 계속 동작
@@ -1413,6 +1506,7 @@ function route() {
   document.querySelectorAll("[data-view]").forEach((v) => (v.hidden = v.dataset.view !== view));
   document.querySelectorAll("[data-nav]").forEach((a) => a.dataset.nav === view ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   renderPageLinks(view);
+  if (view === "practice") loadPhotos();
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
