@@ -328,15 +328,17 @@
   .is-closed > :not(.closed-note) { display: none !important; }
   .closed-note { text-align: center; padding: 56px 16px; font-size: clamp(20px, 2.6vw, 26px); color: var(--sand); border-block: 1px solid var(--earth-line); }
   /* 캐릭터 카드: 공연 프로그램북 한 장처럼 */
-  .cast-modal { border: 0; padding: 0; background: var(--paper); color: var(--ink); width: min(94vw, 900px); max-height: 92vh; overflow: auto; }
+  /* 카드 크기는 사람과 상관없이 항상 같게: 고정 높이, 글이 길면 글 칸 안에서만 스크롤 */
+  .cast-modal { border: 0; padding: 0; background: var(--paper); color: var(--ink); width: min(94vw, 900px); height: min(88vh, 760px); max-height: none; overflow: hidden; }
+  .cast-modal[open] { display: flex; flex-direction: column; }
   .cast-modal::backdrop { background: rgba(20, 14, 10, .82); }
-  .cast-modal .cm-photo { position: relative; aspect-ratio: 4 / 3.4; background: var(--earth-2); overflow: hidden; }
+  .cast-modal .cm-photo { position: relative; flex: none; height: 42%; background: var(--earth-2); overflow: hidden; }
   .cast-modal .cm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .cast-modal .cm-plate { position: absolute; inset: auto 0 0 0; padding: 60px 22px 18px; background: linear-gradient(to bottom, rgba(31,22,18,0), rgba(31,22,18,.82)); color: var(--sand); display: grid; gap: 2px; }
   .cast-modal .cm-role { font-size: clamp(26px, 4vw, 34px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; color: #FFF6EC; }
   .cast-modal .cm-name { font-size: 15px; letter-spacing: .04em; color: var(--sand); }
   .cast-modal .cm-name::before { content: "배우  "; font-size: 12px; letter-spacing: .1em; color: var(--warn); }
-  .cast-modal .cm-body { padding: 26px 26px 20px; display: grid; gap: 22px; align-content: start; }
+  .cast-modal .cm-body { flex: 1; min-height: 0; overflow: auto; padding: 22px 22px 0; display: flex; flex-direction: column; gap: 22px; }
   .cast-modal .cm-say { margin: 0; position: relative; padding-left: 30px; }
   .cast-modal .cm-say::before { content: "“"; position: absolute; left: -2px; top: -14px; font-size: 54px; line-height: 1; font-weight: 700; color: var(--rust); }
   .cast-modal .cm-say blockquote { margin: 0; white-space: pre-line; word-break: keep-all; text-wrap: pretty; }
@@ -356,7 +358,7 @@
   .cast-modal .cm-it em { font-style: normal; font-size: 12px; margin-left: 6px; padding: 1px 6px; border-radius: 3px; background: #EFE8DE; color: var(--ink-soft); white-space: nowrap; }
   .cast-modal .cm-it.pos { font-weight: 600; color: var(--sea); }
   .cast-modal .cm-it.pos em { background: rgba(52,71,154,.1); color: var(--sea); }
-  .cast-modal .cm-foot { display: flex; align-items: center; gap: 8px; padding: 12px 0 2px; font-size: 14px; position: sticky; bottom: -20px; background: var(--paper); border-top: 1px solid #E2D9CD; }
+  .cast-modal .cm-foot { display: flex; align-items: center; gap: 8px; padding: 12px 0 14px; font-size: 14px; position: sticky; bottom: 0; z-index: 3; background: var(--paper); border-top: 1px solid #E2D9CD; margin-top: auto; }
   .cast-modal:focus { outline: none; }
   .cast-modal .cm-count { font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums; min-width: 40px; text-align: center; }
   .cast-modal .cm-nav { all: unset; cursor: pointer; width: 34px; height: 34px; display: grid; place-items: center; border: 1.5px solid var(--ink); font-size: 18px; }
@@ -366,9 +368,10 @@
   .cast-modal .cm-ig:not([hidden]) + .cm-close { margin-left: 8px; }
   .cast-modal :focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 2px; }
   @media (min-width: 760px) {
-    .cast-modal[open] { display: grid; grid-template-columns: 360px 1fr; overflow: hidden; }
-    .cast-modal .cm-photo { aspect-ratio: auto; height: 100%; min-height: 520px; }
-    .cast-modal .cm-body { max-height: 92vh; overflow: auto; padding: 34px 34px 22px; }
+    .cast-modal { height: min(88vh, 640px); }
+    .cast-modal[open] { display: grid; grid-template-columns: 380px 1fr; grid-template-rows: 100%; }
+    .cast-modal .cm-photo { height: 100%; }
+    .cast-modal .cm-body { height: 100%; padding: 34px 34px 0; }
   }
   /* 공지 상자 */
   .notice { max-width: 720px; margin: 0 auto 26px; padding: 12px 16px; border: 1px solid var(--warn); color: var(--sand); background: rgba(240,178,122,.08); font-size: 14.5px; text-align: center; word-break: keep-all; }
