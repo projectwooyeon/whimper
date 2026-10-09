@@ -354,8 +354,15 @@
   .cast-modal .cm-tl > li:last-child::before { display: none; }
   .cast-modal .cm-yr { font-size: 15px; font-weight: 700; color: var(--rust); font-variant-numeric: tabular-nums; text-align: center; background: var(--paper); position: relative; z-index: 1; }
   .cast-modal .cm-items { display: grid; gap: 4px; }
-  .cast-modal .cm-it { font-size: 14px; line-height: 1.5; color: var(--ink); word-break: keep-all; }
-  .cast-modal .cm-it em { font-style: normal; font-size: 12px; margin-left: 6px; padding: 1px 6px; border-radius: 3px; background: #EFE8DE; color: var(--ink-soft); white-space: nowrap; }
+  /* 공연 이름은 왼쪽, 맡은 일 딱지는 오른쪽 한 줄로 정렬 */
+  .cast-modal .cm-it { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline; font-size: 14px; line-height: 1.5; color: var(--ink); word-break: keep-all; }
+  /* 공연 이름: 제목을 위에, 공연 종류(정기공연·워크숍 등)는 아래 작은 글씨로 → 어디서 줄이 바뀌어도 모양이 같음 */
+  .cast-modal .cm-nm { min-width: 0; }
+  .cast-modal .cm-nm .t { display: block; font-weight: 500; }
+  .cast-modal .cm-nm .k { display: block; order: 2; font-size: 12px; color: var(--ink-soft); line-height: 1.4; }
+  .cast-modal .cm-nm:has(.t) { display: flex; flex-direction: column; }
+  .cast-modal .cm-nm .t { order: 1; }
+  .cast-modal .cm-it em { justify-self: end; min-width: 66px; text-align: center; box-sizing: border-box; font-style: normal; font-size: 12px; padding: 1px 7px; border-radius: 3px; background: #EFE8DE; color: var(--ink-soft); white-space: nowrap; }
   .cast-modal .cm-it.pos { font-weight: 600; color: var(--sea); }
   .cast-modal .cm-it.pos em { background: rgba(52,71,154,.1); color: var(--sea); }
   .cast-modal .cm-foot { display: flex; align-items: center; gap: 8px; padding: 12px 0 14px; font-size: 14px; position: sticky; bottom: 0; z-index: 3; background: var(--paper); border-top: 1px solid #E2D9CD; margin-top: auto; }
@@ -572,7 +579,7 @@
             <figure class="cm-say cm-say-role"><blockquote></blockquote><figcaption></figcaption></figure>
             <figure class="cm-say cm-say-actor"><blockquote></blockquote><figcaption></figcaption></figure>
             <section class="cm-hist">
-              <h4>이박터에서 걸어온 길</h4>
+              <h4>이박터 활동 이력</h4>
               <ol class="cm-tl"></ol>
             </section>
             <div class="cm-foot">
@@ -1064,7 +1071,12 @@ function openCastCard(c) {
     const y = document.createElement("span"); y.className = "cm-yr"; y.textContent = yr ? "’" + yr : "";
     const wrap = document.createElement("div"); wrap.className = "cm-items";
     byYr.get(yr).sort((a, b) => b.pos - a.pos).forEach((it) => {
-      const d = document.createElement("div"); d.className = "cm-it" + (it.pos ? " pos" : ""); d.textContent = it.text;
+      const d = document.createElement("div"); d.className = "cm-it" + (it.pos ? " pos" : "");
+      // "제 49회 정기공연 〈날 보러 와요〉" → 종류 / 제목 으로 나눠서 따로 꾸밈
+      const tm = /^(.*?)\s*〈(.+)〉\s*$/.exec(it.text), nm = document.createElement("span"); nm.className = "cm-nm";
+      if (tm) { const k = document.createElement("span"); k.className = "k"; k.textContent = tm[1]; const t = document.createElement("span"); t.className = "t"; t.textContent = tm[2]; nm.append(k, t); }
+      else nm.textContent = it.text;
+      d.appendChild(nm);
       if (it.pos || it.job) { const e = document.createElement("em"); e.textContent = it.pos ? "임원" : it.job; d.appendChild(e); }
       wrap.appendChild(d);
     });
