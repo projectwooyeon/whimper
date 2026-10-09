@@ -338,7 +338,7 @@
   .cast-modal .cm-role { font-size: clamp(26px, 4vw, 34px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; color: #FFF6EC; }
   .cast-modal .cm-name { font-size: 15px; letter-spacing: .04em; color: var(--sand); }
   .cast-modal .cm-name::before { content: "배우  "; font-size: 12px; letter-spacing: .1em; color: var(--warn); }
-  .cast-modal .cm-body { flex: 1; min-height: 0; overflow: auto; padding: 22px 22px 0; display: flex; flex-direction: column; gap: 22px; }
+  .cast-modal .cm-body { flex: 1; min-height: 0; overflow: auto; scrollbar-gutter: stable; /* 스크롤바가 생겨도 버튼 위치가 안 바뀌게 */ padding: 22px 22px 0; display: flex; flex-direction: column; gap: 22px; }
   .cast-modal .cm-say { margin: 0; position: relative; padding-left: 30px; }
   .cast-modal .cm-say::before { content: "“"; position: absolute; left: -2px; top: -14px; font-size: 54px; line-height: 1; font-weight: 700; color: var(--rust); }
   .cast-modal .cm-say blockquote { margin: 0; white-space: pre-line; word-break: keep-all; text-wrap: pretty; }
