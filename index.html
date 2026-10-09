@@ -177,7 +177,22 @@
   .cast-modal .cm-body { padding: 18px 22px 22px; display: grid; gap: 6px; }
   .cast-modal .cm-role { font-family: var(--ui); font-size: 12.5px; letter-spacing: .08em; color: var(--rust); }
   .cast-modal .cm-name { font-family: var(--hand); font-weight: 700; font-size: 28px; line-height: 1.2; }
-  .cast-modal .cm-line { font-family: var(--hand); font-size: 17px; color: var(--ink-soft); margin: 6px 0 0; }
+  .cast-modal .cm-name small { font-size: 14px; font-weight: 500; color: var(--ink-soft); }
+  .cast-modal .cm-quote { margin-top: 10px; }
+  .cast-modal .cm-quote span, .cast-modal .cm-hist > span { display: block; font-size: 12px; letter-spacing: .06em; color: var(--rust); margin-bottom: 2px; }
+  .cast-modal .cm-quote p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink); white-space: pre-line; word-break: keep-all; }
+  .cast-modal .cm-hist { margin-top: 14px; padding-top: 12px; border-top: 1px solid #E4DDD3; }
+  .cast-modal .cm-pos { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
+  .cast-modal .cm-pos:empty { display: none; }
+  .cast-modal .cm-pos b { font-weight: 500; font-size: 13px; padding: 2px 8px; border: 1px solid var(--rust); color: var(--rust); }
+  .cast-modal .cm-shows { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; word-break: keep-all; }
+  /* 넓은 화면: 사진 왼쪽, 글 오른쪽 */
+  @media (min-width: 760px) {
+    .cast-modal { width: min(92vw, 880px); }
+    .cast-modal[open] { display: grid; grid-template-columns: 340px 1fr; }
+    .cast-modal .cm-photo { aspect-ratio: auto; min-height: 100%; }
+    .cast-modal .cm-body { max-height: 88vh; overflow: auto; padding: 24px 26px; align-content: start; }
+  }
   .cast-modal .cm-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; font-family: var(--ui); font-size: 14px; }
   .cast-modal .cm-foot a { color: var(--sea); }
   .cast-modal .cm-close { all: unset; cursor: pointer; font-family: var(--ui); font-weight: 600; font-size: 14px; border: 1.5px solid var(--ink); padding: 7px 14px; }
@@ -534,7 +549,9 @@
           <div class="cm-body">
             <div class="cm-role"></div>
             <div class="cm-name"></div>
-            <p class="cm-line"></p>
+            <div class="cm-quote" data-k="role"><span>배역 한마디</span><p></p></div>
+            <div class="cm-quote" data-k="actor"><span>배우 한마디</span><p></p></div>
+            <div class="cm-hist"><span>이박터 활동 이력</span><div class="cm-pos"></div><ul class="cm-shows"></ul></div>
             <div class="cm-foot"><a class="cm-ig" href="#" target="_blank" rel="noopener" hidden></a><span></span><button type="button" class="cm-close">닫기</button></div>
           </div>
         </dialog>
@@ -907,16 +924,18 @@ const CONTENT = {
   // poster: 배우를 눌렀을 때 크게 보일 캐릭터 포스터 (비우면 photo를 크게 보여 줌)
   // instagram: 공개를 원하는 배우만 계정 아이디나 주소 (예: "@account"). 비우면 표시 안 함
   // 지금 들어 있는 images/sample/animal-*.jpg 는 임시 동물 사진입니다. 실제 사진으로 바꾼 뒤 sample 폴더는 지워도 됩니다.
-  cast: [   // 등장 순서
-    { name: "이수빈", role: "피터", photo: "images/sample/animal-07.jpg", line: "운전면허 3번 떨어짐" },
-    { name: "김예나", role: "메리", photo: "images/sample/animal-04.jpg", line: "다음 세상에선 바다에 집을 짓자" },
-    { name: "유현민", role: "드와이트", photo: "images/sample/animal-06.jpg", line: "짱" },
-    { name: "김상우", role: "존", photo: "images/sample/animal-02.jpg", line: "페라리가 제일 좋았어요" },
-    { name: "김동언", role: "스웨인", photo: "images/sample/animal-01.jpg", line: "산타바바라가 제일 좋았어요" },
-    { name: "오주원", role: "모이라", photo: "images/sample/animal-05.jpg", line: "나는야 베스트 타이피스트" },
-    { name: "김수진", role: "중대장/바텐더/학생", photo: "images/sample/animal-03.jpg", line: "술 좀 그만 드세요" },
-    { name: "한은혜", role: "웬디/약사/학생", photo: "images/sample/animal-09.jpg", line: "과학이 망친 게 아니라구요?" },
-    { name: "한승범", role: "더글라스", photo: "images/sample/animal-08.jpg", line: "🐋🐳" },
+  // 등장 순서. roleLine: 배역 한마디, line: 배우 한마디(줄바꿈은 \n),
+  // positions: 이박터 임원 이력, shows: 이박터 공연 이력. photo/poster/instagram은 아래 설명대로
+  cast: [
+    {"name": "이수빈", "role": "피터", "photo": "images/sample/animal-07.jpg", "roleLine": "나도 같이 갈게.", "line": "다시 돌아가서 시작을 바꿀 수는 없지만, 현재 시점에서 시작하여 결말을 바꿀 수는 있습니다. - C. S. 루이스", "positions": ["'22 부회장"], "shows": ["'22 제 59회 정기공연 〈나생문〉 배우", "'22 제 60회 정기공연 〈귀족수업〉 배우", "'22 특별공연 〈카사블랑카여, 다시 한 번〉 배우", "'23 제 61회 정기공연 〈맨 끝 줄 소년〉 연출"]},
+    {"name": "김예나", "role": "메리", "photo": "images/sample/animal-04.jpg", "roleLine": "첫해에는 많이 피진 않는대. 하지만 내년, 또 그다음 해에는 아주 아름다울 거야.", "line": "여러분이 옳았습니다.\n한번 더 합니다.", "positions": ["'21 부회장"], "shows": ["'18 제 56회 정기공연 〈TOC TOC〉 배우", "'19 제 57회 정기공연 〈날 보러와요〉 배우", "'19 안전연극 〈괜찮아지는 날〉 배우", "'19 제 58회 정기공연 〈지상 최후의 농담〉 배우", "'20 워크숍 〈굿 닥터〉 배우", "'21 특별공연 〈대학살의 신〉 배우", "'21 워크숍 〈우연한 단막극 메들리〉 배우", "'22 제 60회 정기공연 〈귀족수업〉 연출/배우", "'22 특별공연 〈카사블랑카여, 다시 한번〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 배우", "'24 특별공연 〈친절한 식구들〉 연출/배우"]},
+    {"name": "유현민", "role": "드와이트", "photo": "images/sample/animal-06.jpg", "roleLine": "난 마지막까지 일을 올바르게 처리하고 싶어요, 그게 내 방식입니다.", "line": "제가 지금 이대로 커다란 행복감과 만족감을 느끼는 한, 아마 전 바로 제가 꼭 하고 싶었던 일을 하고 있는 거겠죠.", "positions": ["'15 봄학기 부회장", "'16 봄학기 회장", "'20 회장"], "shows": ["'14 제 49회 정기공연 〈날 보러 와요〉 배우", "'14 동아리문화제 특별공연 〈키사라기 미키짱〉 배우", "'15 신입생환영공연 〈어서오세요, 301호〉 배우", "'16 안전연극 〈2016 공동연구〉 배우", "'16 제 53회 정기공연 〈사랑을 주세요〉 배우", "'17 신입생환영공연 〈극적인 하룻밤〉 연출", "'17 안전연극 〈2017 괜찮아지는 날〉 공동제작/배우", "'17 제 54회 정기공연 〈남편을 죽이는 서른 가지 방법〉 연출/배우", "'17 제 55회 정기공연 〈쉬어 매드니스〉 연출/배우", "'20 워크숍 〈굿 닥터〉 연출/배우", "'21 특별공연 〈대학살의 신〉 연출/배우"]},
+    {"name": "김상우", "role": "존", "photo": "images/sample/animal-02.jpg", "roleLine": "끝나고 나면 또 하고 싶어집니다.", "line": "역시 막내라인이 좋아", "positions": ["'23 회장"], "shows": ["'22 제 60회 정기공연 〈귀족수업〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 배우", "'24 제 63회 정기공연 〈밤으로의 긴 여로〉 연출", "'24 안전연극 〈공동연구〉 배우", "'24 제 64회 정기공연 〈호쿠스포쿠스〉 배우", "'25 제 65회 정기공연 〈나무는 서서 죽는다〉 조연출", "'25 특별공연 〈시간 관리자의 정원〉 배우"]},
+    {"name": "김동언", "role": "스웨인", "photo": "images/sample/animal-01.jpg", "roleLine": "저도 보내주십시오! 저도 함께 가고 싶습니다.", "line": "살아가는 동안 자기 삶을 제대로 깨닫는 인간이 있을까요?", "positions": [], "shows": ["'25 제 65회 정기공연 〈나무는 서서 죽는다〉 배우", "'25 제 66회 정기공연 〈안 내놔? 못 내놔!〉 배우", "'26 제 68회 정기공연 〈블랙코미디〉 조연출/배우"]},
+    {"name": "오주원", "role": "모이라", "photo": "images/sample/animal-05.jpg", "roleLine": "지금을 살아야 한다면 뭘 하고 싶어요?", "line": "연극이 이렇게 끝나는구나. 쾅 소리 하나 없이 관객들의 환호와 박수 소리로.", "positions": ["'21 회장"], "shows": ["'20 워크숍 〈별의 미키〉 배우", "'20 워크숍 〈굿 닥터〉 배우", "'21 특별공연 〈웃음의 대학〉 조연출", "'21 워크숍 〈우연한 단막극 메들리〉 연출/배우", "'22 제 59회 정기공연 〈나생문〉 연출/배우", "'22 제 60회 정기공연 〈귀족수업〉 배우", "'22 특별공연 〈카사블랑카여, 다시 한번〉 배우", "'24 특별공연 〈친절한 식구들〉 배우"]},
+    {"name": "김수진", "role": "중대장/바텐더/학생", "photo": "images/sample/animal-03.jpg", "roleLine": "글쎄요. 뭐가 됐든, 돌아오면 좋겠습니다.", "line": "매일 웃고 싶어요 - HAPPY (DAY6)", "positions": [], "shows": ["'22 제 60회 정기공연 〈귀족수업〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 배우", "'23 제 62회 정기공연 〈TOC TOC〉 연출", "'24 안전연극 〈공동연구〉 배우", "'24 제 64회 정기공연 〈호쿠스 포쿠스〉 배우", "'25 특별공연 〈시간관리자의 정원〉 배우", "'26 특별공연 〈별무리〉 배우"]},
+    {"name": "한은혜", "role": "웬디/약사/학생", "photo": "images/sample/animal-09.jpg", "roleLine": "치료제는 없습니다.", "line": "서서히 다가오는 피할 수 없는.... 즐거운 연극!", "positions": [], "shows": ["'24 제 64회 정기공연 〈호쿠스포쿠스〉 배우", "'25 제 65회 정기공연 〈나무는 서서 죽는다〉 배우", "'25 안전연극 〈공동연구〉 배우", "'25 제 66회 정기공연 〈안 내놔? 못 내놔!〉 배우", "'26 제 68회 정기공연 〈블랙코미디〉 연출"]},
+    {"name": "한승범", "role": "더글라스", "photo": "images/sample/animal-08.jpg", "roleLine": "스스로를 잃으면 안 돼. 긴 항해에서는 그게 가장 중요해.", "line": "맛 좋은 술과 함께라면, 그 어떤 불안도 견딜 수 있을까요?", "positions": [], "shows": ["'17 워크숍 〈플라자 스위트〉 배우", "'17 제 55회 정기공연 〈쉬어 매드니스〉 배우", "'18 제 56회 정기공연 〈TOC TOC〉 조연출", "'18 안전연극 〈괜찮아지는 날〉 배우", "'19 제 58회 정기공연 〈지상 최후의 농담〉 배우"]},
   ],
 };
 const TODO_HINTS = {
@@ -993,8 +1012,15 @@ function openCastCard(c) {
   const src = c.poster || c.photo;
   if (src) { const img = document.createElement("img"); img.src = src; img.alt = `${c.name} ${c.role || ""} 캐릭터 포스터`; box.appendChild(img); }
   dlg.querySelector(".cm-role").textContent = c.role ? c.role + " 역" : "배역 미정";
-  dlg.querySelector(".cm-name").textContent = c.name;
-  dlg.querySelector(".cm-line").textContent = c.line ? "“" + c.line + "”" : "";
+  const nm = dlg.querySelector(".cm-name"); nm.textContent = c.name;
+  [["role", c.roleLine], ["actor", c.line]].forEach(([k, v]) => {
+    const q = dlg.querySelector(`.cm-quote[data-k="${k}"]`); q.hidden = !v; q.querySelector("p").textContent = v ? `“${v}”` : "";
+  });
+  const pos = dlg.querySelector(".cm-pos"), shows = dlg.querySelector(".cm-shows");
+  pos.textContent = ""; shows.textContent = "";
+  (c.positions || []).forEach((t) => { const e = document.createElement("b"); e.textContent = t; pos.appendChild(e); });
+  (c.shows || []).forEach((t) => { const li = document.createElement("li"); li.textContent = t; shows.appendChild(li); });
+  dlg.querySelector(".cm-hist").hidden = !((c.positions || []).length || (c.shows || []).length);
   const ig = dlg.querySelector(".cm-ig");
   if (c.instagram) { ig.hidden = false; ig.href = /^https?:/.test(c.instagram) ? c.instagram : "https://www.instagram.com/" + c.instagram.replace(/^@/, "") + "/"; ig.textContent = "@" + c.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, "").replace(/^@/, "").replace(/\/$/, ""); }
   else ig.hidden = true;
@@ -1461,9 +1487,11 @@ $("pAgain").onclick = () => { $("pledgeForm").reset(); $("pledgeForm").hidden = 
 /* ================== 연습 현장 (구글 드라이브 폴더 사진) ================== */
 const PH = { list: null, i: 0, loading: false };
 const okId = (id) => /^[-\w]{10,}$/.test(String(id || ""));
-function photoUrl(p, w) {
+function photoUrl(p, w, alt) {
   if (p.src && /^images\//.test(p.src)) return p.src;           // 미리보기용 예시 사진
-  return `https://drive.google.com/thumbnail?id=${encodeURIComponent(p.id)}&sz=w${w}`;
+  const id = encodeURIComponent(p.id);
+  // 기본은 드라이브 썸네일, 실패하면 다른 구글 주소로 한 번 더 시도
+  return alt ? `https://lh3.googleusercontent.com/d/${id}=w${w}` : `https://drive.google.com/thumbnail?id=${id}&sz=w${w}`;
 }
 async function loadPhotos() {
   if (PH.list || PH.loading) return;
@@ -1481,13 +1509,18 @@ async function loadPhotos() {
     b.setAttribute("aria-label", `${p.name || "연습 사진"} 크게 보기`);
     const img = document.createElement("img"); img.loading = "lazy"; img.decoding = "async"; img.alt = p.name || "연습 사진";
     img.referrerPolicy = "no-referrer"; img.src = photoUrl(p, 600);
-    img.onerror = () => b.classList.add("broken");
+    img.onerror = () => {
+      if (!img.dataset.retry) { img.dataset.retry = "1"; img.src = photoUrl(p, 600, true); return; }
+      b.classList.add("broken");
+      if (!g.querySelector(".ph:not(.broken)")) msg("사진을 불러오지 못했습니다. 잠시 후 다시 들어와 주세요.");
+    };
     b.appendChild(img); b.onclick = () => openPhoto(i); g.appendChild(b);
   });
 }
 function openPhoto(i) {
   const n = PH.list.length; PH.i = (i + n) % n; const p = PH.list[PH.i];
-  $("pbImg").src = photoUrl(p, 1600); $("pbImg").alt = p.name || "연습 사진";
+  const big = $("pbImg"); big.dataset.retry = ""; big.onerror = () => { if (!big.dataset.retry) { big.dataset.retry = "1"; big.src = photoUrl(p, 1600, true); } };
+  big.src = photoUrl(p, 1600); big.alt = p.name || "연습 사진";
   $("pbCap").textContent = `${PH.i + 1} / ${n}`;
   const d = $("photoBox"); if (!d.open) { if (d.showModal) d.showModal(); else d.setAttribute("open", ""); }
 }
