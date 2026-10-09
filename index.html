@@ -466,6 +466,7 @@
   .permit { display: block; margin-top: 6px; font-size: 13px; }
   /* 제작진 페이지는 전문 가운데 정렬 */
   [data-view="crew"] .prose { text-align: center; }
+  html:has(dialog[open]) { overflow: hidden; } /* 배우 카드·사진 크게 보기가 열려 있는 동안 뒤 페이지 스크롤 막기 */
   .prose .ln { display: block; }
   /* 제작진: 원문 줄바꿈을 지키고, 화면이 좁아 한 줄이 넘칠 때는 그 줄만 고르게 나눔 */
   [data-view="crew"] .prose .ln { text-wrap: balance; }
@@ -625,7 +626,7 @@
     <div class="wrap">
       <!-- 예매 -->
       <section class="section first">
-        <p class="section-sub">본 연극은 무료 공연입니다. 10/25까지 후원해주신 분들은 10/31 에 우선 공개되는 지정좌석 예매권을 제공해드립니다.</p>
+        <p class="section-sub">본 연극은 무료 공연입니다. 10/25까지 후원해주신 분들은 10/31에 우선 공개되는 지정좌석 예매권을 제공해드립니다.</p>
         <div class="demo-note" id="demoNote" hidden>미리보기 모드입니다. 서버 주소(API_URL)가 비어 있어 예시 데이터로 동작하고, 새로고침하면 처음 상태로 돌아갑니다. 후원자 예매는 이름 <b>홍길동</b>, 코드 <b>DEMO01</b>로 체험할 수 있습니다. <a href="admin.html" target="_blank" rel="noopener">어드민 미리보기</a></div>
         <div class="tabs" role="tablist" aria-label="예매 방식">
           <button role="tab" id="tabGeneral" aria-selected="true" aria-controls="panelGeneral">일반 예매</button>
@@ -942,13 +943,13 @@ const CONTENT = {
   runtimeNote: "",              // 러닝타임 옆 작은 글씨 (예: "인터미션 없음"). 필요 없으면 ""
   triggerWarning: "연출 상 큰 소리, 흡연, 음주, 죽음에 대한 직간접적 묘사가 포함되어 있습니다.",
   synopsis: ["전 지구적인 핵전쟁으로 북반구의 인류 문명이 멸망한다.\n남반구의 생존자들도 서서히 다가오는 방사성 낙진으로 인한 피할 수 없는 죽음을 기다릴 뿐.\n종말까지 6개월이 남은 어느 날, 사라진 줄로만 알았던 북반구로부터 무전 신호가 날아온다.\n호주 멜버른에서는 희망을 품고 신호의 근원지로 탐사대를 보내는데..."],   // 시놉시스 (문단마다 한 칸, 줄바꿈은 \n)
-  intent: ["KAIST 연극동아리 이박터 창립 40주년을 맞아, 연극을 사랑하는 사람들이 모였습니다.\n각기 다른 시간을 이박터와 보낸 이들이 같은 시간, 같은 공간에 모여 같은 마음과 가치를 나눕니다.", "서로가 서로에 기대어 함께 작업한다는 것이 얼마나 벅차고 멋진 일인지 다시 한 번 느낍니다.\n40년이 단순한 시간의 흐름이 아니라, 숫자로 환산하는 것이 불가능한 가치가 될 수 있음을 느낍니다.", "<세상이 이렇게 끝나는구나..> (이하 세느낌) 은 같은 순간을 살아가는 사람들에 대한 이야기입니다.\n공연을 통해 우리는 앞으로 어떻게 살아가야 할 지 함께 마음을 나누었으면 합니다.", "함께 해주신 모든 분들, 도움주신 모든 분들, 찾아와주실 모든 분들께 감사드립니다.\n그럼, 즐거운 관람 되시길 바라겠습니다."],   // 기획의도 (문단마다 한 칸, 문장 줄바꿈은 \n)
+  intent: ["KAIST 연극동아리 이박터 창립 40주년을 맞아, 연극을 사랑하는 사람들이 모였습니다.\n각기 다른 시간을 이박터와 보낸 이들이 같은 시간, 같은 공간에 모여 같은 마음과 가치를 나눕니다.", "서로가 서로에 기대어 함께 작업한다는 것이 얼마나 벅차고 멋진 일인지 다시 한 번 느낍니다.\n40년이 단순한 시간의 흐름이 아니라, 숫자로 환산하는 것이 불가능한 가치가 될 수 있음을 느낍니다.", "<세상이 이렇게 끝나는구나..> (이하 세느낌) 은 같은 순간을 살아가는 사람들에 대한 이야기입니다.\n공연을 통해 우리는 앞으로 어떻게 살아가야 할지 함께 마음을 나누었으면 합니다.", "함께 해주신 모든 분들, 도움주신 모든 분들, 찾아와주실 모든 분들께 감사드립니다.\n그럼, 즐거운 관람 되시길 바라겠습니다."],   // 기획의도 (문단마다 한 칸, 문장 줄바꿈은 \n)
   wooyeon: ["우리, 같이 연극해요!", "공연에 목마른 이들이 서로를 빌미로 삼아 다시 모였습니다.\n우발적으로, 충동적으로, 비정기적으로 연극 공연을 제작합니다."],   // 프로젝트 우연 소개
-  ibaktor: ["이박터는 이야기를 뜻하는 경상도 방언 이바구와 공간을 뜻하는 터를 결합한 이름을 가진 KAIST 연극 동아리입니다. 1986년 창설된 이박터는 40주년인 '프로를 지향하는 아마추어'라는 모토 아래 지금까지 훌륭하고 멋진 선배들과 열정적인 현역 부원들의 활동에 힘입어 연극을 올리고 있습니다.", "최근 올린 공연으로는 67회 정기연극 <프루프>, 68회 정기연극 <블랙코미디>가 있습니다."],   // 이박터 소개
+  ibaktor: ["이박터는 이야기를 뜻하는 경상도 방언 이바구와 공간을 뜻하는 터를 결합한 이름을 가진 KAIST 연극 동아리입니다. 1986년 창설된 이박터는 '프로를 지향하는 아마추어'라는 모토 아래, 훌륭하고 멋진 선배들과 열정적인 현역 부원들의 활동에 힘입어 40년째 연극을 올리고 있습니다.", "최근 올린 공연으로는 67회 정기연극 <프루프>, 68회 정기연극 <블랙코미디>가 있습니다."],   // 이박터 소개
   // 만든 사람들 (스탭롤). 묶음(빈 줄로 띄워 보일 단위)마다 [역할, 이름]을 한 줄씩. 이름이 여럿이면 "오주원, 김상우"처럼
   staff: [
     [["원작", "네빌 슈트 <해변에서>"], ["각색", "박주영"], ["초연", "극단 배다"]],
-    [["기획 · 연출", "유현민"], ["기획보", "이수빈"], ["조연출", "오주원, 김상우"]],
+    [["기획・윤색・연출", "유현민"], ["기획보", "이수빈"], ["조연출", "오주원, 김상우"]],
     [["조명 · 음향 디자인", "유현민"], ["조명 오퍼레이터", "홍승의"], ["음향 오퍼레이터", "노진혁"]],
     [["무대", "김예나"], ["소품", "오주원"], ["분장", "김상우"]],
     [["홍보 디자인", "오주원"], ["촬영", "박세준"], ["웹사이트", "김동언"]],
@@ -963,13 +964,13 @@ const CONTENT = {
   // positions: 이박터 임원 이력, shows: 이박터 공연 이력.
   // photo: images/cast/ 폴더에 이 이름으로 사진(세로 4:5 권장)을 올리면 자동으로 바뀜. 아직 없으면 sample(동물 사진)이 보임
   cast: [
-    {"name": "이수빈", "role": "피터", "photo": "images/cast/leesubin.webp", "sample": "images/sample/animal-07.jpg", "roleLine": "나도 같이 갈게.", "line": "다시 돌아가서 시작을 바꿀 수는 없지만, 현재 시점에서 시작하여 결말을 바꿀 수는 있습니다. - C. S. 루이스", "positions": ["'22 부회장"], "shows": ["'22 제 59회 정기공연 〈나생문〉 배우", "'22 제 60회 정기공연 〈귀족수업〉 배우", "'22 특별공연 〈카사블랑카여, 다시 한 번〉 배우", "'23 제 61회 정기공연 〈맨 끝 줄 소년〉 연출"]},
-    {"name": "김예나", "role": "메리", "photo": "images/cast/kimyena.webp", "sample": "images/sample/animal-04.jpg", "roleLine": "첫해에는 많이 피진 않는대. 하지만 내년, 또 그다음 해에는 아주 아름다울 거야.", "line": "여러분이 옳았습니다.\n한번 더 합니다.", "positions": ["'21 부회장"], "shows": ["'18 제 56회 정기공연 〈TOC TOC〉 배우", "'19 제 57회 정기공연 〈날 보러와요〉 배우", "'19 안전연극 〈괜찮아지는 날〉 배우", "'19 제 58회 정기공연 〈지상 최후의 농담〉 배우", "'20 워크숍 〈굿 닥터〉 배우", "'21 특별공연 〈대학살의 신〉 배우", "'21 워크숍 〈우연한 단막극 메들리〉 배우", "'22 제 60회 정기공연 〈귀족수업〉 연출/배우", "'22 특별공연 〈카사블랑카여, 다시 한번〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 배우", "'24 특별공연 〈친절한 식구들〉 연출/배우"]},
+    {"name": "이수빈", "role": "피터", "photo": "images/cast/leesubin.webp", "sample": "images/sample/animal-07.jpg", "roleLine": "나도 같이 갈게.", "line": "다시 돌아가서 시작을 바꿀 수는 없지만, 현재 시점에서 시작하여 결말을 바꿀 수는 있습니다. - C. S. 루이스", "positions": ["'22 부회장"], "shows": ["'22 제 59회 정기공연 〈나생문〉 배우", "'22 제 60회 정기공연 〈귀족수업〉 배우", "'22 특별공연 〈카사블랑카여, 다시 한번〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 연출"]},
+    {"name": "김예나", "role": "메리", "photo": "images/cast/kimyena.webp", "sample": "images/sample/animal-04.jpg", "roleLine": "첫해에는 많이 피진 않는대. 하지만 내년, 또 그다음 해에는 아주 아름다울 거야.", "line": "여러분이 옳았습니다.\n한번 더 합니다.", "positions": ["'21 부회장"], "shows": ["'18 제 56회 정기공연 〈TOC TOC〉 배우", "'19 제 57회 정기공연 〈날 보러 와요〉 배우", "'19 안전연극 〈괜찮아지는 날〉 배우", "'19 제 58회 정기공연 〈지상 최후의 농담〉 배우", "'20 워크숍 〈굿 닥터〉 배우", "'21 특별공연 〈대학살의 신〉 배우", "'21 워크숍 〈우연한 단막극 메들리〉 배우", "'22 제 60회 정기공연 〈귀족수업〉 연출/배우", "'22 특별공연 〈카사블랑카여, 다시 한번〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 배우", "'24 특별공연 〈친절한 식구들〉 연출/배우"]},
     {"name": "유현민", "role": "드와이트", "photo": "images/cast/yoohyeonmin.webp", "sample": "images/sample/animal-06.jpg", "roleLine": "난 마지막까지 일을 올바르게 처리하고 싶어요, 그게 내 방식입니다.", "line": "제가 지금 이대로 커다란 행복감과 만족감을 느끼는 한, 아마 전 바로 제가 꼭 하고 싶었던 일을 하고 있는 거겠죠.", "positions": ["'15 봄학기 부회장", "'16 봄학기 회장", "'20 회장"], "shows": ["'14 제 49회 정기공연 〈날 보러 와요〉 배우", "'14 동아리문화제 특별공연 〈키사라기 미키짱〉 배우", "'15 신입생환영공연 〈어서오세요, 301호〉 배우", "'16 안전연극 〈2016 공동연구〉 배우", "'16 제 53회 정기공연 〈사랑을 주세요〉 배우", "'17 신입생환영공연 〈극적인 하룻밤〉 연출", "'17 안전연극 〈2017 괜찮아지는 날〉 공동제작/배우", "'17 제 54회 정기공연 〈남편을 죽이는 서른 가지 방법〉 연출/배우", "'17 제 55회 정기공연 〈쉬어 매드니스〉 연출/배우", "'20 워크숍 〈굿 닥터〉 연출/배우", "'21 특별공연 〈대학살의 신〉 연출/배우"]},
     {"name": "김상우", "role": "존", "photo": "images/cast/kimsangwoo.webp", "sample": "images/sample/animal-02.jpg", "roleLine": "끝나고 나면 또 하고 싶어집니다.", "line": "역시 막내라인이 좋아", "positions": ["'23 회장"], "shows": ["'22 제 60회 정기공연 〈귀족수업〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 배우", "'24 제 63회 정기공연 〈밤으로의 긴 여로〉 연출", "'24 안전연극 〈공동연구〉 배우", "'24 제 64회 정기공연 〈호쿠스포쿠스〉 배우", "'25 제 65회 정기공연 〈나무는 서서 죽는다〉 조연출", "'25 특별공연 〈시간 관리자의 정원〉 배우"]},
     {"name": "김동언", "role": "스웨인", "photo": "images/cast/kimdongeon.webp", "sample": "images/sample/animal-01.jpg", "roleLine": "저도 보내주십시오! 저도 함께 가고 싶습니다.", "line": "살아가는 동안 자기 삶을 제대로 깨닫는 인간이 있을까요?", "positions": [], "shows": ["'25 제 65회 정기공연 〈나무는 서서 죽는다〉 배우", "'25 제 66회 정기공연 〈안 내놔? 못 내놔!〉 배우", "'26 제 68회 정기공연 〈블랙코미디〉 조연출/배우"]},
     {"name": "오주원", "role": "모이라", "photo": "images/cast/ohjuwon.webp", "sample": "images/sample/animal-05.jpg", "roleLine": "지금을 살아야 한다면 뭘 하고 싶어요?", "line": "연극이 이렇게 끝나는구나. 쾅 소리 하나 없이 관객들의 환호와 박수 소리로.", "positions": ["'21 회장"], "shows": ["'20 워크숍 〈별의 미키〉 배우", "'20 워크숍 〈굿 닥터〉 배우", "'21 특별공연 〈웃음의 대학〉 조연출", "'21 워크숍 〈우연한 단막극 메들리〉 연출/배우", "'22 제 59회 정기공연 〈나생문〉 연출/배우", "'22 제 60회 정기공연 〈귀족수업〉 배우", "'22 특별공연 〈카사블랑카여, 다시 한번〉 배우", "'24 특별공연 〈친절한 식구들〉 배우"]},
-    {"name": "김수진", "role": "중대장/바텐더/학생", "photo": "images/cast/kimsujin.webp", "sample": "images/sample/animal-03.jpg", "roleLine": "글쎄요. 뭐가 됐든, 돌아오면 좋겠습니다.", "line": "매일 웃고 싶어요 - HAPPY (DAY6)", "positions": [], "shows": ["'22 제 60회 정기공연 〈귀족수업〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 배우", "'23 제 62회 정기공연 〈TOC TOC〉 연출", "'24 안전연극 〈공동연구〉 배우", "'24 제 64회 정기공연 〈호쿠스 포쿠스〉 배우", "'25 특별공연 〈시간관리자의 정원〉 배우", "'26 특별공연 〈별무리〉 배우"]},
+    {"name": "김수진", "role": "중대장/바텐더/학생", "photo": "images/cast/kimsujin.webp", "sample": "images/sample/animal-03.jpg", "roleLine": "글쎄요. 뭐가 됐든, 돌아오면 좋겠습니다.", "line": "매일 웃고 싶어요 - HAPPY (DAY6)", "positions": [], "shows": ["'22 제 60회 정기공연 〈귀족수업〉 배우", "'23 제 61회 정기공연 〈맨 끝줄 소년〉 배우", "'23 제 62회 정기공연 〈TOC TOC〉 연출", "'24 안전연극 〈공동연구〉 배우", "'24 제 64회 정기공연 〈호쿠스포쿠스〉 배우", "'25 특별공연 〈시간 관리자의 정원〉 배우", "'26 특별공연 〈별무리〉 배우"]},
     {"name": "한은혜", "role": "웬디/약사/학생", "photo": "images/cast/haneunhye.webp", "sample": "images/sample/animal-09.jpg", "roleLine": "치료제는 없습니다.", "line": "서서히 다가오는 피할 수 없는.... 즐거운 연극!", "positions": [], "shows": ["'24 제 64회 정기공연 〈호쿠스포쿠스〉 배우", "'25 제 65회 정기공연 〈나무는 서서 죽는다〉 배우", "'25 안전연극 〈공동연구〉 배우", "'25 제 66회 정기공연 〈안 내놔? 못 내놔!〉 배우", "'26 제 68회 정기공연 〈블랙코미디〉 연출"]},
     {"name": "한승범", "role": "더글라스", "photo": "images/cast/hanseungbeom.webp", "sample": "images/sample/animal-08.jpg", "roleLine": "스스로를 잃으면 안 돼. 긴 항해에서는 그게 가장 중요해.", "line": "맛 좋은 술과 함께라면, 그 어떤 불안도 견딜 수 있을까요?", "positions": [], "shows": ["'17 워크숍 〈플라자 스위트〉 배우", "'17 제 55회 정기공연 〈쉬어 매드니스〉 배우", "'18 제 56회 정기공연 〈TOC TOC〉 조연출", "'18 안전연극 〈괜찮아지는 날〉 배우", "'19 제 58회 정기공연 〈지상 최후의 농담〉 배우"]},
   ],
@@ -1316,17 +1317,17 @@ $("lkNo").onclick = () => { $("lkConfirm").hidden = true; };
 $("lkYes").onclick = async () => {
   if (DBUSY) return;
   DBUSY = true; document.body.classList.add("busy"); $("lkYes").textContent = "취소하는 중…"; $("lkMsg").textContent = "";
-  const bySession = {}; [...LK.pick].forEach((k) => { const [s, seat] = k.split("|"); (bySession[s] = bySession[s] || []).push(seat); });
+  const bySession = {}; let failed = false; [...LK.pick].forEach((k) => { const [s, seat] = k.split("|"); (bySession[s] = bySession[s] || []).push(seat); });
   try {
     for (const [session, seats] of Object.entries(bySession)) {
       const res = await api.call("donorCancel", { token: D.token, session, seats });
       if (expired(res)) return;
-      if (!res.ok) { $("lkMsg").textContent = res.error; break; }
+      if (!res.ok) { $("lkMsg").textContent = res.error; failed = true; break; }
       D.donor = res.donor;
     }
     LK.pick.clear(); $("lkConfirm").hidden = true;
     await loadStatus();
-    $("lkMsg").innerHTML = '<span class="ok-msg">취소했습니다. 토큰이 돌아왔습니다.</span>';
+    if (!failed) $("lkMsg").innerHTML = '<span class="ok-msg">취소했습니다. 토큰이 돌아왔습니다.</span>'; // 일부만 실패해도 오류 문구를 덮지 않음
   } catch { $("lkMsg").textContent = "서버에 연결하지 못했습니다."; }
   finally { $("lkYes").textContent = "취소하기"; DBUSY = false; document.body.classList.remove("busy"); }
 };
@@ -1483,7 +1484,7 @@ $("lookupForm").addEventListener("submit", async (e) => {
 });
 
 $("copyPhone").addEventListener("click", async () => {
-  try { await navigator.clipboard.writeText("010-3863-0463"); $("copyPhone").textContent = "복사됨"; }
+  try { await navigator.clipboard.writeText("010-3863-0463"); $("copyPhone").textContent = "복사됨"; setTimeout(() => ($("copyPhone").textContent = "복사"), 1800); }
   catch { const r = document.createRange(); r.selectNodeContents($("phoneText")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); }
 });
 
@@ -1524,12 +1525,13 @@ function renderPageLinks(current) {
     document.head.appendChild(sc);
   }
 })();
-function amountValue() { return Number(String($("pAmount").value).replace(/\D/g, "")) || 0; }
+const AMOUNT_MAX = 10000000; // 직접 입력 상한 1,000만 원
+function amountValue() { return Math.min(Number(String($("pAmount").value).replace(/\D/g, "")) || 0, AMOUNT_MAX); }
 function updatePledgeHint() {
   const a = amountValue();
   document.querySelectorAll(".amt").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.amt) === a)));
   const n = Math.floor(a / 15000);
-  $("pTokens").textContent = a ? `${a.toLocaleString("ko-KR")}원 · 지정석 ${n}석 예매 가능` : "15,000원마다 지정석 1석";
+  $("pTokens").textContent = a ? `${a.toLocaleString("ko-KR")}원 · 지정석 ${n.toLocaleString("ko-KR")}석 예매 가능` : "15,000원마다 지정석 1석";
 }
 document.querySelectorAll(".amt").forEach((b) => (b.onclick = () => { $("pAmount").value = Number(b.dataset.amt).toLocaleString("ko-KR"); updatePledgeHint(); }));
 $("pAmount").addEventListener("input", () => { const n = amountValue(); $("pAmount").value = n ? n.toLocaleString("ko-KR") : ""; updatePledgeHint(); });
@@ -1702,7 +1704,7 @@ function route() {
   document.querySelectorAll("[data-view]").forEach((v) => (v.hidden = v.dataset.view !== view));
   document.querySelectorAll("[data-nav]").forEach((a) => a.dataset.nav === view ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   renderPageLinks(view);
-  if (view === "practice") loadPhotos();
+  if (view === "practice") { loadPhotos(); layoutGallery(); } // 다른 화면에 있는 동안 화면 크기가 바뀌었으면 다시 배치
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
