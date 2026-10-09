@@ -387,13 +387,12 @@
   .notice.small { margin: 0; font-size: 13px; padding: 10px 12px; }
   .cast-note { font-size: 13px; color: var(--sand-muted); }
   /* 연습 현장 */
-  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-  @media (max-width: 520px) { .gallery { grid-template-columns: repeat(2, 1fr); gap: 6px; } }
-  .gallery .ph { all: unset; box-sizing: border-box; cursor: pointer; aspect-ratio: 4 / 3; background: var(--earth-2); overflow: hidden; display: block; }
-  .gallery .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+  .gallery { display: grid; gap: var(--g-gap, 12px); }
+  .gallery .g-row { display: flex; justify-content: center; }
+  .gallery .ph { all: unset; box-sizing: border-box; cursor: pointer; flex: none; background: var(--earth-2); overflow: hidden; display: block; }
+  .gallery .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
   .gallery .ph:hover img { transform: scale(1.03); }
   .gallery .ph:focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 2px; }
-  .gallery .ph.broken { display: none; }
   .gallery-empty { grid-column: 1 / -1; text-align: center; color: var(--sand-muted); padding: 40px 0; }
   .photo-box { border: 0; padding: 0; background: #120D0A; color: var(--sand); width: min(96vw, 1200px); max-height: 94vh; }
   .photo-box::backdrop { background: rgba(10, 7, 5, .88); }
@@ -1576,19 +1575,51 @@ async function loadPhotos() {
   PH.loading = false;
   if (!PH.list.length) return msg("연습 사진이 곧 올라옵니다.");
   g.textContent = "";
-  PH.list.forEach((p, i) => {
+  PH.items = PH.list.map((p, i) => {
     const b = document.createElement("button"); b.type = "button"; b.className = "ph";
     b.setAttribute("aria-label", `${p.name || "연습 사진"} 크게 보기`);
-    const img = document.createElement("img"); img.loading = "lazy"; img.decoding = "async"; img.alt = p.name || "연습 사진";
-    img.referrerPolicy = "no-referrer"; img.src = photoUrl(p, 600);
+    const img = document.createElement("img"); img.decoding = "async"; img.alt = p.name || "연습 사진";
+    img.referrerPolicy = "no-referrer"; img.src = photoUrl(p, 1000);
+    const it = { b, ratio: 1.5, ok: true };
+    img.onload = () => { if (img.naturalWidth && img.naturalHeight) { it.ratio = img.naturalWidth / img.naturalHeight; layoutGallery(); } };
     img.onerror = () => {
-      if (!img.dataset.retry) { img.dataset.retry = "1"; img.src = photoUrl(p, 600, true); return; }
-      b.classList.add("broken");
-      if (!g.querySelector(".ph:not(.broken)")) msg("사진을 불러오지 못했습니다. 잠시 후 다시 들어와 주세요.");
+      if (!img.dataset.retry) { img.dataset.retry = "1"; img.src = photoUrl(p, 1000, true); return; }
+      it.ok = false; layoutGallery();
+      if (!PH.items.some((x) => x.ok)) msg("사진을 불러오지 못했습니다. 잠시 후 다시 들어와 주세요.");
     };
-    b.appendChild(img); b.onclick = () => openPhoto(i); g.appendChild(b);
+    b.appendChild(img); b.onclick = () => openPhoto(i);
+    return it;
   });
+  layoutGallery();
 }
+/* 콜라주 배치: 사진 원래 비율을 지키면서 줄마다 폭을 꽉 채움. 한 줄 최대 3장(휴대폰 2장), 줄마다 장수를 바꿔 자연스럽게 */
+let galleryTimer;
+function layoutGallery() {
+  clearTimeout(galleryTimer);
+  galleryTimer = setTimeout(() => {
+    const g = $("gallery"); if (!PH.items || !g.clientWidth) return;
+    const W = g.clientWidth, narrow = W < 560, gap = narrow ? 6 : 12, maxN = narrow ? 2 : 3;
+    // 줄마다 목표 높이를 조금씩 바꿔서 콜라주처럼: 목표보다 낮아질 때까지(최대 maxN장) 사진을 채움
+    const targets = narrow ? [W * 0.62, W * 0.48, W * 0.7] : [W * 0.36, W * 0.28, W * 0.32];
+    const items = PH.items.filter((x) => x.ok);
+    const frag = document.createDocumentFragment();
+    const hOf = (row) => (W - gap * (row.length - 1)) / row.reduce((a, x) => a + x.ratio, 0);
+    let k = 0, r = 0;
+    while (k < items.length) {
+      const target = targets[r % targets.length];
+      let n = 1;
+      while (n < maxN && k + n < items.length && hOf(items.slice(k, k + n)) > target) n++;
+      const row = items.slice(k, k + n);
+      let h = hOf(row), last = k + n >= items.length;
+      if (h > target * 1.3) h = target * 1.3; // 가로로 아주 넓은 사진 한 장이나 마지막 줄이 너무 커지지 않게
+      const div = document.createElement("div"); div.className = "g-row" + (last ? " last" : ""); div.style.gap = gap + "px";
+      row.forEach((x) => { x.b.style.width = (x.ratio * h).toFixed(1) + "px"; x.b.style.height = h.toFixed(1) + "px"; div.appendChild(x.b); });
+      frag.appendChild(div); k += n; r++;
+    }
+    g.textContent = ""; g.style.setProperty("--g-gap", gap + "px"); g.appendChild(frag);
+  }, 60);
+}
+window.addEventListener("resize", layoutGallery);
 function openPhoto(i) {
   const n = PH.list.length; PH.i = (i + n) % n; const p = PH.list[PH.i];
   const big = $("pbImg"); big.dataset.retry = ""; big.onerror = () => { if (!big.dataset.retry) { big.dataset.retry = "1"; big.src = photoUrl(p, 1600, true); } };
