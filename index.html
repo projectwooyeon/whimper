@@ -1580,48 +1580,108 @@ async function loadPhotos() {
     b.setAttribute("aria-label", `${p.name || "연습 사진"} 크게 보기`);
     const img = document.createElement("img"); img.decoding = "async"; img.alt = p.name || "연습 사진";
     img.referrerPolicy = "no-referrer"; img.src = photoUrl(p, 1000);
-    const it = { b, ratio: 1.5, ok: true };
+    const it = { b, idx: i, ratio: 1.5, ok: true };
     img.onload = () => { if (img.naturalWidth && img.naturalHeight) { it.ratio = img.naturalWidth / img.naturalHeight; layoutGallery(); } };
     img.onerror = () => {
       if (!img.dataset.retry) { img.dataset.retry = "1"; img.src = photoUrl(p, 1000, true); return; }
       it.ok = false; layoutGallery();
       if (!PH.items.some((x) => x.ok)) msg("사진을 불러오지 못했습니다. 잠시 후 다시 들어와 주세요.");
     };
-    b.appendChild(img); b.onclick = () => openPhoto(i);
+    b.appendChild(img); b.onclick = () => openPhoto(Math.max(0, (PH.order || []).indexOf(i)));
     return it;
   });
   layoutGallery();
 }
-/* 콜라주 배치: 사진 원래 비율을 지키면서 줄마다 폭을 꽉 채움. 한 줄 최대 3장(휴대폰 2장), 줄마다 장수를 바꿔 자연스럽게 */
+/* 콜라주 배치: 사진 원래 비율을 지키면서 줄마다 폭을 꽉 채움. 한 줄 최대 3장(휴대폰 2장).
+   줄마다 목표 높이를 크게 바꾸고, 몇 줄마다 가로 사진 한 장을 폭 전체로 크게 보여줌.
+   끝부분은 마지막 몇 줄을 다시 나눠서 모자란 줄 없이 폭을 채움 */
 let galleryTimer;
 function layoutGallery() {
   clearTimeout(galleryTimer);
   galleryTimer = setTimeout(() => {
     const g = $("gallery"); if (!PH.items || !g.clientWidth) return;
     const W = g.clientWidth, narrow = W < 560, gap = narrow ? 6 : 12, maxN = narrow ? 2 : 3;
-    // 줄마다 목표 높이를 조금씩 바꿔서 콜라주처럼: 목표보다 낮아질 때까지(최대 maxN장) 사진을 채움
-    const targets = narrow ? [W * 0.62, W * 0.48, W * 0.7] : [W * 0.36, W * 0.28, W * 0.32];
-    const items = PH.items.filter((x) => x.ok);
+    // 높은 줄 / 낮은 줄이 번갈아 나오도록 목표 높이 차이를 크게
+    const targets = narrow ? [W * 0.72, W * 0.42, W * 0.6, W * 0.5] : [W * 0.42, W * 0.24, W * 0.34, W * 0.27];
+    const FEATURE_GAP = 4, featureMax = narrow ? W * 0.72 : W * 0.6;
+    const tailCap = narrow ? W * 0.78 : W * 0.5; // 끝부분 줄의 최대 높이
+    const items = PH.items.filter((x) => x.ok).slice();
     const frag = document.createDocumentFragment();
     const hOf = (row) => (W - gap * (row.length - 1)) / row.reduce((a, x) => a + x.ratio, 0);
-    let k = 0, r = 0;
+    const rows = []; // { row, cls, cap, fit } — fit이면 폭을 꽉 채우고, cap을 넘으면 높이만 줄여 사진을 살짝 잘라(cover) 맞춤
+
+    // 1) 앞에서부터 줄 만들기
+    let k = 0, r = 0, lastF = -2;
     while (k < items.length) {
+      // 크게 보여줄 줄: 셋째 줄부터, 직전 크게 본 줄에서 몇 줄 지나면 앞으로 6장 안의 가로 사진(1.3:1 이상)을 당겨와 한 줄 전체로
+      if (r >= 2 && r - lastF > FEATURE_GAP && items.length - k > 3) {
+        let j = -1;
+        for (let t = k; t < Math.min(k + 6, items.length); t++) if (items[t].ratio >= 1.3) { j = t; break; }
+        if (j >= 0) {
+          const [f] = items.splice(j, 1); items.splice(k, 0, f);
+          rows.push({ row: [f], cls: " feature", cap: featureMax, fit: true }); lastF = r; k++; r++; continue;
+        }
+      }
       const target = targets[r % targets.length];
       let n = 1;
       while (n < maxN && k + n < items.length && hOf(items.slice(k, k + n)) > target) n++;
-      const row = items.slice(k, k + n);
-      let h = hOf(row), last = k + n >= items.length;
-      if (h > target * 1.3) h = target * 1.3; // 가로로 아주 넓은 사진 한 장이나 마지막 줄이 너무 커지지 않게
-      const div = document.createElement("div"); div.className = "g-row" + (last ? " last" : ""); div.style.gap = gap + "px";
-      row.forEach((x) => { x.b.style.width = (x.ratio * h).toFixed(1) + "px"; x.b.style.height = h.toFixed(1) + "px"; div.appendChild(x.b); });
-      frag.appendChild(div); k += n; r++;
+      rows.push({ row: items.slice(k, k + n), cls: "", cap: n === maxN ? Infinity : target * 1.3, fit: true }); k += n; r++;
     }
+
+    // 2) 마지막 줄이 모자라면: 끝의 줄들(최대 4줄)을 모아, 잘림이 가장 적게 다시 나눔
+    const lastRow = rows[rows.length - 1];
+    if (lastRow && hOf(lastRow.row) > lastRow.cap) {
+      let s = rows.length; while (s > 0 && rows.length - s < 4) s--; // 크게 보기 줄도 필요하면 다시 일반 줄로 섞음
+      const T = rows.slice(s).flatMap((x) => x.row);
+      if (rows.length === 1 && T.length < maxN) lastRow.fit = false; // 사진이 한두 장뿐이면 자르지 않고 가운데에
+      else {
+        const cost = (seg) => {
+          const h = hOf(seg), crop = Math.max(h / tailCap, 1);
+          return (crop - 1) * 8 + (seg.length === 1 && seg[0].ratio < 1.3 ? 2 : 0) + (seg.length < maxN ? 0.3 : 0);
+        };
+        const best = [{ c: 0, cut: [] }];
+        for (let i = 1; i <= T.length; i++) {
+          best[i] = null;
+          for (let m = 1; m <= maxN && m <= i; m++) {
+            const prev = best[i - m]; if (!prev) continue;
+            const c = prev.c + cost(T.slice(i - m, i));
+            if (!best[i] || c < best[i].c) best[i] = { c, cut: prev.cut.concat(m) };
+          }
+        }
+        let p = 0; const redo = best[T.length].cut.map((m) => { const row = T.slice(p, p + m); p += m; return { row, cls: "", cap: tailCap, fit: true }; });
+        rows.splice(s, rows.length - s, ...redo);
+      }
+    }
+
+    // 3) 가장 넓은 사진(가로 사진)이 매 줄 같은 자리에 오지 않게: 왼쪽 → 오른쪽 → 가운데 순으로 돌리고, 바로 윗줄과 같은 자리는 피함
+    let wideTurn = 0, lastWide = -1;
+    rows.forEach((x) => {
+      const seg = x.row, n = seg.length; if (x.cls || n < 2) { lastWide = -1; return; }
+      let wi = 0; seg.forEach((y, t) => { if (y.ratio > seg[wi].ratio) wi = t; });
+      if (seg[wi].ratio <= Math.min(...seg.map((y) => y.ratio)) * 1.15) { lastWide = -1; return; }
+      const seq = n === 3 ? [0, 2, 1] : [0, 1];
+      let pos = seq[wideTurn % seq.length];
+      if (pos === lastWide) pos = seq[++wideTurn % seq.length];
+      wideTurn++; lastWide = pos;
+      const [w] = seg.splice(wi, 1); seg.splice(pos, 0, w);
+    });
+
+    // 4) 그리기
+    rows.forEach(({ row, cls, cap, fit }) => {
+      const div = document.createElement("div"); div.className = "g-row" + cls; div.style.gap = gap + "px";
+      const sum = row.reduce((a, x) => a + x.ratio, 0), inner = W - gap * (row.length - 1);
+      const h = Math.min(inner / sum, cap);
+      row.forEach((x) => { x.b.style.width = (fit ? inner * x.ratio / sum : x.ratio * h).toFixed(1) + "px"; x.b.style.height = h.toFixed(1) + "px"; div.appendChild(x.b); });
+      frag.appendChild(div);
+    });
+    PH.order = rows.flatMap((x) => x.row).map((x) => x.idx); // 크게 보기의 이전/다음 순서를 화면 배치 순서와 맞춤
     g.textContent = ""; g.style.setProperty("--g-gap", gap + "px"); g.appendChild(frag);
   }, 60);
 }
 window.addEventListener("resize", layoutGallery);
 function openPhoto(i) {
-  const n = PH.list.length; PH.i = (i + n) % n; const p = PH.list[PH.i];
+  const order = PH.order && PH.order.length ? PH.order : PH.list.map((_, j) => j);
+  const n = order.length; PH.i = (i + n) % n; const p = PH.list[order[PH.i]];
   const big = $("pbImg"); big.dataset.retry = ""; big.onerror = () => { if (!big.dataset.retry) { big.dataset.retry = "1"; big.src = photoUrl(p, 1600, true); } };
   big.src = photoUrl(p, 1600); big.alt = p.name || "연습 사진";
   $("pbCap").textContent = `${PH.i + 1} / ${n}`;
