@@ -170,33 +170,7 @@
     .actor .photo .ph { font-size: 30px; }
   }
   /* 캐릭터 카드 (배우를 누르면 열림) */
-  .cast-modal { border: 0; padding: 0; background: var(--paper); color: var(--ink); width: min(92vw, 440px); max-height: 92vh; overflow: auto; }
-  .cast-modal::backdrop { background: rgba(20, 14, 10, .78); }
-  .cast-modal .cm-photo { aspect-ratio: 4 / 5; background: var(--earth-2); }
-  .cast-modal .cm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .cast-modal .cm-body { padding: 18px 22px 22px; display: grid; gap: 6px; }
-  .cast-modal .cm-role { font-family: var(--ui); font-size: 12.5px; letter-spacing: .08em; color: var(--rust); }
-  .cast-modal .cm-name { font-family: var(--hand); font-weight: 700; font-size: 28px; line-height: 1.2; }
-  .cast-modal .cm-name small { font-size: 14px; font-weight: 500; color: var(--ink-soft); }
-  .cast-modal .cm-quote { margin-top: 10px; }
-  .cast-modal .cm-quote span, .cast-modal .cm-hist > span { display: block; font-size: 12px; letter-spacing: .06em; color: var(--rust); margin-bottom: 2px; }
-  .cast-modal .cm-quote p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink); white-space: pre-line; word-break: keep-all; }
-  .cast-modal .cm-hist { margin-top: 14px; padding-top: 12px; border-top: 1px solid #E4DDD3; }
-  .cast-modal .cm-pos { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
-  .cast-modal .cm-pos:empty { display: none; }
-  .cast-modal .cm-pos b { font-weight: 500; font-size: 13px; padding: 2px 8px; border: 1px solid var(--rust); color: var(--rust); }
-  .cast-modal .cm-shows { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; word-break: keep-all; }
-  /* 넓은 화면: 사진 왼쪽, 글 오른쪽 */
-  @media (min-width: 760px) {
-    .cast-modal { width: min(92vw, 880px); }
-    .cast-modal[open] { display: grid; grid-template-columns: 340px 1fr; }
-    .cast-modal .cm-photo { aspect-ratio: auto; min-height: 100%; }
-    .cast-modal .cm-body { max-height: 88vh; overflow: auto; padding: 24px 26px; align-content: start; }
-  }
-  .cast-modal .cm-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; font-family: var(--ui); font-size: 14px; }
-  .cast-modal .cm-foot a { color: var(--sea); }
-  .cast-modal .cm-close { all: unset; cursor: pointer; font-family: var(--ui); font-weight: 600; font-size: 14px; border: 1.5px solid var(--ink); padding: 7px 14px; }
-  .cast-modal .cm-close:hover { background: var(--ink); color: var(--paper); }
+
 
   /* ---------- 예매 ---------- */
   .tabs { display: flex; justify-content: center; gap: 0; margin: 0 auto 30px; border: 1.5px solid var(--earth-line); width: fit-content; max-width: 100%; }
@@ -353,6 +327,49 @@
   /* 예매 오픈 전: 탭 안에는 "N/N 오픈 예정입니다"만 */
   .is-closed > :not(.closed-note) { display: none !important; }
   .closed-note { text-align: center; padding: 56px 16px; font-size: clamp(20px, 2.6vw, 26px); color: var(--sand); border-block: 1px solid var(--earth-line); }
+  /* 캐릭터 카드: 공연 프로그램북 한 장처럼 */
+  .cast-modal { border: 0; padding: 0; background: var(--paper); color: var(--ink); width: min(94vw, 900px); max-height: 92vh; overflow: auto; }
+  .cast-modal::backdrop { background: rgba(20, 14, 10, .82); }
+  .cast-modal .cm-photo { position: relative; aspect-ratio: 4 / 3.4; background: var(--earth-2); overflow: hidden; }
+  .cast-modal .cm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cast-modal .cm-plate { position: absolute; inset: auto 0 0 0; padding: 60px 22px 18px; background: linear-gradient(to bottom, rgba(31,22,18,0), rgba(31,22,18,.82)); color: var(--sand); display: grid; gap: 2px; }
+  .cast-modal .cm-role { font-size: clamp(26px, 4vw, 34px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; color: #FFF6EC; }
+  .cast-modal .cm-name { font-size: 15px; letter-spacing: .04em; color: var(--sand); }
+  .cast-modal .cm-name::before { content: "배우  "; font-size: 12px; letter-spacing: .1em; color: var(--warn); }
+  .cast-modal .cm-body { padding: 26px 26px 20px; display: grid; gap: 22px; align-content: start; }
+  .cast-modal .cm-say { margin: 0; position: relative; padding-left: 30px; }
+  .cast-modal .cm-say::before { content: "“"; position: absolute; left: -2px; top: -14px; font-size: 54px; line-height: 1; font-weight: 700; color: var(--rust); }
+  .cast-modal .cm-say blockquote { margin: 0; white-space: pre-line; word-break: keep-all; text-wrap: pretty; }
+  .cast-modal .cm-say figcaption { margin-top: 6px; font-size: 13px; color: var(--ink-soft); }
+  .cast-modal .cm-say-role blockquote { font-size: clamp(18px, 2.3vw, 21px); font-weight: 600; line-height: 1.5; color: var(--rust); }
+  .cast-modal .cm-say-actor::before { color: var(--sea); opacity: .55; }
+  .cast-modal .cm-say-actor blockquote { font-size: 16px; line-height: 1.65; color: var(--ink); }
+  .cast-modal .cm-hist { border-top: 1px solid #E2D9CD; padding-top: 16px; }
+  .cast-modal .cm-hist h4 { margin: 0 0 12px; font-size: 13px; letter-spacing: .14em; color: var(--ink-soft); font-weight: 600; }
+  .cast-modal .cm-tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .cast-modal .cm-tl > li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: baseline; position: relative; }
+  .cast-modal .cm-tl > li::before { content: ""; position: absolute; left: 21px; top: 22px; bottom: -12px; width: 1px; background: #E2D9CD; }
+  .cast-modal .cm-tl > li:last-child::before { display: none; }
+  .cast-modal .cm-yr { font-size: 15px; font-weight: 700; color: var(--rust); font-variant-numeric: tabular-nums; text-align: center; background: var(--paper); position: relative; z-index: 1; }
+  .cast-modal .cm-items { display: grid; gap: 4px; }
+  .cast-modal .cm-it { font-size: 14px; line-height: 1.5; color: var(--ink); word-break: keep-all; }
+  .cast-modal .cm-it em { font-style: normal; font-size: 12px; margin-left: 6px; padding: 1px 6px; border-radius: 3px; background: #EFE8DE; color: var(--ink-soft); white-space: nowrap; }
+  .cast-modal .cm-it.pos { font-weight: 600; color: var(--sea); }
+  .cast-modal .cm-it.pos em { background: rgba(52,71,154,.1); color: var(--sea); }
+  .cast-modal .cm-foot { display: flex; align-items: center; gap: 8px; padding: 12px 0 2px; font-size: 14px; position: sticky; bottom: -20px; background: var(--paper); border-top: 1px solid #E2D9CD; }
+  .cast-modal:focus { outline: none; }
+  .cast-modal .cm-count { font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums; min-width: 40px; text-align: center; }
+  .cast-modal .cm-nav { all: unset; cursor: pointer; width: 34px; height: 34px; display: grid; place-items: center; border: 1.5px solid var(--ink); font-size: 18px; }
+  .cast-modal .cm-nav:hover, .cast-modal .cm-close:hover { background: var(--ink); color: var(--paper); }
+  .cast-modal .cm-ig { margin-left: auto; color: var(--sea); }
+  .cast-modal .cm-close { all: unset; cursor: pointer; font-weight: 600; font-size: 14px; border: 1.5px solid var(--ink); padding: 7px 14px; margin-left: auto; }
+  .cast-modal .cm-ig:not([hidden]) + .cm-close { margin-left: 8px; }
+  .cast-modal :focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 2px; }
+  @media (min-width: 760px) {
+    .cast-modal[open] { display: grid; grid-template-columns: 360px 1fr; overflow: hidden; }
+    .cast-modal .cm-photo { aspect-ratio: auto; height: 100%; min-height: 520px; }
+    .cast-modal .cm-body { max-height: 92vh; overflow: auto; padding: 34px 34px 22px; }
+  }
   /* 공지 상자 */
   .notice { max-width: 720px; margin: 0 auto 26px; padding: 12px 16px; border: 1px solid var(--warn); color: var(--sand); background: rgba(240,178,122,.08); font-size: 14.5px; text-align: center; word-break: keep-all; }
   .notice { text-wrap: balance; }
@@ -544,15 +561,24 @@
         <h2 class="section-h">출연진</h2>
         <p class="section-sub" style="margin-bottom:24px">사진을 누르면 캐릭터 카드와 배우의 한마디를 볼 수 있어요.<br><span class="cast-note">* 배역 사진은 추후 업데이트 예정입니다</span></p>
         <div class="cast-grid" id="castGrid"></div>
-        <dialog class="cast-modal" id="castModal" aria-label="캐릭터 카드">
-          <div class="cm-photo"></div>
+        <dialog class="cast-modal" id="castModal" aria-label="캐릭터 카드" tabindex="-1">
+          <div class="cm-photo">
+            <div class="cm-plate"><span class="cm-role"></span><span class="cm-name"></span></div>
+          </div>
           <div class="cm-body">
-            <div class="cm-role"></div>
-            <div class="cm-name"></div>
-            <div class="cm-quote" data-k="role"><span>배역 한마디</span><p></p></div>
-            <div class="cm-quote" data-k="actor"><span>배우 한마디</span><p></p></div>
-            <div class="cm-hist"><span>이박터 활동 이력</span><div class="cm-pos"></div><ul class="cm-shows"></ul></div>
-            <div class="cm-foot"><a class="cm-ig" href="#" target="_blank" rel="noopener" hidden></a><span></span><button type="button" class="cm-close">닫기</button></div>
+            <figure class="cm-say cm-say-role"><blockquote></blockquote><figcaption></figcaption></figure>
+            <figure class="cm-say cm-say-actor"><blockquote></blockquote><figcaption></figcaption></figure>
+            <section class="cm-hist">
+              <h4>이박터에서 걸어온 길</h4>
+              <ol class="cm-tl"></ol>
+            </section>
+            <div class="cm-foot">
+              <button type="button" class="cm-nav" id="cmPrev" aria-label="이전 배우">‹</button>
+              <span class="cm-count" id="cmCount"></span>
+              <button type="button" class="cm-nav" id="cmNext" aria-label="다음 배우">›</button>
+              <a class="cm-ig" href="#" target="_blank" rel="noopener" hidden></a>
+              <button type="button" class="cm-close">닫기</button>
+            </div>
           </div>
         </dialog>
       </section>
@@ -1006,26 +1032,54 @@ function fillContent() {
 }
 
 /* ---------- 캐릭터 카드 ---------- */
+// 공연 이력 한 줄: "'14 제 49회 정기공연 〈날 보러 와요〉 배우" → 연도 / 공연 / 맡은 일
+function splitHistory(t, pos) {
+  const m = /^\s*['’‘]?(\d{2})['’‘]?\s+(.*)$/.exec(String(t)); if (!m) return { yr: "", text: t, job: "", pos };
+  let rest = m[2], job = "";
+  if (!pos) { const k = /\s(배우|연출|조연출|연출\/배우|공동제작\/배우|[^\s〉]+\/[^\s〉]+)$/.exec(rest); if (k) { job = k[1]; rest = rest.slice(0, k.index); } }
+  return { yr: m[1], text: rest, job, pos };
+}
+let castIdx = 0;
 function openCastCard(c) {
+  castIdx = Math.max(0, CONTENT.cast.indexOf(c));
   const dlg = $("castModal");
-  const box = dlg.querySelector(".cm-photo"); box.textContent = "";
+  const box = dlg.querySelector(".cm-photo"), plate = box.querySelector(".cm-plate");
+  box.querySelectorAll("img").forEach((x) => x.remove());
   const src = c.poster || c.photo;
-  if (src) { const img = document.createElement("img"); img.src = src; img.alt = `${c.name} ${c.role || ""} 캐릭터 포스터`; box.appendChild(img); }
-  dlg.querySelector(".cm-role").textContent = c.role ? c.role + " 역" : "배역 미정";
-  const nm = dlg.querySelector(".cm-name"); nm.textContent = c.name;
-  [["role", c.roleLine], ["actor", c.line]].forEach(([k, v]) => {
-    const q = dlg.querySelector(`.cm-quote[data-k="${k}"]`); q.hidden = !v; q.querySelector("p").textContent = v ? `“${v}”` : "";
+  if (src) { const img = document.createElement("img"); img.src = src; img.alt = `${c.name} ${c.role || ""} 캐릭터 사진`; box.insertBefore(img, plate); }
+  dlg.querySelector(".cm-role").textContent = c.role || "배역 미정";
+  dlg.querySelector(".cm-name").textContent = c.name;
+  const say = (cls, text, cap) => { const f = dlg.querySelector(cls); f.hidden = !text; f.querySelector("blockquote").textContent = text || ""; f.querySelector("figcaption").textContent = cap; };
+  say(".cm-say-role", c.roleLine, `— ${c.role || ""}`);
+  say(".cm-say-actor", c.line, `— 배우 ${c.name}`);
+  // 연도별로 묶기 (임원 이력도 같은 줄에)
+  const items = [...(c.positions || []).map((t) => splitHistory(t, true)), ...(c.shows || []).map((t) => splitHistory(t, false))];
+  const byYr = new Map(); items.forEach((it) => { if (!byYr.has(it.yr)) byYr.set(it.yr, []); byYr.get(it.yr).push(it); });
+  const tl = dlg.querySelector(".cm-tl"); tl.textContent = "";
+  [...byYr.keys()].sort().forEach((yr) => {
+    const li = document.createElement("li");
+    const y = document.createElement("span"); y.className = "cm-yr"; y.textContent = yr ? "’" + yr : "";
+    const wrap = document.createElement("div"); wrap.className = "cm-items";
+    byYr.get(yr).sort((a, b) => b.pos - a.pos).forEach((it) => {
+      const d = document.createElement("div"); d.className = "cm-it" + (it.pos ? " pos" : ""); d.textContent = it.text;
+      if (it.pos || it.job) { const e = document.createElement("em"); e.textContent = it.pos ? "임원" : it.job; d.appendChild(e); }
+      wrap.appendChild(d);
+    });
+    li.append(y, wrap); tl.appendChild(li);
   });
-  const pos = dlg.querySelector(".cm-pos"), shows = dlg.querySelector(".cm-shows");
-  pos.textContent = ""; shows.textContent = "";
-  (c.positions || []).forEach((t) => { const e = document.createElement("b"); e.textContent = t; pos.appendChild(e); });
-  (c.shows || []).forEach((t) => { const li = document.createElement("li"); li.textContent = t; shows.appendChild(li); });
-  dlg.querySelector(".cm-hist").hidden = !((c.positions || []).length || (c.shows || []).length);
+  dlg.querySelector(".cm-hist").hidden = !items.length;
+  $("cmCount").textContent = `${castIdx + 1} / ${CONTENT.cast.length}`;
   const ig = dlg.querySelector(".cm-ig");
   if (c.instagram) { ig.hidden = false; ig.href = /^https?:/.test(c.instagram) ? c.instagram : "https://www.instagram.com/" + c.instagram.replace(/^@/, "") + "/"; ig.textContent = "@" + c.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, "").replace(/^@/, "").replace(/\/$/, ""); }
   else ig.hidden = true;
-  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  dlg.querySelector(".cm-body").scrollTop = 0; dlg.scrollTop = 0;
+  if (!dlg.open) { if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", ""); }
+  dlg.focus({ preventScroll: true }); dlg.scrollTop = 0; dlg.querySelector(".cm-body").scrollTop = 0; // 열면 항상 맨 위부터
 }
+const stepCast = (d) => { const n = CONTENT.cast.length; openCastCard(CONTENT.cast[(castIdx + d + n) % n]); };
+$("cmPrev").onclick = () => stepCast(-1);
+$("cmNext").onclick = () => stepCast(1);
+$("castModal").addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") stepCast(-1); if (e.key === "ArrowRight") stepCast(1); });
 $("castModal").addEventListener("click", (e) => { if (e.target === $("castModal")) $("castModal").close(); }); // 바깥 누르면 닫힘
 $("castModal").querySelector(".cm-close").onclick = () => $("castModal").close();
 
