@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>세.느.낌 | 이박터 40주년 기념공연</title>
 <meta name="description" content="KAIST 연극동아리 이박터 40주년 기념공연 · 프로젝트 우연 · 2026.11.21–22 창작플랫폼 경험과상상">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="프로젝트 우연">
+<meta property="og:title" content="세상이 이렇게 끝나는구나 쾅 소리 한 번 없이 흐느낌으로">
+<meta property="og:description" content="이박터 40주년 기념공연 · 2026.11.21–22 · 창작플랫폼 경험과상상 · 무료 공연">
+<meta property="og:url" content="https://projectwooyeon.github.io/whimper/">
+<meta property="og:image" content="https://projectwooyeon.github.io/whimper/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2B1F1A">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="images/icon-512.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -126,10 +136,10 @@
   /* 홈: 포스터 + 공연 정보 목록 */
   .info-rows { max-width: 760px; margin: 0 auto; border-top: 1px solid var(--earth-line); }
   .info-rows > div { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 20px 4px; border-bottom: 1px solid var(--earth-line); }
-  .info-rows dt { font-family: var(--ui); font-size: 12.5px; letter-spacing: .12em; color: var(--rust-bright); padding-top: 3px; }
+  .info-rows dt { font-family: var(--ui); font-size: 12.5px; letter-spacing: .04em; color: var(--rust-bright); padding-top: 3px; }
   .info-rows dd { margin: 0; font-size: 16px; line-height: 1.75; }
   .info-rows dd b { font-weight: 400; font-size: 19px; }
-  .info-rows dd a { color: var(--sea-light); font-size: 14.5px; }
+  .info-rows dd a { color: var(--sand); text-decoration-color: var(--rust-bright); text-underline-offset: 4px; font-size: 14.5px; }
   .info-rows .muted { color: var(--sand-muted); font-size: 14px; }
   .info-rows .prose p { font-size: 16px; }
   @media (max-width: 560px) { .info-rows > div { grid-template-columns: 1fr; gap: 6px; } }
@@ -138,13 +148,13 @@
   .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--earth-line); }
   .facts > div { padding: 22px 18px; text-align: center; display: grid; gap: 6px; align-content: start; }
   .facts > div + div { border-left: 1px solid var(--earth-line); }
-  .facts dt { font-family: var(--ui); font-size: 12px; letter-spacing: .14em; color: var(--sand-muted); }
+  .facts dt { font-family: var(--ui); font-size: 12px; letter-spacing: .04em; color: var(--sand-muted); }
   .facts dd { margin: 0; font-size: 17px; }
   .facts .big { font-family: var(--ui); font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
-  .facts a { color: var(--sea-light); font-size: 14px; }
+  .facts a { color: var(--sand); text-decoration-color: var(--rust-bright); text-underline-offset: 4px; font-size: 14px; }
   @media (max-width: 760px) { .facts { grid-template-columns: 1fr; } .facts > div + div { border-left: 0; border-top: 1px solid var(--earth-line); } }
   .tw { margin-top: 18px; text-align: center; font-size: 14.5px; color: var(--warn); }
-  .tw b { font-family: var(--ui); font-weight: 600; letter-spacing: .1em; font-size: 12px; margin-right: 8px; }
+  .tw b { font-family: var(--ui); font-weight: 600; letter-spacing: .04em; font-size: 12px; margin-right: 8px; }
 
   /* 만든 사람들 */
   @media (max-width: 860px) { .team { grid-template-columns: 1fr; gap: 32px; } }
@@ -155,10 +165,9 @@
   .actor { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 8px; align-content: start; text-align: left; }
   .actor:focus-visible { outline: 2px solid var(--rust-bright); outline-offset: 4px; }
   .actor .photo { aspect-ratio: 4 / 5; max-width: 100%; background: var(--earth-2); position: relative; overflow: hidden; }
-  .actor .photo img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.08); transition: filter .4s; }
-  .actor:hover .photo img { filter: none; }
+  .actor .photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter .3s; }
+  .actor:hover .photo img { filter: brightness(1.08); }
   /* 터치 기기(마우스 없음): 흑백 효과 없이 처음부터 컬러 */
-  @media (hover: none) { .actor .photo img { filter: none; } }
   .actor .photo .ph { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--hand); font-size: 64px; color: var(--sea-light);
     background-image: radial-gradient(circle, rgba(157,174,235,.22) 1.2px, transparent 1.6px); background-size: 7px 7px; }
   .actor .role { font-family: var(--ui); font-size: 12.5px; letter-spacing: .06em; color: var(--rust-bright); }
@@ -181,7 +190,7 @@
 
   .book { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 40px; align-items: start; }
   @media (max-width: 860px) { .book { grid-template-columns: 1fr; gap: 28px; } }
-  .step-label { font-family: var(--ui); font-size: 12px; letter-spacing: .12em; color: var(--sand-muted); margin: 0 0 10px; }
+  .step-label { font-family: var(--ui); font-size: 12px; letter-spacing: .04em; color: var(--sand-muted); margin: 0 0 10px; }
   .step + .step { margin-top: 30px; }
 
   /* 회차 고르기: 달력 + 시간 */
@@ -246,7 +255,7 @@
     -webkit-mask: radial-gradient(circle 11px at 0 var(--cut), transparent 98%, #000), radial-gradient(circle 11px at 100% var(--cut), transparent 98%, #000);
     -webkit-mask-composite: source-in; mask-composite: intersect; --cut: 64%; }
   .ticket .main { padding: 22px 22px 20px; display: grid; gap: 14px; }
-  .ticket .kicker { font-family: var(--ui); font-size: 12px; letter-spacing: .14em; color: var(--ink-soft); display: flex; justify-content: space-between; gap: 8px; }
+  .ticket .kicker { font-family: var(--ui); font-size: 12px; letter-spacing: .04em; color: var(--ink-soft); display: flex; justify-content: space-between; gap: 8px; }
   .ticket .name { font-family: var(--hand); font-size: clamp(19px, 1.9vw, 22px); font-weight: 700; line-height: 1.4; letter-spacing: -.03em; color: var(--rust); text-wrap: balance; }
   .ticket dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-family: var(--ui); font-size: 14px; }
   .ticket dt { color: var(--ink-soft); }
@@ -337,7 +346,7 @@
   .cast-modal .cm-plate { position: absolute; inset: auto 0 0 0; padding: 60px 22px 18px; background: linear-gradient(to bottom, rgba(31,22,18,0), rgba(31,22,18,.82)); color: var(--sand); display: grid; gap: 2px; }
   .cast-modal .cm-role { font-size: clamp(26px, 4vw, 34px); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; color: #FFF6EC; }
   .cast-modal .cm-name { font-size: 15px; letter-spacing: .04em; color: var(--sand); }
-  .cast-modal .cm-name::before { content: "배우  "; font-size: 12px; letter-spacing: .1em; color: var(--warn); }
+  .cast-modal .cm-name::before { content: "배우  "; font-size: 12px; letter-spacing: .04em; color: var(--warn); }
   .cast-modal .cm-body { flex: 1; min-height: 0; overflow: auto; scrollbar-gutter: stable; /* 스크롤바가 생겨도 버튼 위치가 안 바뀌게 */ padding: 22px 22px 0; display: flex; flex-direction: column; gap: 22px; }
   .cast-modal .cm-say { margin: 0; position: relative; padding-left: 30px; }
   .cast-modal .cm-say::before { content: "“"; position: absolute; left: -2px; top: -14px; font-size: 54px; line-height: 1; font-weight: 700; color: var(--rust); }
@@ -347,7 +356,7 @@
   .cast-modal .cm-say-actor::before { color: var(--sea); opacity: .55; }
   .cast-modal .cm-say-actor blockquote { font-size: 16px; line-height: 1.65; color: var(--ink); }
   .cast-modal .cm-hist { border-top: 1px solid #E2D9CD; padding-top: 16px; }
-  .cast-modal .cm-hist h4 { margin: 0 0 12px; font-size: 13px; letter-spacing: .14em; color: var(--ink-soft); font-weight: 600; }
+  .cast-modal .cm-hist h4 { margin: 0 0 12px; font-size: 13px; letter-spacing: .04em; color: var(--ink-soft); font-weight: 600; }
   .cast-modal .cm-tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .cast-modal .cm-tl > li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: baseline; position: relative; }
   .cast-modal .cm-tl > li::before { content: ""; position: absolute; left: 21px; top: 22px; bottom: -12px; width: 1px; background: #E2D9CD; }
@@ -385,7 +394,6 @@
   .notice { text-wrap: balance; }
   .notice::before { content: "※ "; color: var(--warn); }
   .notice.small { margin: 0; font-size: 13px; padding: 10px 12px; }
-  .cast-note { font-size: 13px; color: var(--sand-muted); }
   /* 연습 현장 */
   .gallery { display: grid; gap: var(--g-gap, 12px); }
   .gallery .g-row { display: flex; justify-content: center; }
@@ -447,11 +455,11 @@
   .site-foot { background: #211712; color: var(--sand); padding-block: 44px 36px; border-top: 1px solid var(--earth-line); }
   .foot-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
   @media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; gap: 24px; } }
-  .site-foot h3 { font-family: var(--ui); font-size: 12px; letter-spacing: .14em; color: var(--rust-bright); margin: 0 0 10px; font-weight: 600; }
+  .site-foot h3 { font-family: var(--ui); font-size: 12px; letter-spacing: .04em; color: var(--rust-bright); margin: 0 0 10px; font-weight: 600; }
   .site-foot p { margin: 0; font-size: 14.5px; line-height: 1.7; }
   .site-foot p + p { margin-top: 8px; }
   .site-foot .muted { color: var(--sand-muted); font-size: 13px; }
-  .site-foot a { color: var(--sea-light); }
+  .site-foot a { color: var(--sand); text-decoration-color: var(--rust-bright); text-underline-offset: 4px; }
   .foot-line { margin-top: 32px !important; padding-top: 18px; border-top: 1px solid var(--earth-line); font-family: var(--ui); font-size: 12px !important; color: var(--sand-muted); letter-spacing: .02em; }
   .foot-line { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 20px; }
   .foot-logos { display: inline-flex; align-items: center; gap: 12px; color: var(--sand-muted); font-size: 13px; }
@@ -488,10 +496,16 @@
     .top .act { flex: 1; padding: 9px 6px; }
     .top .mark img { height: 44px; }
   }
+  .top .act, .btn-main, .btn-line, .tabs button, .qty button, .ghost { transition: background-color .2s, color .2s, border-color .2s, transform .12s; }
+  .top .act:active, .btn-main:active, .btn-line:active, .tabs button:active, .qty button:active { transform: translateY(1px); }
+  .skip { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--ink); color: var(--paper); padding: 10px 14px; font-family: var(--ui); font-size: 14px; text-decoration: none; }
+  .skip:focus { top: 12px; }
   @media (prefers-reduced-motion: reduce) { .title img { animation: none; } * { transition: none !important; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
+<a class="skip" href="#main" onclick="event.preventDefault();document.getElementById('main').focus()">본문으로 건너뛰기</a>
+
 <header class="wrap top">
   <a class="mark" href="#home" aria-label="공연 정보로 이동"><img src="images/logo-sub.png" alt="세.느.낌" width="480" height="194"></a>
   <nav aria-label="페이지 이동">
@@ -505,7 +519,7 @@
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1" style="outline:none">
   <!-- ===== 홈 ===== -->
   <div class="view" data-view="home">
     <div class="hero">
